@@ -1,5 +1,5 @@
 /**
- * TripNova Centralized Backend API Client
+ * Terrain Wise Centralized Backend API Client
  * Connects Frontend to Backend with API Key Authentication
  */
 

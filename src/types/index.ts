@@ -217,11 +217,9 @@ export interface EmergencyPhrase {
   importance: 'critical' | 'high' | 'normal';
 }
 
-export type SafetyPlaceType = 'hospital' | 'pharmacy' | 'police' | 'hotel' | 'residency';
-
 export interface SafetyPlace {
   id: string;
-  type: SafetyPlaceType;
+  type: 'hospital' | 'police' | 'pharmacy';
   name: string;
   address: string;
   phone: string;
@@ -230,13 +228,6 @@ export interface SafetyPlace {
   rating: number;
   openHours: string;
   verified: boolean;
-  latitude?: number;
-  longitude?: number;
-  city?: string;
-  state?: string;
-  specialty?: string;
-  facilities?: string[];
-  priceRange?: string;
 }
 
 export interface CountryRule {

@@ -348,7 +348,7 @@ export const ServiceProviderModal: React.FC<ServiceProviderModalProps> = ({
   const handleFinalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!hasAgreedCommitment) {
-      alert('Please agree to the TripNova Fair-Fare & Tourist Safety commitment.');
+      alert('Please agree to the Terrain Wise Fair-Fare & Tourist Safety commitment.');
       return;
     }
 
@@ -435,18 +435,22 @@ export const ServiceProviderModal: React.FC<ServiceProviderModalProps> = ({
       alignItems: 'center',
       justifyContent: 'center',
       padding: '16px',
-      background: 'rgba(7, 11, 20, 0.9)',
-      backdropFilter: 'blur(20px)'
+      background: 'rgba(3, 7, 18, 0.75)',
+      backdropFilter: 'blur(24px)',
+      WebkitBackdropFilter: 'blur(24px)'
     }} className="animate-fade">
       <div className="glass-panel" style={{
         width: '100%',
         maxWidth: '840px',
         maxHeight: '92vh',
-        background: '#090e17',
+        background: 'rgba(11, 17, 32, 0.86)',
+        backdropFilter: 'blur(28px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(28px) saturate(180%)',
         borderRadius: '24px',
         overflowY: 'auto',
-        border: '1px solid rgba(255,255,255,0.12)',
-        boxShadow: '0 25px 60px rgba(0,0,0,0.85)',
+        border: '1px solid rgba(255,255,255,0.14)',
+        borderTop: '1px solid rgba(255,255,255,0.28)',
+        boxShadow: '0 25px 64px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.18)',
         display: 'flex',
         flexDirection: 'column'
       }}>
@@ -476,7 +480,7 @@ export const ServiceProviderModal: React.FC<ServiceProviderModalProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff' }}>
-                  TripNova Service Provider Onboarding
+                  Terrain Wise Service Provider Onboarding
                 </h2>
                 <span className="badge badge-amber" style={{ fontSize: '0.68rem' }}>Verified Partner</span>
               </div>
@@ -1680,10 +1684,10 @@ export const ServiceProviderModal: React.FC<ServiceProviderModalProps> = ({
             <form onSubmit={handleFinalSubmit} className="animate-fade" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div>
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>
-                  TripNova Fair-Fare & Tourist Safety Pledge
+                  Terrain Wise Fair-Fare & Tourist Safety Pledge
                 </h3>
                 <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
-                  All registered TripNova service providers must commit to standard pricing and anti-scam integrity.
+                  All registered Terrain Wise service providers must commit to standard pricing and anti-scam integrity.
                 </p>
               </div>
 
@@ -1698,12 +1702,12 @@ export const ServiceProviderModal: React.FC<ServiceProviderModalProps> = ({
               }}>
                 <div className="flex items-center gap-2" style={{ color: '#fbbf24', fontWeight: 800, fontSize: '0.92rem' }}>
                   <ShieldCheck style={{ width: '18px', height: '18px' }} />
-                  <span>TripNova Code of Conduct for Providers:</span>
+                  <span>Terrain Wise Code of Conduct for Providers:</span>
                 </div>
 
                 <ul style={{ fontSize: '0.8rem', color: '#cbd5e1', lineHeight: 1.6, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <li><strong>Zero Overcharging Guarantee:</strong> Never demand unfair 3x-6x tourist markups; adhere to standard metered or published rates.</li>
-                  <li><strong>Emergency Cooperation:</strong> Cooperate immediately with local tourist police, 112 emergency hotlines, and TripNova SOS alerts.</li>
+                  <li><strong>Emergency Cooperation:</strong> Cooperate immediately with local tourist police, 112 emergency hotlines, and Terrain Wise SOS alerts.</li>
                   <li><strong>Verified Credentials:</strong> Maintain valid commercial licenses, vehicle fitness certificates, and guide badges at all times.</li>
                   <li><strong>Respectful Conduct:</strong> Ensure tourist safety, medical assistance cooperation, and transparent communication in native language translation.</li>
                 </ul>
@@ -1717,7 +1721,7 @@ export const ServiceProviderModal: React.FC<ServiceProviderModalProps> = ({
                     style={{ marginTop: '3px' }}
                   />
                   <span style={{ fontSize: '0.78rem', color: '#f8fafc', fontWeight: 700 }}>
-                    I hereby certify that all submitted business and license details are authentic, and I agree to strictly uphold the TripNova Fair-Fare & Tourist Safety Guarantee.
+                    I hereby certify that all submitted business and license details are authentic, and I agree to strictly uphold the Terrain Wise Fair-Fare & Tourist Safety Guarantee.
                   </span>
                 </label>
               </div>
@@ -1767,7 +1771,7 @@ export const ServiceProviderModal: React.FC<ServiceProviderModalProps> = ({
                   Provider Profile Registered & Verified!
                 </h3>
                 <p style={{ fontSize: '0.84rem', color: '#94a3b8', maxWidth: '500px', margin: '6px auto 0' }}>
-                  Your services are now active on the TripNova Network. Tourists in {createdProfile.operatingCity} can discover your verified services.
+                  Your services are now active on the Terrain Wise Network. Tourists in {createdProfile.operatingCity} can discover your verified services.
                 </p>
               </div>
 
@@ -1876,7 +1880,7 @@ export const ServiceProviderModal: React.FC<ServiceProviderModalProps> = ({
                 </div>
 
                 <div className="flex items-center justify-between pt-2 border-t border-white/10" style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
-                  <span>🛡️ TripNova Fair-Fare & Anti-Scam Shield Armed</span>
+                  <span>🛡️ Terrain Wise Fair-Fare & Anti-Scam Shield Armed</span>
                   <QrCode style={{ width: '22px', height: '22px', color: '#fbbf24' }} />
                 </div>
               </div>

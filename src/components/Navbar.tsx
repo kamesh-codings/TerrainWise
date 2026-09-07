@@ -85,7 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div 
           className="brand-logo"
           onClick={() => setActiveTab('dashboard')}
-          title="TripNova Home"
+          title="Terrain Wise Home"
         >
           <div className="brand-icon-box">
             <div className="brand-icon-inner">
@@ -94,7 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="brand-title">TripNova</span>
+              <span className="brand-title">Terrain Wise</span>
               <span className="badge badge-blue hide-mobile" style={{ fontSize: '0.68rem', padding: '1px 6px' }}>AI Safety</span>
             </div>
             <p className="brand-subtitle hide-mobile">Smart AI Travel Companion</p>
@@ -214,7 +214,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 ? `Tourist Profile: ${userProfile.name}` 
                 : providerProfile 
                 ? `Partner Profile: ${providerProfile.businessName}` 
-                : 'Join TripNova: Choose Registration Mode'
+                : 'Join Terrain Wise: Choose Registration Mode'
             }
           >
             {userProfile.isRegistered && userProfile.avatarUrl ? (

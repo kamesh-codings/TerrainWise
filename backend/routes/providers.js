@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * TripNova Service Providers API Routes
+ * Terrain Wise Service Providers API Routes
  * =============================================================================
  * Handles fetching, updating, and querying service providers from MySQL.
  */

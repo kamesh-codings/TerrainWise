@@ -188,7 +188,7 @@ export const App: React.FC = () => {
     sessionStorage.removeItem(GATEWAY_SHOWN_KEY);
     setIsGatewayOpen(true);
     setActiveTab('dashboard');
-    showToast('Logged out successfully. Welcome back to TripNova Gateway!');
+    showToast('Logged out successfully. Welcome back to Terrain Wise Gateway!');
   };
 
   const handleSaveTrip = (newTrip: TripPlan) => {

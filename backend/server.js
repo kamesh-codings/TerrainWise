@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * TripNova Backend API Server
+ * Terrain Wise Backend API Server
  * =============================================================================
  * Tourism Platform & Safety Hub for Smart India Hackathon
  * Powered by Node.js, Express, and SQLite / MySQL Engine
@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 // 4. Public Endpoints
 app.get('/', (req, res) => {
   res.json({
-    service: 'TripNova Tourism Platform API',
+    service: 'Terrain Wise Tourism Platform API',
     status: 'ONLINE',
     version: '1.0.0',
     documentation: {
@@ -133,14 +133,14 @@ async function startServer() {
     await db.init();
     app.listen(PORT, () => {
       console.log('====================================================');
-      console.log(`🚀 TripNova Backend API Server running on port ${PORT}`);
+      console.log(`🚀 Terrain Wise Backend API Server running on port ${PORT}`);
       console.log(`📡 URL: http://localhost:${PORT}`);
       console.log(`🔑 Master API Key: ${process.env.API_KEY || 'tripnova_live_api_key_2026'}`);
       console.log(`🔑 Client API Key: ${process.env.CLIENT_API_KEY || 'tripnova_client_key_9921'}`);
       console.log('====================================================');
     });
   } catch (err) {
-    console.error('❌ Failed to start TripNova server:', err);
+    console.error('❌ Failed to start Terrain Wise server:', err);
     process.exit(1);
   }
 }

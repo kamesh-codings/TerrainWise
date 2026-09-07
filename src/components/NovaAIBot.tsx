@@ -109,17 +109,19 @@ export const NovaAIBot: React.FC<NovaAIBotProps> = ({
       width: '100%',
       maxWidth: '420px',
       height: '520px',
-      background: '#090e17',
+      background: 'rgba(10, 15, 29, 0.78)',
       borderRadius: '24px',
       border: '1px solid rgba(168, 85, 247, 0.4)',
-      boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
+      borderTop: '1px solid rgba(168, 85, 247, 0.7)',
+      boxShadow: '0 24px 60px rgba(0,0,0,0.65), inset 0 1px 1px rgba(255,255,255,0.2)',
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden',
-      backdropFilter: 'blur(16px)'
+      backdropFilter: 'blur(28px) saturate(180%)',
+      WebkitBackdropFilter: 'blur(28px) saturate(180%)'
     }} className="animate-fade">
       {/* Bot Header */}
-      <div style={{ padding: '16px', background: 'linear-gradient(90deg, rgba(88, 28, 135, 0.4) 0%, rgba(15, 23, 42, 0.95) 100%)', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ padding: '16px', background: 'linear-gradient(90deg, rgba(88, 28, 135, 0.5) 0%, rgba(15, 23, 42, 0.85) 100%)', borderBottom: '1px solid rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div className="flex items-center gap-3">
           <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(168, 85, 247, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#c084fc' }}>
             <Sparkles style={{ width: '18px', height: '18px' }} />

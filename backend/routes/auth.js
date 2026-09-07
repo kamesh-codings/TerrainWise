@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * TripNova Authentication & Account Endpoints
+ * Terrain Wise Authentication & Account Endpoints
  * =============================================================================
  * Handles Tourist & Service Provider Registration, Login, and Password Reset
  * directly with MySQL database.
@@ -33,7 +33,7 @@ router.get('/verify', (req, res) => {
       success: true,
       authenticated: true,
       engine: db.getEngine(),
-      message: `TripNova API Key is active (Database: ${db.getEngine().toUpperCase()})`
+      message: `Terrain Wise API Key is active (Database: ${db.getEngine().toUpperCase()})`
     });
   }
 

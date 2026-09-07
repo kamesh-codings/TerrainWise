@@ -1,6 +1,6 @@
-# ⚙️ TripNova Backend API Documentation
+# ⚙️ Terrain Wise Backend API Documentation
 
-The backend service for the **TripNova Tourism Platform & Tourist Safety System** is built with **Node.js**, **Express**, and **SQLite / MySQL**.
+The backend service for the **Terrain Wise Tourism Platform & Tourist Safety System** is built with **Node.js**, **Express**, and **SQLite / MySQL**.
 
 ---
 

@@ -52,7 +52,7 @@ export const EmergencyCard: React.FC<EmergencyCardProps> = ({
   };
 
   const copyEmergencyInfo = () => {
-    const text = `EMERGENCY TOURIST PASS - TRIPNOVA
+    const text = `EMERGENCY TOURIST PASS - TERRAIN WISE
 Name: ${userProfile.name}
 Blood Group: ${userProfile.bloodGroup}
 Age: ${userProfile.age} | Gender: ${userProfile.gender}
