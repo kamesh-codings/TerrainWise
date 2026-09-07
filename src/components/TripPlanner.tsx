@@ -31,7 +31,9 @@ import {
   ChevronRight,
   Trash2,
   AlertCircle,
-  ExternalLink
+  ExternalLink,
+  Search,
+  X
 } from 'lucide-react';
 import { 
   TripPlan, 
@@ -151,6 +153,55 @@ const PROVIDER_CATEGORIES: {
   }
 ];
 
+// Helper: Badge styling for tourist spot categories
+const getSpotCategoryBadge = (cat: string) => {
+  switch (cat) {
+    case 'historical':
+    case 'monument':
+      return { label: 'Historical', bg: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: 'rgba(245, 158, 11, 0.3)' };
+    case 'beach':
+      return { label: 'Beach', bg: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8', border: 'rgba(56, 189, 248, 0.3)' };
+    case 'nature':
+    case 'wildlife':
+    case 'hill_station':
+      return { label: 'Nature / Scenic', bg: 'rgba(52, 211, 153, 0.15)', color: '#34d399', border: 'rgba(52, 211, 153, 0.3)' };
+    case 'religious':
+      return { label: 'Religious', bg: 'rgba(251, 191, 36, 0.15)', color: '#f59e0b', border: 'rgba(251, 191, 36, 0.3)' };
+    case 'stay_hotel':
+      return { label: 'Hotel & Stay', bg: 'rgba(244, 114, 182, 0.15)', color: '#f472b6', border: 'rgba(244, 114, 182, 0.3)' };
+    case 'medical_facility':
+      return { label: 'Hospital / Medical', bg: 'rgba(248, 113, 113, 0.15)', color: '#f87171', border: 'rgba(248, 113, 113, 0.3)' };
+    case 'police_station':
+      return { label: 'Police Station', bg: 'rgba(129, 140, 248, 0.15)', color: '#818cf8', border: 'rgba(129, 140, 248, 0.3)' };
+    case 'fire_station':
+      return { label: 'Fire & Rescue', bg: 'rgba(251, 146, 60, 0.15)', color: '#fb923c', border: 'rgba(251, 146, 60, 0.3)' };
+    case 'food_dining':
+      return { label: 'Food & Dining', bg: 'rgba(250, 204, 21, 0.15)', color: '#facc15', border: 'rgba(250, 204, 21, 0.3)' };
+    case 'shopping':
+      return { label: 'Shopping', bg: 'rgba(168, 85, 247, 0.15)', color: '#c084fc', border: 'rgba(168, 85, 247, 0.3)' };
+    default:
+      return { label: cat ? cat.replace(/_/g, ' ') : 'Attraction', bg: 'rgba(148, 163, 184, 0.15)', color: '#cbd5e1', border: 'rgba(148, 163, 184, 0.3)' };
+  }
+};
+
+// Helper: Highlight typed search letters in spot name
+const renderHighlightedSpotName = (name: string, query: string) => {
+  if (!query.trim()) return name;
+  const q = query.trim().toLowerCase();
+  const lower = name.toLowerCase();
+  const idx = lower.indexOf(q);
+  if (idx === -1) return name;
+  return (
+    <>
+      {name.slice(0, idx)}
+      <span style={{ color: '#38bdf8', fontWeight: 800, textDecoration: 'underline', background: 'rgba(56, 189, 248, 0.2)', padding: '0 2px', borderRadius: '3px' }}>
+        {name.slice(idx, idx + q.length)}
+      </span>
+      {name.slice(idx + q.length)}
+    </>
+  );
+};
+
 export const TripPlanner: React.FC<TripPlannerProps> = ({
   trips,
   onSaveTrip,
@@ -265,10 +316,17 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
     return allLocations.filter(l => l.state.toLowerCase() === destState.toLowerCase());
   }, [allLocations, destState]);
 
-  // Filtered Spots for Destination City
+  // Filtered Spots for Destination City (prioritizes top attractions, monuments, viewpoints)
   const destCitySpots = useMemo(() => {
     if (!destCityId) return [];
-    return allPlaces.filter(p => p.location_id === destCityId);
+    const spots = allPlaces.filter(p => p.location_id === destCityId);
+    const touristCategories = ['historical', 'nature', 'beach', 'hill_station', 'cultural', 'religious', 'viewpoint', 'wildlife', 'museum', 'monument', 'park', 'attraction', 'shopping'];
+    return spots.slice().sort((a, b) => {
+      const aIsTourist = touristCategories.includes(a.category) ? 1 : 0;
+      const bIsTourist = touristCategories.includes(b.category) ? 1 : 0;
+      if (aIsTourist !== bIsTourist) return bIsTourist - aIsTourist;
+      return (b.avg_rating || 0) - (a.avg_rating || 0);
+    });
   }, [allPlaces, destCityId]);
 
   // Selected Boarding Object & Coordinates
@@ -415,12 +473,114 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
   const effectiveBudget = budgetType === 'suggested' ? accurateBudget.total : (customBudgetAmount || accurateBudget.total);
   const perPersonBudget = Math.round(effectiveBudget / safeTravelers);
 
-  // Spot addition/removal
-  const handleAddSpot = () => {
-    if (newSpotInput.trim() && !selectedSpots.includes(newSpotInput.trim())) {
-      setSelectedSpots(prev => [...prev, newSpotInput.trim()]);
-      setNewSpotInput('');
+  // Spot search suggestions dropdown state
+  const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
+  const searchContainerRef = React.useRef<HTMLDivElement>(null);
+
+  // Close suggestions dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setIsSearchFocused(false);
+      }
     }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Dynamic letter-by-letter spot suggestions prioritizing destination places & locations entered above
+  const searchedSpotSuggestions = useMemo(() => {
+    const query = newSpotInput.trim().toLowerCase();
+
+    // If query is empty, suggest top spots in current destination city/state when search is focused
+    if (!query) {
+      if (destCitySpots.length > 0) {
+        return destCitySpots.slice(0, 8).map(p => {
+          const loc = allLocations.find(l => l.id === p.location_id);
+          return {
+            ...p,
+            cityName: loc?.name || currentDestCity?.name || '',
+            stateName: loc?.state || destState || ''
+          };
+        });
+      }
+      return [];
+    }
+
+    // Filter places where name, category, or city matches query
+    const matched = allPlaces.filter(p => {
+      const nameLower = p.name.toLowerCase();
+      const catLower = (p.category || '').toLowerCase();
+      return nameLower.includes(query) || catLower.includes(query);
+    });
+
+    const touristCategories = ['historical', 'nature', 'beach', 'hill_station', 'cultural', 'religious', 'viewpoint', 'wildlife', 'museum', 'monument', 'park', 'attraction', 'shopping'];
+
+    const scored = matched.map(p => {
+      let score = 0;
+      const nameLower = p.name.toLowerCase();
+      const loc = allLocations.find(l => l.id === p.location_id);
+      const isCurrentDestCity = destCityId && p.location_id === destCityId;
+      const isCurrentDestState = destState && loc && loc.state.toLowerCase() === destState.toLowerCase();
+
+      // Highest priority: spots in the selected destination city
+      if (isCurrentDestCity) {
+        score += 10000;
+      } else if (isCurrentDestState) {
+        score += 5000;
+      }
+
+      // Exact, prefix, and word boundary match bonuses
+      if (nameLower === query) {
+        score += 3000;
+      } else if (nameLower.startsWith(query)) {
+        score += 1500;
+      } else if (nameLower.includes(` ${query}`) || nameLower.includes(`(${query}`)) {
+        score += 800;
+      } else {
+        score += 200;
+      }
+
+      // Tourist preference bonus
+      if (touristCategories.includes(p.category)) {
+        score += 100;
+      }
+
+      // Rating bonus
+      score += Math.round((p.avg_rating || 4.0) * 10);
+
+      return {
+        ...p,
+        cityName: loc?.name || '',
+        stateName: loc?.state || '',
+        score
+      };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, 15);
+  }, [allPlaces, allLocations, newSpotInput, destCityId, destState, destCitySpots, currentDestCity]);
+
+  // Spot addition/removal
+  const handleAddSpot = (customName?: string) => {
+    const textToAdd = (customName || newSpotInput).trim();
+    if (!textToAdd) return;
+
+    let spotName = textToAdd;
+    if (!customName && highlightedIndex >= 0 && searchedSpotSuggestions[highlightedIndex]) {
+      spotName = searchedSpotSuggestions[highlightedIndex].name;
+    } else if (!customName && searchedSpotSuggestions.length > 0) {
+      const exact = searchedSpotSuggestions.find(s => s.name.toLowerCase() === textToAdd.toLowerCase());
+      if (exact) spotName = exact.name;
+    }
+
+    if (!selectedSpots.includes(spotName)) {
+      setSelectedSpots(prev => [...prev, spotName]);
+    }
+    setNewSpotInput('');
+    setHighlightedIndex(-1);
+    setIsSearchFocused(false);
   };
 
   const handleToggleSuggestedSpot = (spotName: string) => {
@@ -433,6 +593,30 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
 
   const handleRemoveSpot = (spot: string) => {
     setSelectedSpots(prev => prev.filter(s => s !== spot));
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (!isSearchFocused) setIsSearchFocused(true);
+      setHighlightedIndex(prev => (prev < searchedSpotSuggestions.length - 1 ? prev + 1 : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setHighlightedIndex(prev => (prev > 0 ? prev - 1 : searchedSpotSuggestions.length - 1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (highlightedIndex >= 0 && searchedSpotSuggestions[highlightedIndex]) {
+        handleToggleSuggestedSpot(searchedSpotSuggestions[highlightedIndex].name);
+        setNewSpotInput('');
+        setHighlightedIndex(-1);
+        setIsSearchFocused(false);
+      } else {
+        handleAddSpot();
+      }
+    } else if (e.key === 'Escape') {
+      setIsSearchFocused(false);
+      setHighlightedIndex(-1);
+    }
   };
 
   // ===========================================================================
@@ -1595,25 +1779,271 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
               </p>
             )}
 
-            {/* Custom Spot Addition */}
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={newSpotInput}
-                onChange={e => setNewSpotInput(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), handleAddSpot())}
-                placeholder="Type custom spot or landmark name..."
-                className="input-glass"
-                style={{ flex: 1, fontSize: '0.8rem' }}
-              />
-              <button
-                type="button"
-                onClick={handleAddSpot}
-                className="btn-primary"
-                style={{ padding: '8px 16px', fontSize: '0.8rem' }}
-              >
-                <Plus style={{ width: '16px', height: '16px' }} /> Add
-              </button>
+            {/* Custom Spot Live Search & Addition */}
+            <div ref={searchContainerRef} style={{ position: 'relative', width: '100%' }}>
+              <div className="flex gap-2" style={{ position: 'relative' }}>
+                <div style={{ position: 'relative', flex: 1, display: 'flex', alignItems: 'center' }}>
+                  <Search 
+                    style={{ 
+                      position: 'absolute', 
+                      left: '12px', 
+                      width: '16px', 
+                      height: '16px', 
+                      color: isSearchFocused ? '#38bdf8' : '#94a3b8',
+                      pointerEvents: 'none',
+                      transition: 'color 0.2s'
+                    }} 
+                  />
+                  <input
+                    type="text"
+                    value={newSpotInput}
+                    onChange={e => {
+                      setNewSpotInput(e.target.value);
+                      setIsSearchFocused(true);
+                      setHighlightedIndex(-1);
+                    }}
+                    onFocus={() => setIsSearchFocused(true)}
+                    onKeyDown={handleSearchKeyDown}
+                    placeholder={`Search destination spots letter by letter (e.g. Thiruvalluvar Statue, Beach, Temple in ${currentDestCity?.name || destState || 'India'})...`}
+                    className="input-glass"
+                    style={{ 
+                      width: '100%', 
+                      paddingLeft: '38px', 
+                      paddingRight: newSpotInput ? '34px' : '12px',
+                      fontSize: '0.82rem',
+                      borderRadius: '12px',
+                      borderColor: isSearchFocused ? '#38bdf8' : 'rgba(255,255,255,0.1)'
+                    }}
+                  />
+                  {newSpotInput && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setNewSpotInput('');
+                        setHighlightedIndex(-1);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        right: '10px',
+                        background: 'rgba(255,255,255,0.08)',
+                        border: 'none',
+                        color: '#94a3b8',
+                        width: '20px',
+                        height: '20px',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        fontSize: '12px'
+                      }}
+                      title="Clear Search"
+                    >
+                      <X style={{ width: '12px', height: '12px' }} />
+                    </button>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => handleAddSpot()}
+                  className="btn-primary"
+                  style={{ 
+                    padding: '8px 18px', 
+                    fontSize: '0.82rem',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    flexShrink: 0
+                  }}
+                  title="Add Spot to Trip Plan"
+                >
+                  <Plus style={{ width: '16px', height: '16px' }} /> Add
+                </button>
+              </div>
+
+              {/* Suggestions Dropdown Popover */}
+              {isSearchFocused && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 'calc(100% + 6px)',
+                    left: 0,
+                    right: 0,
+                    background: 'rgba(10, 15, 29, 0.98)',
+                    backdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(56, 189, 248, 0.35)',
+                    borderRadius: '14px',
+                    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.75), 0 0 15px rgba(56, 189, 248, 0.15)',
+                    zIndex: 100,
+                    maxHeight: '360px',
+                    overflowY: 'auto',
+                    padding: '8px 6px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '4px'
+                  }}
+                >
+                  {/* Dropdown Header */}
+                  <div style={{ padding: '6px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                    <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <Sparkles style={{ width: '13px', height: '13px', color: '#38bdf8' }} />
+                      {newSpotInput.trim() 
+                        ? `Spot suggestions for "${newSpotInput}" (${searchedSpotSuggestions.length} found)`
+                        : `Recommended spots in ${currentDestCity?.name || destState || 'Destination'}`
+                      }
+                    </span>
+                    {(currentDestCity || destState) && (
+                      <span style={{ fontSize: '0.64rem', color: '#38bdf8', background: 'rgba(56,189,248,0.12)', padding: '2px 6px', borderRadius: '6px', fontWeight: 600 }}>
+                        📍 {currentDestCity?.name ? `${currentDestCity.name}, ` : ''}{destState || 'All India'}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Suggestions List */}
+                  {searchedSpotSuggestions.length > 0 ? (
+                    searchedSpotSuggestions.map((spot, idx) => {
+                      const isAdded = selectedSpots.includes(spot.name);
+                      const isHighlighted = highlightedIndex === idx;
+                      const badgeStyle = getSpotCategoryBadge(spot.category);
+
+                      return (
+                        <div
+                          key={spot.id || `${spot.name}-${idx}`}
+                          onClick={() => {
+                            handleToggleSuggestedSpot(spot.name);
+                          }}
+                          onMouseEnter={() => setHighlightedIndex(idx)}
+                          style={{
+                            padding: '8px 12px',
+                            borderRadius: '10px',
+                            background: isHighlighted 
+                              ? 'rgba(56, 189, 248, 0.2)' 
+                              : isAdded 
+                                ? 'rgba(56, 189, 248, 0.08)' 
+                                : 'transparent',
+                            border: isHighlighted ? '1px solid rgba(56, 189, 248, 0.4)' : '1px solid transparent',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '10px',
+                            transition: 'all 0.15s ease'
+                          }}
+                        >
+                          <div style={{ minWidth: 0, flex: 1 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: isAdded ? '#38bdf8' : '#ffffff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                {renderHighlightedSpotName(spot.name, newSpotInput)}
+                              </span>
+                              <span 
+                                style={{ 
+                                  fontSize: '0.62rem', 
+                                  padding: '1px 6px', 
+                                  borderRadius: '6px', 
+                                  background: badgeStyle.bg, 
+                                  color: badgeStyle.color, 
+                                  border: `1px solid ${badgeStyle.border}`,
+                                  fontWeight: 700,
+                                  whiteSpace: 'nowrap'
+                                }}
+                              >
+                                {badgeStyle.label}
+                              </span>
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.68rem', color: '#94a3b8', marginTop: '3px' }}>
+                              {spot.cityName && (
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                                  <MapPin style={{ width: '11px', height: '11px', color: '#64748b' }} />
+                                  {spot.cityName}{spot.stateName ? `, ${spot.stateName}` : ''}
+                                </span>
+                              )}
+                              <span style={{ color: '#fbbf24' }}>★ {spot.avg_rating || '4.8'}</span>
+                              <span style={{ color: '#94a3b8' }}>{spot.entry_fee ? `₹${spot.entry_fee}` : 'Free Entry'}</span>
+                            </div>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleToggleSuggestedSpot(spot.name);
+                            }}
+                            style={{
+                              padding: '5px 10px',
+                              borderRadius: '8px',
+                              fontSize: '0.72rem',
+                              fontWeight: 700,
+                              border: 'none',
+                              background: isAdded ? '#38bdf8' : 'rgba(255,255,255,0.08)',
+                              color: isAdded ? '#090e17' : '#cbd5e1',
+                              cursor: 'pointer',
+                              flexShrink: 0,
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              transition: 'all 0.2s'
+                            }}
+                          >
+                            {isAdded ? (
+                              <>
+                                <Check style={{ width: '12px', height: '12px' }} /> Added
+                              </>
+                            ) : (
+                              <>
+                                <Plus style={{ width: '12px', height: '12px' }} /> Add
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div style={{ padding: '16px 12px', textAlign: 'center', color: '#94a3b8' }}>
+                      <p style={{ margin: '0 0 8px 0', fontSize: '0.78rem' }}>
+                        No destination spot matched <strong>"{newSpotInput}"</strong> in database.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => handleAddSpot(newSpotInput)}
+                        className="btn-secondary"
+                        style={{ padding: '6px 14px', fontSize: '0.74rem', color: '#38bdf8', borderColor: '#38bdf8' }}
+                      >
+                        <Plus style={{ width: '14px', height: '14px' }} /> Add "{newSpotInput}" as Custom Landmark
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Add Custom Spot prompt at bottom when input has text and suggestions exist */}
+                  {newSpotInput.trim() && searchedSpotSuggestions.length > 0 && (
+                    <div 
+                      onClick={() => handleAddSpot(newSpotInput)}
+                      style={{
+                        padding: '8px 12px',
+                        marginTop: '4px',
+                        borderTop: '1px solid rgba(255,255,255,0.06)',
+                        fontSize: '0.72rem',
+                        color: '#38bdf8',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        borderRadius: '8px',
+                        background: 'rgba(56, 189, 248, 0.05)'
+                      }}
+                    >
+                      <Plus style={{ width: '13px', height: '13px' }} />
+                      Add <strong>"{newSpotInput}"</strong> as custom landmark
+                    </div>
+                  )}
+
+                  <div style={{ padding: '4px 10px', fontSize: '0.64rem', color: '#64748b', textAlign: 'center' }}>
+                    💡 Tip: Click any spot or press Enter / arrow keys to select.
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Selected Spots Badges */}
