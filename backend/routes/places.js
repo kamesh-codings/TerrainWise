@@ -5,7 +5,7 @@ const db = require('../config/db');
 // GET /api/places - List all tourist places with search and filtering
 router.get('/', async (req, res) => {
   try {
-    const { location_id, state, category, search, limit = 2000, offset = 0 } = req.query;
+    const { location_id, state, category, search, limit = 25000, offset = 0 } = req.query;
     let sql = `
       SELECT p.*, l.name as location_name, l.state as location_state, l.region as location_region
       FROM places p

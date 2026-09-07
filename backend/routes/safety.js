@@ -26,6 +26,53 @@ router.get('/contacts', async (req, res) => {
   }
 });
 
+// GET /api/safety/police - Verified police stations across Tamil Nadu
+router.get('/police', async (req, res) => {
+  try {
+    const { location_id, search, lat, lng } = req.query;
+    let sql = `
+      SELECT ps.*, l.name as location_name, l.state as location_state
+      FROM police_stations ps
+      JOIN locations l ON ps.location_id = l.id
+      WHERE 1=1
+    `;
+    const params = [];
+
+    if (location_id) {
+      sql += ' AND ps.location_id = ?';
+      params.push(location_id);
+    }
+
+    if (search) {
+      sql += ' AND (ps.name LIKE ? OR ps.address LIKE ? OR l.name LIKE ?)';
+      params.push(`%${search}%`, `%${search}%`, `%${search}%`);
+    }
+
+    sql += ' ORDER BY l.name ASC, ps.name ASC';
+    let rows = await db.query(sql, params);
+
+    // If coordinates are provided, compute distanceKm using Haversine formula and sort nearest first
+    if (lat && lng && !isNaN(parseFloat(lat)) && !isNaN(parseFloat(lng))) {
+      const uLat = parseFloat(lat);
+      const uLng = parseFloat(lng);
+      rows = rows.map(r => {
+        const dLat = (r.latitude - uLat) * (Math.PI / 180);
+        const dLng = (r.longitude - uLng) * (Math.PI / 180);
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                  Math.cos(uLat * (Math.PI / 180)) * Math.cos(r.latitude * (Math.PI / 180)) *
+                  Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distanceKm = Math.round(6371 * c * 10) / 10;
+        return { ...r, distanceKm };
+      }).sort((a, b) => a.distanceKm - b.distanceKm);
+    }
+
+    res.json({ success: true, count: rows.length, data: rows });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // GET /api/safety/rules - Cultural rules and etiquette
 router.get('/rules', async (req, res) => {
   try {

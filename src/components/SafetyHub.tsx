@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Building2, 
   PhoneCall, 
@@ -10,13 +10,14 @@ import {
   AlertOctagon, 
   Send, 
   Clock, 
-  Globe,
-  ShieldCheck,
-  Search
+  Globe, 
+  ShieldCheck, 
+  Search 
 } from 'lucide-react';
 import { SafetyPlace, UserProfile } from '../types';
 import { NEARBY_HOSPITALS, NEARBY_POLICE_STATIONS, COUNTRY_RULES } from '../data/mockData';
 import { logSOSEvent } from '../utils/storage';
+import { fetchPoliceStations } from '../utils/api';
 
 interface SafetyHubProps {
   userProfile: UserProfile;
@@ -34,8 +35,21 @@ export const SafetyHub: React.FC<SafetyHubProps> = ({
   const [sosSent, setSosSent] = useState(false);
   const [sosSending, setSosSending] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(COUNTRY_RULES[0]);
+  const [policeStations, setPoliceStations] = useState<SafetyPlace[]>(NEARBY_POLICE_STATIONS);
 
-  const allPlaces: SafetyPlace[] = [...NEARBY_HOSPITALS, ...NEARBY_POLICE_STATIONS];
+  useEffect(() => {
+    let isMounted = true;
+    fetchPoliceStations()
+      .then(data => {
+        if (isMounted && data && data.length > 0) {
+          setPoliceStations(data);
+        }
+      })
+      .catch(() => {});
+    return () => { isMounted = false; };
+  }, []);
+
+  const allPlaces: SafetyPlace[] = [...NEARBY_HOSPITALS, ...policeStations];
 
   const filteredPlaces = allPlaces.filter(place => {
     const matchesCat = activeCategory === 'all' || place.type === activeCategory;

@@ -148,19 +148,78 @@ export const SpotsExplorer: React.FC<SpotsExplorerProps> = ({ onSelectSpot, onNa
 
   const currentLocation = locations.find(l => l.id === selectedLocationId);
 
+  const getCategoryBadgeColor = (category: string) => {
+    switch (category) {
+      case 'police_station':
+        return 'badge-blue';
+      case 'fire_station':
+      case 'medical_facility':
+        return 'badge-red';
+      case 'stay_hotel':
+        return 'badge-green';
+      case 'food_dining':
+        return 'badge-orange';
+      case 'religious':
+        return 'badge-gold';
+      case 'nature':
+        return 'badge-green';
+      case 'beach':
+        return 'badge-blue';
+      case 'historical':
+      case 'heritage':
+        return 'badge-purple';
+      case 'museum':
+      case 'cultural':
+      case 'entertainment':
+        return 'badge-blue';
+      default:
+        return 'badge-purple';
+    }
+  };
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'police_station': return '👮';
+      case 'fire_station': return '🚒';
+      case 'medical_facility': return '🏥';
+      case 'stay_hotel': return '🏨';
+      case 'food_dining': return '🍲';
+      case 'religious': return '🛕';
+      case 'nature': return '🌲';
+      case 'beach': return '🏖️';
+      case 'historical': return '🏰';
+      case 'heritage': return '🏛️';
+      case 'museum': return '🏺';
+      case 'cultural': return '🎭';
+      case 'shopping': return '🛍️';
+      case 'adventure': return '🧗';
+      case 'wildlife': return '🐅';
+      case 'hill_station': return '⛰️';
+      case 'entertainment': return '🎡';
+      default: return '📍';
+    }
+  };
+
   const categories = [
-    { id: 'all', label: '🌐 All Categories' },
-    { id: 'religious', label: '🛕 Religious & Temples' },
-    { id: 'historical', label: '🏰 Historical' },
+    { id: 'all', label: '🌐 All Spots' },
+    { id: 'stay_hotel', label: '🏨 Hotels & Stays' },
+    { id: 'food_dining', label: '🍲 Food & Dining' },
+    { id: 'religious', label: '🛕 Religious & Worship' },
+    { id: 'police_station', label: '👮 Police Stations' },
+    { id: 'fire_station', label: '🚒 Fire & Rescue' },
+    { id: 'medical_facility', label: '🏥 Hospitals & Medical' },
+    { id: 'historical', label: '🏰 Historical & Forts' },
     { id: 'heritage', label: '🏛️ Heritage & UNESCO' },
-    { id: 'nature', label: '🌲 Nature & Waterfalls' },
+    { id: 'nature', label: '🌲 Nature, Parks & Gardens' },
     { id: 'beach', label: '🏖️ Beaches & Coastal' },
     { id: 'wildlife', label: '🐅 Wildlife & Safari' },
     { id: 'hill_station', label: '⛰️ Hill Stations' },
-    { id: 'museum', label: '🏺 Museums & Science' },
+    { id: 'museum', label: '🏺 Museums & Art Galleries' },
+    { id: 'cultural', label: '🎭 Arts, Culture & Cinema' },
     { id: 'adventure', label: '🧗 Adventure & Trekking' },
-    { id: 'shopping', label: '🛍️ Markets & Crafts' },
-    { id: 'food_dining', label: '🍲 Food & Dining' }
+    { id: 'shopping', label: '🛍️ Markets & Bazaars' },
+    { id: 'entertainment', label: '🎡 Entertainment & Leisure' },
+    { id: 'other', label: '📍 Other Attractions' }
   ];
 
   return (
@@ -309,7 +368,7 @@ export const SpotsExplorer: React.FC<SpotsExplorerProps> = ({ onSelectSpot, onNa
             <div style={{ position: 'relative' }}>
               <input
                 type="text"
-                placeholder="Search spot, temple, palace, park..."
+                placeholder="Search spot, temple, hotel, police, hospital, dining..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="input-field"
@@ -435,8 +494,9 @@ export const SpotsExplorer: React.FC<SpotsExplorerProps> = ({ onSelectSpot, onNa
                   <div>
                     {/* Card Header: Category Badge & Rating */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
-                      <span className="badge badge-purple" style={{ textTransform: 'capitalize' }}>
-                        {place.category.replace('_', ' ')}
+                      <span className={`badge ${getCategoryBadgeColor(place.category)}`} style={{ textTransform: 'capitalize', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                        <span>{getCategoryIcon(place.category)}</span>
+                        <span>{place.category.replace('_', ' ')}</span>
                       </span>
                       <div className="flex items-center gap-1" style={{ color: '#fbbf24', fontSize: '0.85rem', fontWeight: 700 }}>
                         <Star style={{ width: '14px', height: '14px', fill: '#fbbf24' }} />

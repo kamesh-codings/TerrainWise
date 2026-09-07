@@ -97,6 +97,10 @@ CREATE TABLE `places` (
         'food_dining',
         'shopping',
         'entertainment',
+        'police_station',
+        'fire_station',
+        'stay_hotel',
+        'medical_facility',
         'other'
     ) NOT NULL,
     `avg_rating` DECIMAL(3, 2) NOT NULL DEFAULT 0.00,
@@ -179,6 +183,31 @@ CREATE TABLE `safety_contacts` (
     PRIMARY KEY (`id`),
     KEY `idx_safety_contacts_location_id` (`location_id`),
     CONSTRAINT `fk_safety_contacts_location` FOREIGN KEY (`location_id`)
+        REFERENCES `locations` (`id`)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
+-- Table 5b: police_stations
+-- Verified police stations and tourist police precincts across Tamil Nadu
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `police_stations` (
+    `id` VARCHAR(64) NOT NULL,
+    `location_id` VARCHAR(64) NOT NULL,
+    `name` VARCHAR(150) NOT NULL,
+    `type` VARCHAR(50) NOT NULL DEFAULT 'police',
+    `latitude` DECIMAL(10, 6) DEFAULT NULL,
+    `longitude` DECIMAL(10, 6) DEFAULT NULL,
+    `contact_number` VARCHAR(50) NOT NULL DEFAULT '100 / 112',
+    `operating_hours` VARCHAR(100) NOT NULL DEFAULT '24/7',
+    `address` VARCHAR(255) DEFAULT NULL,
+    `osm_id` VARCHAR(100) DEFAULT NULL,
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    KEY `idx_police_stations_location_id` (`location_id`),
+    CONSTRAINT `fk_police_stations_location` FOREIGN KEY (`location_id`)
         REFERENCES `locations` (`id`)
         ON DELETE CASCADE
         ON UPDATE CASCADE
