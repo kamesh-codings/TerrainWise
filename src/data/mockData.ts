@@ -552,6 +552,371 @@ export const LOCAL_GUIDES: LocalGuide[] = [
   }
 ];
 
+export interface MockTransportProvider {
+  id: string;
+  name: string;
+  businessName: string;
+  photo: string;
+  location: string;
+  vehicleType: string;
+  vehicleRegNumber: string;
+  operatingStand: string;
+  ratePerKm: number;
+  dailyRate: number;
+  phone: string;
+  rating: number;
+  reviewsCount: number;
+  verified: boolean;
+  isPartner?: boolean;
+  badgeNumber?: string;
+  currency?: string;
+  acAvailable: boolean;
+  seatingCapacity: number;
+  hillStationCertified?: boolean;
+}
+
+export const LOCAL_DRIVERS: MockTransportProvider[] = [
+  {
+    id: 'drv_1',
+    name: 'Karthik Raja',
+    businessName: 'Madurai Temple & Heritage Cabs',
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    location: 'Madurai & Thanjavur, Tamil Nadu',
+    vehicleType: 'Innova Crysta AC (7-Seater)',
+    vehicleRegNumber: 'TN-58-AX-9921',
+    operatingStand: 'Madurai Junction & Airport Stand',
+    ratePerKm: 28,
+    dailyRate: 3200,
+    phone: '+91 98421 66554',
+    rating: 4.96,
+    reviewsCount: 184,
+    verified: true,
+    acAvailable: true,
+    seatingCapacity: 7,
+    hillStationCertified: true
+  },
+  {
+    id: 'drv_2',
+    name: 'M. Selvakumar',
+    businessName: 'Nilgiri Ghat Mountain Drivers',
+    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+    location: 'Nilgiris (Ooty & Coonoor), Tamil Nadu',
+    vehicleType: 'Mahindra Scorpio 4x4 (Hill Terrain Special)',
+    vehicleRegNumber: 'TN-43-C-4091',
+    operatingStand: 'Ooty Central Bus Stand & Railway Station',
+    ratePerKm: 32,
+    dailyRate: 3500,
+    phone: '+91 94432 77889',
+    rating: 4.92,
+    reviewsCount: 140,
+    verified: true,
+    acAvailable: true,
+    seatingCapacity: 6,
+    hillStationCertified: true
+  },
+  {
+    id: 'drv_3',
+    name: 'G. Murugan',
+    businessName: 'Marina City & Heritage Tours',
+    photo: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80',
+    location: 'Chennai & Chengalpattu (Mamallapuram), Tamil Nadu',
+    vehicleType: 'Maruti Dzire Sedan AC',
+    vehicleRegNumber: 'TN-01-BK-3310',
+    operatingStand: 'Chennai Central & Chennai Airport',
+    ratePerKm: 22,
+    dailyRate: 2400,
+    phone: '+91 98402 11447',
+    rating: 4.88,
+    reviewsCount: 210,
+    verified: true,
+    acAvailable: true,
+    seatingCapacity: 4
+  },
+  {
+    id: 'drv_4',
+    name: 'Pradeep Kurup',
+    businessName: 'Gods Own Country Express Cabs',
+    photo: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80',
+    location: 'Ernakulam (Kochi) & Alappuzha, Kerala',
+    vehicleType: 'Toyota Etios Premium AC',
+    vehicleRegNumber: 'KL-07-CB-8812',
+    operatingStand: 'Kochi Cochin International Airport (COK)',
+    ratePerKm: 24,
+    dailyRate: 2600,
+    phone: '+91 94470 22331',
+    rating: 4.95,
+    reviewsCount: 195,
+    verified: true,
+    acAvailable: true,
+    seatingCapacity: 4
+  },
+  {
+    id: 'drv_5',
+    name: 'Rameshwar Singh',
+    businessName: 'Royal Rajputana Chauffeurs',
+    photo: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80',
+    location: 'Jaipur & Udaipur, Rajasthan',
+    vehicleType: 'Toyota Innova Hycross Hybrid',
+    vehicleRegNumber: 'RJ-14-TA-5502',
+    operatingStand: 'Jaipur Railway Station & Sindhi Camp',
+    ratePerKm: 30,
+    dailyRate: 3600,
+    phone: '+91 98291 99887',
+    rating: 4.94,
+    reviewsCount: 168,
+    verified: true,
+    acAvailable: true,
+    seatingCapacity: 7
+  }
+];
+
+export interface MockHomestayProvider {
+  id: string;
+  name: string;
+  businessName: string;
+  photo: string;
+  location: string;
+  propertyType: string;
+  address: string;
+  totalRooms: number;
+  nightlyRateMin: number;
+  nightlyRateMax: number;
+  phone: string;
+  rating: number;
+  reviewsCount: number;
+  verified: boolean;
+  isPartner?: boolean;
+  badgeNumber?: string;
+  currency?: string;
+  amenities: string[];
+  fssaiLicense?: string;
+}
+
+export const LOCAL_HOMESTAYS: MockHomestayProvider[] = [
+  {
+    id: 'hst_1',
+    name: 'Meenakshi Sundaram',
+    businessName: 'Heritage Chettinad Mansion & Courtyard Stay',
+    photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80',
+    location: 'Madurai & Sivaganga, Tamil Nadu',
+    propertyType: 'Heritage Courtyard Mansion (Safe Stay Approved)',
+    address: '14, Palace Road, Near Meenakshi Temple, Madurai',
+    totalRooms: 8,
+    nightlyRateMin: 2200,
+    nightlyRateMax: 4500,
+    phone: '+91 94431 88001',
+    rating: 4.97,
+    reviewsCount: 128,
+    verified: true,
+    amenities: ['Traditional Banana Leaf Breakfast', 'High-Speed Wi-Fi', 'Solar Heated Water', '24/7 CCTV & Security', 'Ayurvedic Massage On-Demand'],
+    fssaiLicense: 'FSSAI-12421008000412'
+  },
+  {
+    id: 'hst_2',
+    name: 'David & Rachel Macfarlane',
+    businessName: 'Cloud-Mist Nilgiri Tea Estate Villa',
+    photo: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80',
+    location: 'Nilgiris (Ooty & Coonoor), Tamil Nadu',
+    propertyType: 'Mountain Colonial Villa & Tea Bungalow',
+    address: 'Highland Ridge Estate, Lovedale Road, Ooty',
+    totalRooms: 6,
+    nightlyRateMin: 3500,
+    nightlyRateMax: 6500,
+    phone: '+91 98422 33110',
+    rating: 4.94,
+    reviewsCount: 172,
+    verified: true,
+    amenities: ['Fireplace in Every Room', 'Organic Tea Tasting', 'Campfire & Stargazing Lawn', 'Homecooked Nilgiri Meals', 'Forest Trail Access'],
+    fssaiLicense: 'FSSAI-12419009000187'
+  },
+  {
+    id: 'hst_3',
+    name: 'Joseph Varghese',
+    businessName: 'Vembanad Backwater Breeze Homestay',
+    photo: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=400&q=80',
+    location: 'Ernakulam (Kochi) & Alappuzha, Kerala',
+    propertyType: 'Waterfront Eco-Cottage & Canoe Deck',
+    address: 'River View Lane, Kumbalangi Eco-Tourism Village, Kochi',
+    totalRooms: 5,
+    nightlyRateMin: 2800,
+    nightlyRateMax: 5200,
+    phone: '+91 94472 55667',
+    rating: 4.98,
+    reviewsCount: 220,
+    verified: true,
+    amenities: ['Free Village Canoe Rides', 'Kerala Sadya Cooking Lessons', 'Air-Conditioned Rooms', 'Organic Fish Pond', 'Hammock Garden'],
+    fssaiLicense: 'FSSAI-11320005000998'
+  },
+  {
+    id: 'hst_4',
+    name: 'Bhawani Singh Rathore',
+    businessName: 'Haveli Heritage Court Udaipur',
+    photo: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=400&q=80',
+    location: 'Jaipur & Udaipur, Rajasthan',
+    propertyType: '18th-Century Jharokha Haveli',
+    address: 'Gangaur Ghat Marg, Old City, Udaipur',
+    totalRooms: 10,
+    nightlyRateMin: 3000,
+    nightlyRateMax: 7000,
+    phone: '+91 98292 77112',
+    rating: 4.91,
+    reviewsCount: 145,
+    verified: true,
+    amenities: ['Rooftop Lake Pichola View', 'Folk Music Evenings', 'Rajasthani Thali Dining', 'Heritage Furniture', 'Doctor on Call'],
+    fssaiLicense: 'FSSAI-12218002000344'
+  }
+];
+
+export interface MockEmergencyMedicalProvider {
+  id: string;
+  name: string;
+  businessName: string;
+  photo: string;
+  location: string;
+  serviceType: string;
+  medicalLicenseNumber: string;
+  emergencyHotline: string;
+  availableVehiclesOrBeds: number;
+  serviceRadiusKm: number;
+  equipmentSupported: string[];
+  phone: string;
+  rating: number;
+  reviewsCount: number;
+  verified: boolean;
+  isPartner?: boolean;
+  badgeNumber?: string;
+  currency?: string;
+}
+
+export const LOCAL_MEDICAL_SERVICES: MockEmergencyMedicalProvider[] = [
+  {
+    id: 'med_1',
+    name: 'Dr. C. Balakrishnan (Chief Paramedic)',
+    businessName: 'Meenakshi Rapid Emergency & 24/7 Cardiac SOS Care',
+    photo: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80',
+    location: 'Madurai & Thanjavur, Tamil Nadu',
+    serviceType: '24/7 Advanced Cardiac Life Support (ACLS) Ambulance & Trauma Response',
+    medicalLicenseNumber: 'TN-MED-SOS-9811-A',
+    emergencyHotline: '+91 94432 00108',
+    availableVehiclesOrBeds: 6,
+    serviceRadiusKm: 45,
+    equipmentSupported: ['Defibrillator & ECG', 'Portable Oxygen Cylinders', 'Trauma Splints & Spine Board', 'Critical Care Nurse on Board'],
+    phone: '+91 94432 00108',
+    rating: 4.99,
+    reviewsCount: 340,
+    verified: true
+  },
+  {
+    id: 'med_2',
+    name: 'Dr. Sarah Mathews',
+    businessName: 'Nilgiris Mountain Rescue & High-Altitude Clinic',
+    photo: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80',
+    location: 'Nilgiris (Ooty & Coonoor), Tamil Nadu',
+    serviceType: 'Mountain Rescue Ambulance & Altitude Sickness Emergency Clinic',
+    medicalLicenseNumber: 'TN-MED-NLG-4402',
+    emergencyHotline: '+91 98421 99108',
+    availableVehiclesOrBeds: 4,
+    serviceRadiusKm: 50,
+    equipmentSupported: ['Hyperbaric Oxygen Chamber', 'Anti-Venom Kits', 'Mountain Stretcher System', 'Hypothermia Heat Blankets'],
+    phone: '+91 98421 99108',
+    rating: 4.97,
+    reviewsCount: 190,
+    verified: true
+  },
+  {
+    id: 'med_3',
+    name: 'Dr. Thomas Kurian',
+    businessName: 'Kochi Port & Backwater Quick-Response Medical Unit',
+    photo: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80',
+    location: 'Ernakulam (Kochi) & Alappuzha, Kerala',
+    serviceType: 'Water-Ambulance & 24/7 Coastal Emergency Clinic',
+    medicalLicenseNumber: 'KL-MED-EMG-7719',
+    emergencyHotline: '+91 94470 11108',
+    availableVehiclesOrBeds: 5,
+    serviceRadiusKm: 35,
+    equipmentSupported: ['Speedboat Water-Ambulance', 'Emergency Resuscitation Unit', 'First-Aid Pediatric Kits', 'Multilingual Medical Staff'],
+    phone: '+91 94470 11108',
+    rating: 4.96,
+    reviewsCount: 265,
+    verified: true
+  }
+];
+
+export interface MockRentalAgencyProvider {
+  id: string;
+  name: string;
+  businessName: string;
+  photo: string;
+  location: string;
+  agencyType: string;
+  gstOrMsmeNumber: string;
+  itemsOffered: string[];
+  insuranceIncluded: boolean;
+  dailyRateMin: number;
+  dailyRateMax: number;
+  phone: string;
+  rating: number;
+  reviewsCount: number;
+  verified: boolean;
+  isPartner?: boolean;
+  badgeNumber?: string;
+  currency?: string;
+}
+
+export const LOCAL_RENTAL_AGENCIES: MockRentalAgencyProvider[] = [
+  {
+    id: 'rnt_1',
+    name: 'Vikram Sundaram',
+    businessName: 'Nilgiri Peak Trekkers & Adventure Gear Rentals',
+    photo: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=400&q=80',
+    location: 'Nilgiris (Ooty & Coonoor), Tamil Nadu',
+    agencyType: 'Trekking Tents, Sleeping Bags, GoPro & Mountain Bike Rentals',
+    gstOrMsmeNumber: 'MSME-TN-NLG-88123',
+    itemsOffered: ['Waterproof Alpine Tents (2-4 Person)', 'Down Feather Sleeping Bags (-5°C)', 'Trekking Poles & Crampons', 'GoPro Hero 12 with Chest Mount', 'Trek 21-Speed Mountain Bikes'],
+    insuranceIncluded: true,
+    dailyRateMin: 350,
+    dailyRateMax: 1500,
+    phone: '+91 98422 88440',
+    rating: 4.93,
+    reviewsCount: 162,
+    verified: true
+  },
+  {
+    id: 'rnt_2',
+    name: 'S. Nagarajan',
+    businessName: 'Dhanushkodi 4x4 Safari & Coastal Snorkel Gear',
+    photo: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=400&q=80',
+    location: 'Ramanathapuram (Rameshwaram), Tamil Nadu',
+    agencyType: '4x4 Sand Dune Safari Jeeps & Snorkeling Equipment',
+    gstOrMsmeNumber: 'MSME-TN-RMD-44109',
+    itemsOffered: ['Open-Top Mahindra Thar 4x4 with Guide', 'Full Face Snorkel Masks & Fins', 'Underwater Action Cameras', 'Beach Camping Gazebos & Life Vests'],
+    insuranceIncluded: true,
+    dailyRateMin: 600,
+    dailyRateMax: 3200,
+    phone: '+91 94861 55990',
+    rating: 4.95,
+    reviewsCount: 188,
+    verified: true
+  },
+  {
+    id: 'rnt_3',
+    name: 'Mathew Abraham',
+    businessName: 'Fort Kochi Heritage Bicycle & Kayak Station',
+    photo: 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=400&q=80',
+    location: 'Ernakulam (Kochi) & Alappuzha, Kerala',
+    agencyType: 'Heritage Geared Cycles, Electric Scooters & Sea Kayaks',
+    gstOrMsmeNumber: 'MSME-KL-ERN-99321',
+    itemsOffered: ['Classic Dutch City Cruisers with Baskets', 'Electric Step-Through Scooters', 'Single & Tandem Ocean Kayaks', 'Waterproof Dry Bags & Helmets'],
+    insuranceIncluded: true,
+    dailyRateMin: 200,
+    dailyRateMax: 1200,
+    phone: '+91 94471 66332',
+    rating: 4.91,
+    reviewsCount: 230,
+    verified: true
+  }
+];
+
 export const VEHICLE_FARE_BENCHMARKS = [
   {
     vehicleType: 'Auto-Rickshaw (3-Wheeler)',

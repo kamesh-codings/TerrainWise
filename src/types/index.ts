@@ -68,6 +68,7 @@ export interface BaseProviderInfo {
   operatingCity: string;
   operatingState: string;
   nativeCurrency: string;
+  avatarUrl?: string;
   isVerified: boolean;
   registeredAt: string;
 }
@@ -201,6 +202,10 @@ export interface TripPlan {
   selectedResidencies: string[];
   itinerary: ItineraryItem[];
   assignedGuide?: LocalGuide;
+  assignedTransport?: any;
+  assignedHomestay?: any;
+  assignedEmergencySupport?: any;
+  assignedRentalAgency?: any;
   createdAt: string;
   status: 'planning' | 'ongoing' | 'completed';
 }
