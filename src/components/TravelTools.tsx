@@ -157,6 +157,10 @@ export const TravelTools: React.FC = () => {
   const [utcBandFilter, setUtcBandFilter] = useState<string>(''); // e.g. 'UTC+5:30' or ''
   const [homeCountryId, setHomeCountryId] = useState<number>(77); // Default: India (77)
   const [homeSubZoneTzId, setHomeSubZoneTzId] = useState<string>('Asia/Kolkata');
+  const [homeCountrySearch, setHomeCountrySearch] = useState<string>('');
+  const [destCountrySearch, setDestCountrySearch] = useState<string>('');
+  const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState<boolean>(false);
+  const [isDestDropdownOpen, setIsDestDropdownOpen] = useState<boolean>(false);
   const [timelineHour, setTimelineHour] = useState<number>(() => new Date().getHours());
   const [clockSearchQuery, setClockSearchQuery] = useState('London');
   const [clockData, setClockData] = useState<FullDestinationIntelligence | null>(null);
@@ -1641,41 +1645,148 @@ export const TravelTools: React.FC = () => {
 
             </div>
 
-            {/* DEDICATED DUAL DROPDOWN SELECTORS FIXED JUST ABOVE THE TWO TIMELINE COMPARISONS */}
+            {/* DEDICATED DUAL DROPDOWN SELECTORS WITH SEARCH & SUGGESTIONS FIXED JUST ABOVE TIME COMPARING DISPLAY MODULE */}
             <div className="glass-panel" style={{
-              padding: '18px 22px',
+              padding: '20px 22px',
               background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(20, 30, 55, 0.9) 100%)',
-              border: '1px solid rgba(56, 189, 248, 0.4)',
+              border: '1px solid rgba(56, 189, 248, 0.45)',
               borderRadius: '16px',
-              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.4)'
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.45)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px'
             }}>
               <div className="flex items-center justify-between flex-wrap gap-3 pb-3" style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
                 <div className="flex items-center gap-2">
-                  <span style={{ fontSize: '1.2rem' }}>⏱️</span>
+                  <span style={{ fontSize: '1.25rem' }}>⏱️</span>
                   <div>
-                    <h4 style={{ fontSize: '0.98rem', fontWeight: 900, color: '#ffffff' }}>
+                    <h4 style={{ fontSize: '1rem', fontWeight: 900, color: '#ffffff' }}>
                       Dual Timeline Comparison Selectors
                     </h4>
                     <p style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
-                      Choose your Home Base & Comparing Destination to compare real-time and hour-by-hour schedules
+                      Search or tap suggestions to instantly compare real-time clocks and timezone offsets
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="badge badge-blue" style={{ fontSize: '0.7rem', padding: '3px 8px' }}>
-                    195 Countries Direct Select
+                  <span className="badge badge-blue" style={{ fontSize: '0.7rem', padding: '3px 9px' }}>
+                    195 Countries Instant Search & Suggestions
                   </span>
                 </div>
               </div>
 
-              <div className="grid grid-12 gap-4 pt-3 items-center">
-                {/* 1. Home Base Country Dropdown */}
-                <div className="col-span-5 lg-col-span-12" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '0.76rem', fontWeight: 800, color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span>📍 1. Your Home Base:</span>
-                    <span style={{ fontSize: '0.7rem', color: '#cbd5e1' }}>({homeCountry.flag} {homeCountry.name})</span>
-                  </label>
+              <div className="grid grid-12 gap-5 items-start">
+                {/* 1. Home Base Country Selector with Search & Suggestions */}
+                <div className="col-span-5 lg-col-span-12" style={{ display: 'flex', flexDirection: 'column', gap: '8px', position: 'relative' }}>
+                  <div className="flex items-center justify-between">
+                    <label style={{ fontSize: '0.76rem', fontWeight: 800, color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span>📍 1. Your Home Base:</span>
+                      <span style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>({homeCountry.flag} {homeCountry.name})</span>
+                    </label>
+                    <span className="badge badge-blue" style={{ fontSize: '0.65rem', padding: '1px 6px' }}>
+                      {homeCountry.utcOffset.split('/')[0].trim()}
+                    </span>
+                  </div>
+
+                  {/* Search Input for Home Base */}
+                  <div style={{ position: 'relative' }}>
+                    <Search style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', width: '15px', height: '15px', color: '#38bdf8' }} />
+                    <input
+                      type="text"
+                      value={homeCountrySearch}
+                      onChange={e => {
+                        setHomeCountrySearch(e.target.value);
+                        setIsHomeDropdownOpen(true);
+                      }}
+                      onFocus={() => setIsHomeDropdownOpen(true)}
+                      placeholder={`Search base country (${homeCountry.name})...`}
+                      className="input-glass"
+                      style={{
+                        paddingLeft: '36px',
+                        paddingRight: homeCountrySearch ? '30px' : '12px',
+                        fontSize: '0.82rem',
+                        fontWeight: 700,
+                        color: '#ffffff',
+                        borderColor: 'rgba(56, 189, 248, 0.4)',
+                        width: '100%',
+                        borderRadius: '10px'
+                      }}
+                    />
+                    {homeCountrySearch && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setHomeCountrySearch('');
+                          setIsHomeDropdownOpen(false);
+                        }}
+                        style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '0.8rem' }}
+                      >
+                        ✕
+                      </button>
+                    )}
+
+                    {/* Autocomplete Suggestion Dropdown List */}
+                    {isHomeDropdownOpen && (
+                      <div style={{
+                        position: 'absolute',
+                        top: 'calc(100% + 4px)',
+                        left: 0,
+                        right: 0,
+                        maxHeight: '220px',
+                        overflowY: 'auto',
+                        background: '#090e17',
+                        border: '1px solid rgba(56, 189, 248, 0.5)',
+                        borderRadius: '10px',
+                        zIndex: 100,
+                        boxShadow: '0 8px 24px rgba(0,0,0,0.7)',
+                        padding: '4px',
+                        scrollbarWidth: 'thin'
+                      }}>
+                        {GLOBAL_195_COUNTRIES.filter(c => {
+                          if (!homeCountrySearch.trim()) return true;
+                          const q = homeCountrySearch.toLowerCase();
+                          return c.name.toLowerCase().includes(q) || c.capitalOrMajorCity.toLowerCase().includes(q) || c.utcOffset.toLowerCase().includes(q);
+                        }).slice(0, 30).map(c => (
+                          <div
+                            key={`h-search-${c.id}`}
+                            onClick={() => {
+                              setHomeCountryId(c.id);
+                              setHomeSubZoneTzId(c.primaryTzId);
+                              setHomeCountrySearch('');
+                              setIsHomeDropdownOpen(false);
+                            }}
+                            style={{
+                              padding: '7px 10px',
+                              borderRadius: '6px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              cursor: 'pointer',
+                              background: c.id === homeCountryId ? 'rgba(56, 189, 248, 0.2)' : 'transparent',
+                              color: c.id === homeCountryId ? '#38bdf8' : '#ffffff',
+                              fontSize: '0.78rem',
+                              fontWeight: c.id === homeCountryId ? 800 : 600,
+                              transition: 'background 0.15s ease'
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(56, 189, 248, 0.15)'}
+                            onMouseLeave={e => e.currentTarget.style.background = c.id === homeCountryId ? 'rgba(56, 189, 248, 0.2)' : 'transparent'}
+                          >
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span>{c.flag}</span>
+                              <span>{c.name}</span>
+                              <span style={{ fontSize: '0.68rem', color: '#64748b' }}>({c.capitalOrMajorCity})</span>
+                            </span>
+                            <span style={{ fontSize: '0.68rem', color: '#38bdf8', fontFamily: 'monospace' }}>
+                              {c.utcOffset.split('/')[0].trim()}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Standard Select Alternative */}
                   <select
                     value={homeCountryId}
                     onChange={e => {
@@ -1688,13 +1799,13 @@ export const TravelTools: React.FC = () => {
                     }}
                     className="input-glass"
                     style={{
-                      fontSize: '0.84rem',
+                      fontSize: '0.82rem',
                       fontWeight: 800,
                       color: '#38bdf8',
-                      padding: '10px 14px',
+                      padding: '8px 12px',
                       background: '#090e17',
-                      border: '1.5px solid rgba(56, 189, 248, 0.5)',
-                      borderRadius: '10px',
+                      border: '1px solid rgba(56, 189, 248, 0.35)',
+                      borderRadius: '8px',
                       width: '100%'
                     }}
                   >
@@ -1707,7 +1818,7 @@ export const TravelTools: React.FC = () => {
 
                   {/* Home Multi-Zone Sub-Dropdown if applicable */}
                   {homeCountry.subZones && homeCountry.subZones.length > 0 && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span style={{ fontSize: '0.68rem', color: '#38bdf8', fontWeight: 700, whiteSpace: 'nowrap' }}>Sub-Zone:</span>
                       <select
                         value={activeHomeTz}
@@ -1723,10 +1834,49 @@ export const TravelTools: React.FC = () => {
                       </select>
                     </div>
                   )}
+
+                  {/* Quick Suggestions for Home Base */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexWrap: 'wrap', paddingTop: '2px' }}>
+                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 700 }}>💡 Suggestions:</span>
+                    {[
+                      { id: 77, name: 'India', flag: '🇮🇳' },
+                      { id: 185, name: 'UK', flag: '🇬🇧' },
+                      { id: 186, name: 'USA', flag: '🇺🇸' },
+                      { id: 184, name: 'UAE', flag: '🇦🇪' },
+                      { id: 153, name: 'Singapore', flag: '🇸🇬' },
+                      { id: 9, name: 'Australia', flag: '🇦🇺' },
+                      { id: 31, name: 'Canada', flag: '🇨🇦' }
+                    ].map(sug => {
+                      const isCur = homeCountryId === sug.id;
+                      return (
+                        <button
+                          key={`sug-home-${sug.id}`}
+                          type="button"
+                          onClick={() => {
+                            setHomeCountryId(sug.id);
+                            const cObj = GLOBAL_195_COUNTRIES.find(c => c.id === sug.id);
+                            if (cObj) setHomeSubZoneTzId(cObj.primaryTzId);
+                          }}
+                          style={{
+                            padding: '2px 7px',
+                            borderRadius: '6px',
+                            fontSize: '0.68rem',
+                            fontWeight: isCur ? 800 : 600,
+                            background: isCur ? '#38bdf8' : 'rgba(56, 189, 248, 0.12)',
+                            color: isCur ? '#0f172a' : '#cbd5e1',
+                            border: '1px solid rgba(56, 189, 248, 0.3)',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          {sug.flag} {sug.name}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {/* Center Swap Action Button */}
-                <div className="col-span-2 lg-col-span-12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className="col-span-2 lg-col-span-12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '22px' }}>
                   <button
                     type="button"
                     onClick={() => {
@@ -1742,7 +1892,7 @@ export const TravelTools: React.FC = () => {
                     }}
                     className="btn-secondary"
                     style={{
-                      padding: '8px 16px',
+                      padding: '8px 14px',
                       fontSize: '0.78rem',
                       fontWeight: 800,
                       background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(168, 85, 247, 0.25) 100%)',
@@ -1762,12 +1912,116 @@ export const TravelTools: React.FC = () => {
                   </button>
                 </div>
 
-                {/* 2. Choosing Option / Comparing Destination Dropdown */}
-                <div className="col-span-5 lg-col-span-12" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '0.76rem', fontWeight: 800, color: '#c084fc', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span>✈️ 2. Choosing Option (Destination):</span>
-                    <span style={{ fontSize: '0.7rem', color: '#cbd5e1' }}>({selectedCountry.flag} {selectedCountry.name})</span>
-                  </label>
+                {/* 2. Choosing Option / Comparing Destination with Search & Suggestions */}
+                <div className="col-span-5 lg-col-span-12" style={{ display: 'flex', flexDirection: 'column', gap: '8px', position: 'relative' }}>
+                  <div className="flex items-center justify-between">
+                    <label style={{ fontSize: '0.76rem', fontWeight: 800, color: '#c084fc', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span>✈️ 2. Choosing Option (Destination):</span>
+                      <span style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>({selectedCountry.flag} {selectedCountry.name})</span>
+                    </label>
+                    <span style={{ fontSize: '0.65rem', padding: '1px 6px', borderRadius: '4px', background: 'rgba(168, 85, 247, 0.2)', color: '#c084fc', fontWeight: 800 }}>
+                      {selectedCountry.utcOffset.split('/')[0].trim()}
+                    </span>
+                  </div>
+
+                  {/* Search Input for Destination */}
+                  <div style={{ position: 'relative' }}>
+                    <Search style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', width: '15px', height: '15px', color: '#c084fc' }} />
+                    <input
+                      type="text"
+                      value={destCountrySearch}
+                      onChange={e => {
+                        setDestCountrySearch(e.target.value);
+                        setIsDestDropdownOpen(true);
+                      }}
+                      onFocus={() => setIsDestDropdownOpen(true)}
+                      placeholder={`Search destination country (${selectedCountry.name})...`}
+                      className="input-glass"
+                      style={{
+                        paddingLeft: '36px',
+                        paddingRight: destCountrySearch ? '30px' : '12px',
+                        fontSize: '0.82rem',
+                        fontWeight: 700,
+                        color: '#ffffff',
+                        borderColor: 'rgba(168, 85, 247, 0.4)',
+                        width: '100%',
+                        borderRadius: '10px'
+                      }}
+                    />
+                    {destCountrySearch && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setDestCountrySearch('');
+                          setIsDestDropdownOpen(false);
+                        }}
+                        style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '0.8rem' }}
+                      >
+                        ✕
+                      </button>
+                    )}
+
+                    {/* Autocomplete Suggestion Dropdown List */}
+                    {isDestDropdownOpen && (
+                      <div style={{
+                        position: 'absolute',
+                        top: 'calc(100% + 4px)',
+                        left: 0,
+                        right: 0,
+                        maxHeight: '220px',
+                        overflowY: 'auto',
+                        background: '#090e17',
+                        border: '1px solid rgba(168, 85, 247, 0.5)',
+                        borderRadius: '10px',
+                        zIndex: 100,
+                        boxShadow: '0 8px 24px rgba(0,0,0,0.7)',
+                        padding: '4px',
+                        scrollbarWidth: 'thin'
+                      }}>
+                        {GLOBAL_195_COUNTRIES.filter(c => {
+                          if (!destCountrySearch.trim()) return true;
+                          const q = destCountrySearch.toLowerCase();
+                          return c.name.toLowerCase().includes(q) || c.capitalOrMajorCity.toLowerCase().includes(q) || c.utcOffset.toLowerCase().includes(q);
+                        }).slice(0, 30).map(c => (
+                          <div
+                            key={`d-search-${c.id}`}
+                            onClick={() => {
+                              setSelectedCountryId(c.id);
+                              setSelectedSubZoneTzId(c.primaryTzId);
+                              setDestCountrySearch('');
+                              setIsDestDropdownOpen(false);
+                            }}
+                            style={{
+                              padding: '7px 10px',
+                              borderRadius: '6px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              cursor: 'pointer',
+                              background: c.id === selectedCountryId ? 'rgba(168, 85, 247, 0.2)' : 'transparent',
+                              color: c.id === selectedCountryId ? '#c084fc' : '#ffffff',
+                              fontSize: '0.78rem',
+                              fontWeight: c.id === selectedCountryId ? 800 : 600,
+                              transition: 'background 0.15s ease'
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(168, 85, 247, 0.15)'}
+                            onMouseLeave={e => e.currentTarget.style.background = c.id === selectedCountryId ? 'rgba(168, 85, 247, 0.2)' : 'transparent'}
+                          >
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span>{c.flag}</span>
+                              <span>{c.name}</span>
+                              <span style={{ fontSize: '0.68rem', color: '#64748b' }}>({c.capitalOrMajorCity})</span>
+                            </span>
+                            <span style={{ fontSize: '0.68rem', color: '#c084fc', fontFamily: 'monospace' }}>
+                              {c.utcOffset.split('/')[0].trim()}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Standard Select Alternative */}
                   <select
                     value={selectedCountryId}
                     onChange={e => {
@@ -1780,13 +2034,13 @@ export const TravelTools: React.FC = () => {
                     }}
                     className="input-glass"
                     style={{
-                      fontSize: '0.84rem',
+                      fontSize: '0.82rem',
                       fontWeight: 800,
                       color: '#c084fc',
-                      padding: '10px 14px',
+                      padding: '8px 12px',
                       background: '#090e17',
-                      border: '1.5px solid rgba(168, 85, 247, 0.5)',
-                      borderRadius: '10px',
+                      border: '1px solid rgba(168, 85, 247, 0.35)',
+                      borderRadius: '8px',
                       width: '100%'
                     }}
                   >
@@ -1799,7 +2053,7 @@ export const TravelTools: React.FC = () => {
 
                   {/* Destination Multi-Zone Sub-Dropdown if applicable */}
                   {selectedCountry.subZones && selectedCountry.subZones.length > 0 && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span style={{ fontSize: '0.68rem', color: '#c084fc', fontWeight: 700, whiteSpace: 'nowrap' }}>Multi-Zone:</span>
                       <select
                         value={activeDestTz}
@@ -1815,8 +2069,191 @@ export const TravelTools: React.FC = () => {
                       </select>
                     </div>
                   )}
+
+                  {/* Quick Suggestions for Destination */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexWrap: 'wrap', paddingTop: '2px' }}>
+                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 700 }}>💡 Suggestions:</span>
+                    {[
+                      { id: 185, name: 'UK', flag: '🇬🇧' },
+                      { id: 186, name: 'USA', flag: '🇺🇸' },
+                      { id: 184, name: 'UAE', flag: '🇦🇪' },
+                      { id: 86, name: 'Japan', flag: '🇯🇵' },
+                      { id: 59, name: 'France', flag: '🇫🇷' },
+                      { id: 172, name: 'Thailand', flag: '🇹🇭' },
+                      { id: 167, name: 'Swiss', flag: '🇨🇭' },
+                      { id: 63, name: 'Germany', flag: '🇩🇪' },
+                      { id: 9, name: 'Australia', flag: '🇦🇺' }
+                    ].map(sug => {
+                      const isCur = selectedCountryId === sug.id;
+                      return (
+                        <button
+                          key={`sug-dest-${sug.id}`}
+                          type="button"
+                          onClick={() => {
+                            setSelectedCountryId(sug.id);
+                            const cObj = GLOBAL_195_COUNTRIES.find(c => c.id === sug.id);
+                            if (cObj) setSelectedSubZoneTzId(cObj.primaryTzId);
+                          }}
+                          style={{
+                            padding: '2px 7px',
+                            borderRadius: '6px',
+                            fontSize: '0.68rem',
+                            fontWeight: isCur ? 800 : 600,
+                            background: isCur ? '#c084fc' : 'rgba(168, 85, 247, 0.12)',
+                            color: isCur ? '#0f172a' : '#cbd5e1',
+                            border: '1px solid rgba(168, 85, 247, 0.3)',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          {sug.flag} {sug.name}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
+            </div>
+
+            {/* LIVE DUAL CLOCKS HERO COMPARISON (TIME COMPARING DISPLAY MODULE) */}
+            <div className="grid grid-12 gap-4">
+              
+              {/* Left: Home Base Live Clock */}
+              <div className="col-span-6 lg-col-span-12 glass-panel" style={{
+                padding: '24px',
+                background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(20, 35, 65, 0.85) 100%)',
+                border: '1px solid rgba(56, 189, 248, 0.35)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '14px'
+              }}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span style={{ fontSize: '1.4rem' }}>{homeCountry.flag}</span>
+                    <div>
+                      <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 800 }}>📍 1. Your Home Base</span>
+                      <h4 style={{ fontSize: '1.1rem', fontWeight: 900, color: '#ffffff' }}>{homeCountry.name}</h4>
+                    </div>
+                  </div>
+                  <span className="badge badge-blue">{homeCountry.utcOffset.split('/')[0].trim()}</span>
+                </div>
+
+                <div style={{ padding: '16px', borderRadius: '14px', background: 'rgba(10, 15, 29, 0.85)', textAlign: 'center', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#38bdf8', fontFamily: 'monospace', letterSpacing: '1px' }}>
+                    {currentHomeTimeStr}
+                  </div>
+                  <p style={{ fontSize: '0.78rem', color: '#cbd5e1', marginTop: '4px', fontWeight: 600 }}>
+                    📅 {currentHomeDateStr}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between text-xs" style={{ color: '#94a3b8', fontSize: '0.72rem' }}>
+                  <span>Zone: <strong style={{ color: '#ffffff' }}>{activeHomeTz}</strong></span>
+                  <span>Capital: <strong>{homeCountry.capitalOrMajorCity}</strong></span>
+                </div>
+              </div>
+
+              {/* Right: Destination Location Live Clock */}
+              <div className="col-span-6 lg-col-span-12 glass-panel" style={{
+                padding: '24px',
+                background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 27, 75, 0.75) 100%)',
+                border: '1px solid rgba(168, 85, 247, 0.35)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '14px'
+              }}>
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center gap-2">
+                    <span style={{ fontSize: '1.4rem' }}>{selectedCountry.flag}</span>
+                    <div>
+                      <span style={{ fontSize: '0.7rem', color: '#c084fc', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 800 }}>✈️ 2. Choosing Option (Destination)</span>
+                      <h4 style={{ fontSize: '1.1rem', fontWeight: 900, color: '#ffffff' }}>{selectedCountry.name}</h4>
+                    </div>
+                  </div>
+
+                  <span style={{ fontSize: '0.72rem', padding: '3px 10px', borderRadius: '6px', background: 'rgba(168, 85, 247, 0.2)', color: '#c084fc', fontWeight: 800 }}>
+                    {selectedCountry.utcOffset}
+                  </span>
+                </div>
+
+                <div style={{ padding: '16px', borderRadius: '14px', background: 'rgba(10, 15, 29, 0.85)', textAlign: 'center', border: '1px solid rgba(168, 85, 247, 0.25)' }}>
+                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#c084fc', fontFamily: 'monospace', letterSpacing: '1px' }}>
+                    {currentDestTimeStr}
+                  </div>
+                  <p style={{ fontSize: '0.78rem', color: '#cbd5e1', marginTop: '4px', fontWeight: 600 }}>
+                    📅 {currentDestDateStr}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between flex-wrap gap-2 text-xs" style={{ color: '#94a3b8', fontSize: '0.72rem' }}>
+                  <span>Zone: <strong style={{ color: '#ffffff' }}>{activeDestTz}</strong></span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const cityName = selectedCountry.capitalOrMajorCity.split('&')[0].split(',')[0].trim();
+                      setWeatherSearchInput(cityName);
+                      setActiveSubTab('weather');
+                      handleLoadWeather(cityName);
+                    }}
+                    style={{
+                      padding: '3px 8px',
+                      borderRadius: '6px',
+                      background: 'rgba(251, 191, 36, 0.15)',
+                      border: '1px solid rgba(251, 191, 36, 0.3)',
+                      color: '#fbbf24',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px'
+                    }}
+                  >
+                    <CloudSun style={{ width: '12px', height: '12px' }} />
+                    <span>Check Live Weather &rarr;</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Time Difference Banner */}
+              {timeDelta && (
+                <div className="col-span-12 glass-panel" style={{
+                  padding: '16px 20px',
+                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.3) 100%)',
+                  border: '1px solid rgba(16, 185, 129, 0.4)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '12px'
+                }}>
+                  <div className="flex items-center gap-3">
+                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#34d399' }}>
+                      <ArrowRightLeft style={{ width: '20px', height: '20px' }} />
+                    </div>
+                    <div>
+                      <span style={{ fontSize: '0.72rem', color: '#a7f3d0', fontWeight: 800 }}>Time Difference Assessment:</span>
+                      <div style={{ fontSize: '1rem', fontWeight: 900, color: '#ffffff' }}>
+                        {selectedCountry.flag} {selectedCountry.name} is <span style={{ color: '#34d399' }}>{timeDelta.differenceText}</span> ({homeCountry.name})
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div style={{ textAlign: 'right' }}>
+                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', display: 'block' }}>Official Timezone Name</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#ffffff' }}>
+                        {selectedCountry.timezoneName}
+                      </span>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', display: 'block' }}>IANA Identifier</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#38bdf8', fontFamily: 'monospace' }}>
+                        {activeDestTz}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
             </div>
 
             {/* INTERACTIVE 24-HOUR VISUAL COMPARATIVE TIMELINE MATRIX */}
@@ -1970,148 +2407,6 @@ export const TravelTools: React.FC = () => {
 
                 <span>Tap any column to inspect timeline alignment</span>
               </div>
-            </div>
-
-            {/* LIVE DUAL CLOCKS HERO COMPARISON */}
-            <div className="grid grid-12 gap-4">
-              
-              {/* Left: Home Base Live Clock */}
-              <div className="col-span-6 lg-col-span-12 glass-panel" style={{
-                padding: '24px',
-                background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(20, 35, 65, 0.85) 100%)',
-                border: '1px solid rgba(56, 189, 248, 0.35)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '14px'
-              }}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span style={{ fontSize: '1.4rem' }}>{homeCountry.flag}</span>
-                    <div>
-                      <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 800 }}>📍 1. Your Home Base</span>
-                      <h4 style={{ fontSize: '1.1rem', fontWeight: 900, color: '#ffffff' }}>{homeCountry.name}</h4>
-                    </div>
-                  </div>
-                  <span className="badge badge-blue">{homeCountry.utcOffset.split('/')[0].trim()}</span>
-                </div>
-
-                <div style={{ padding: '16px', borderRadius: '14px', background: 'rgba(10, 15, 29, 0.85)', textAlign: 'center', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
-                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#38bdf8', fontFamily: 'monospace', letterSpacing: '1px' }}>
-                    {currentHomeTimeStr}
-                  </div>
-                  <p style={{ fontSize: '0.78rem', color: '#cbd5e1', marginTop: '4px', fontWeight: 600 }}>
-                    📅 {currentHomeDateStr}
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between text-xs" style={{ color: '#94a3b8', fontSize: '0.72rem' }}>
-                  <span>Zone: <strong style={{ color: '#ffffff' }}>{activeHomeTz}</strong></span>
-                  <span>Capital: <strong>{homeCountry.capitalOrMajorCity}</strong></span>
-                </div>
-              </div>
-
-              {/* Right: Destination Location Live Clock */}
-              <div className="col-span-6 lg-col-span-12 glass-panel" style={{
-                padding: '24px',
-                background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 27, 75, 0.75) 100%)',
-                border: '1px solid rgba(168, 85, 247, 0.35)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '14px'
-              }}>
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <div className="flex items-center gap-2">
-                    <span style={{ fontSize: '1.4rem' }}>{selectedCountry.flag}</span>
-                    <div>
-                      <span style={{ fontSize: '0.7rem', color: '#c084fc', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 800 }}>✈️ 2. Choosing Option (Destination)</span>
-                      <h4 style={{ fontSize: '1.1rem', fontWeight: 900, color: '#ffffff' }}>{selectedCountry.name}</h4>
-                    </div>
-                  </div>
-
-                  <span style={{ fontSize: '0.72rem', padding: '3px 10px', borderRadius: '6px', background: 'rgba(168, 85, 247, 0.2)', color: '#c084fc', fontWeight: 800 }}>
-                    {selectedCountry.utcOffset}
-                  </span>
-                </div>
-
-                <div style={{ padding: '16px', borderRadius: '14px', background: 'rgba(10, 15, 29, 0.85)', textAlign: 'center', border: '1px solid rgba(168, 85, 247, 0.25)' }}>
-                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#c084fc', fontFamily: 'monospace', letterSpacing: '1px' }}>
-                    {currentDestTimeStr}
-                  </div>
-                  <p style={{ fontSize: '0.78rem', color: '#cbd5e1', marginTop: '4px', fontWeight: 600 }}>
-                    📅 {currentDestDateStr}
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between flex-wrap gap-2 text-xs" style={{ color: '#94a3b8', fontSize: '0.72rem' }}>
-                  <span>Zone: <strong style={{ color: '#ffffff' }}>{activeDestTz}</strong></span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const cityName = selectedCountry.capitalOrMajorCity.split('&')[0].split(',')[0].trim();
-                      setWeatherSearchInput(cityName);
-                      setActiveSubTab('weather');
-                      handleLoadWeather(cityName);
-                    }}
-                    style={{
-                      padding: '3px 8px',
-                      borderRadius: '6px',
-                      background: 'rgba(251, 191, 36, 0.15)',
-                      border: '1px solid rgba(251, 191, 36, 0.3)',
-                      color: '#fbbf24',
-                      fontWeight: 800,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px'
-                    }}
-                  >
-                    <CloudSun style={{ width: '12px', height: '12px' }} />
-                    <span>Check Live Weather &rarr;</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Time Difference Banner */}
-              {timeDelta && (
-                <div className="col-span-12 glass-panel" style={{
-                  padding: '16px 20px',
-                  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.3) 100%)',
-                  border: '1px solid rgba(16, 185, 129, 0.4)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                  gap: '12px'
-                }}>
-                  <div className="flex items-center gap-3">
-                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#34d399' }}>
-                      <ArrowRightLeft style={{ width: '20px', height: '20px' }} />
-                    </div>
-                    <div>
-                      <span style={{ fontSize: '0.72rem', color: '#a7f3d0', fontWeight: 800 }}>Time Difference Assessment:</span>
-                      <div style={{ fontSize: '1rem', fontWeight: 900, color: '#ffffff' }}>
-                        {selectedCountry.flag} {selectedCountry.name} is <span style={{ color: '#34d399' }}>{timeDelta.differenceText}</span> ({homeCountry.name})
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4">
-                    <div style={{ textAlign: 'right' }}>
-                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', display: 'block' }}>Official Timezone Name</span>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#ffffff' }}>
-                        {selectedCountry.timezoneName}
-                      </span>
-                    </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <span style={{ fontSize: '0.68rem', color: '#94a3b8', display: 'block' }}>IANA Identifier</span>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#38bdf8', fontFamily: 'monospace' }}>
-                        {activeDestTz}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
             </div>
 
             {/* Complete 195-Country Live World Clock Grid */}
