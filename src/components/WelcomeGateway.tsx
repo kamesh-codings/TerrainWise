@@ -109,8 +109,9 @@ export const WelcomeGateway: React.FC<WelcomeGatewayProps> = ({
       alignItems: 'center',
       justifyContent: 'center',
       padding: '16px',
-      background: 'radial-gradient(circle at 50% 30%, rgba(30, 27, 75, 0.95) 0%, rgba(7, 11, 20, 0.98) 100%)',
-      backdropFilter: 'blur(20px)'
+      background: 'radial-gradient(circle at 50% 30%, rgba(30, 27, 75, 0.85) 0%, rgba(7, 11, 20, 0.92) 100%)',
+      backdropFilter: 'blur(24px)',
+      WebkitBackdropFilter: 'blur(24px)'
     }} className="animate-fade">
       <div className="glass-panel" style={{
         position: 'relative',
@@ -119,10 +120,13 @@ export const WelcomeGateway: React.FC<WelcomeGatewayProps> = ({
         maxHeight: '92vh',
         overflowY: 'auto',
         padding: '30px 26px',
-        background: 'rgba(15, 23, 42, 0.96)',
+        background: 'rgba(11, 17, 32, 0.85)',
+        backdropFilter: 'blur(30px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(30px) saturate(180%)',
         borderRadius: '28px',
-        border: '1px solid rgba(255, 255, 255, 0.12)',
-        boxShadow: '0 25px 60px rgba(0, 0, 0, 0.85)',
+        border: '1px solid rgba(255, 255, 255, 0.15)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.3)',
+        boxShadow: '0 25px 64px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.15)',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
@@ -180,7 +184,7 @@ export const WelcomeGateway: React.FC<WelcomeGatewayProps> = ({
           <div>
             <div className="flex items-center justify-center gap-2">
               <h1 style={{ fontSize: '1.75rem', fontWeight: 900, letterSpacing: '-0.02em', color: '#ffffff' }}>
-                Welcome to <span className="text-gradient">TripNova</span>
+                Welcome to <span className="text-gradient">Terrain Wise</span>
               </h1>
               <span className="badge badge-blue">Smart AI Guardian</span>
             </div>

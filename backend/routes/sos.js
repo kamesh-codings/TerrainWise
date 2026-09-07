@@ -1,6 +1,6 @@
 /**
  * =============================================================================
- * TripNova - SOS Emergency Email API Routes
+ * Terrain Wise - SOS Emergency Email API Routes
  * =============================================================================
  * Handles emergency dispatch requests, email broadcasting to trusted contacts,
  * and SOS audit logging.
@@ -141,7 +141,7 @@ router.get('/health', async (req, res) => {
   const from = process.env.EMAIL_FROM || process.env.SMTP_FROM || 'sos-alerts@tripnova.app';
 
   res.json({
-    service: 'TripNova SOS Email Automation Service',
+    service: 'Terrain Wise SOS Email Automation Service',
     status: 'ONLINE',
     configuredProvider: process.env.SMTP_HOST ? 'Custom SMTP' : 'Ethereal Demo / Local Transport',
     host,
@@ -176,7 +176,7 @@ router.post('/test', async (req, res) => {
         address: 'Chennai Central Tourist Safety Zone, Tamil Nadu'
       },
       timestamp: new Date().toLocaleString(),
-      customMessage: 'This is a test emergency broadcast verification from TripNova.'
+      customMessage: 'This is a test emergency broadcast verification from Terrain Wise.'
     });
 
     res.json({

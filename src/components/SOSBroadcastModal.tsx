@@ -175,7 +175,7 @@ export const SOSBroadcastModal: React.FC<SOSBroadcastModalProps> = ({
       .filter((e): e is string => !!e && e.includes('@'));
 
     const toStr = emailRecipients.join(',');
-    const subject = `🚨 TRIPNOVA EMERGENCY SOS: Immediate Assistance Required for ${userProfile.name || 'Traveler'}`;
+    const subject = `🚨 TERRAIN WISE EMERGENCY SOS: Immediate Assistance Required for ${userProfile.name || 'Traveler'}`;
     
     // Dynamic Google Maps link: Uses exact typed address/place name or GPS coordinates
     const mapQuery = liveLocation.address && liveLocation.address.trim()
@@ -186,7 +186,7 @@ export const SOSBroadcastModal: React.FC<SOSBroadcastModalProps> = ({
       ? `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
       : 'Location unavailable';
 
-    const bodyText = `🚨 TRIPNOVA EMERGENCY SOS DISTRESS ALERT 🚨
+    const bodyText = `🚨 TERRAIN WISE EMERGENCY SOS DISTRESS ALERT 🚨
 ====================================================
 
 ${customMessage ? `🚨 EMERGENCY DISTRESS NOTE:
@@ -216,7 +216,7 @@ NATIONAL EMERGENCY HELPLINES (INDIA):
 - Women Safety: 1091
 
 ====================================================
-TripNova Tourism Safety & Navigation Platform`;
+Terrain Wise Tourism Safety & Navigation Platform`;
 
     return { toStr, subject, bodyText };
   };
@@ -257,7 +257,7 @@ TripNova Tourism Safety & Navigation Platform`;
         phone: c.phone || '',
         relationship: c.relationship || 'Contact'
       })),
-      customMessage: customMessage.trim() || 'Urgent distress beacon activated from TripNova.'
+      customMessage: customMessage.trim() || 'Urgent distress beacon activated from Terrain Wise.'
     };
 
     const response = await sendSOSEmailAlert(payload);
@@ -307,10 +307,13 @@ TripNova Tourism Safety & Navigation Platform`;
           maxHeight: 'min(94vh, 740px)',
           margin: 'auto',
           padding: '24px', 
-          background: '#090e17', 
+          background: 'rgba(15, 18, 30, 0.88)', 
+          backdropFilter: 'blur(28px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
           borderRadius: '24px',
-          border: '2px solid #ef4444', 
-          boxShadow: '0 0 50px rgba(239, 68, 68, 0.35), 0 25px 50px -12px rgba(0, 0, 0, 0.9)',
+          border: '1.5px solid rgba(239, 68, 68, 0.65)', 
+          borderTop: '1.5px solid rgba(248, 113, 113, 0.9)',
+          boxShadow: '0 0 50px rgba(239, 68, 68, 0.35), 0 25px 60px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
           display: 'flex', 
           flexDirection: 'column', 
           gap: '16px',

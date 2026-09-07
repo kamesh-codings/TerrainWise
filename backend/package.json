@@ -1,7 +1,7 @@
 {
-  "name": "tripnova-backend",
+  "name": "terrain-wise-backend",
   "version": "1.0.0",
-  "description": "TripNova Tourism Platform Backend API Server",
+  "description": "Terrain Wise Tourism Platform Backend API Server",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
@@ -11,12 +11,12 @@
   "keywords": [
     "tourism",
     "travel",
-    "tripnova",
+    "terrain-wise",
     "api",
     "safety",
     "smart-india-hackathon"
   ],
-  "author": "TripNova Team",
+  "author": "Terrain Wise Team",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

@@ -444,7 +444,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
               <div className="glass-panel" style={{ padding: '22px', display: 'flex', flexDirection: 'column', gap: '14px', borderColor: 'rgba(245, 158, 11, 0.3)' }}>
                 <h3 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#fbbf24', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Award style={{ width: '18px', height: '18px' }} />
-                  TripNova Safety Accreditation
+                  Terrain Wise Safety Accreditation
                 </h3>
 
                 <div style={{ padding: '14px', background: 'rgba(245, 158, 11, 0.1)', borderRadius: '12px', border: '1px solid rgba(245, 158, 11, 0.25)' }}>

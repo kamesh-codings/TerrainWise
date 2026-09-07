@@ -1,4 +1,4 @@
-# 🌍 TripNova — Smart AI Travel Companion & Tourist Safety Platform
+# 🌍 Terrain Wise — Smart AI Travel Companion & Tourist Safety Platform
 
 [![React](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Vite%20%7C%20TypeScript-blue?logo=react)](https://react.dev/)
 [![Node.js](https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-green?logo=node.js)](https://nodejs.org/)
@@ -6,7 +6,7 @@
 [![Coverage](https://img.shields.io/badge/Coverage-36%20States%20%26%20UTs%20Across%20India-success)](#-database--master-dataset)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
-**TripNova** is a modern, high-performance web platform designed for tourist safety, smart AI trip planning, anti-scam fare estimation, real-time multi-language voice translation, all-India destination discovery (1,417+ verified attractions), and digital emergency tourist passes.
+**Terrain Wise** is a modern, high-performance web platform designed for tourist safety, smart AI trip planning, anti-scam fare estimation, real-time multi-language voice translation, all-India destination discovery (1,417+ verified attractions), and digital emergency tourist passes.
 
 ---
 
@@ -87,7 +87,7 @@ node server.js
 
 You will see:
 ```text
-🚀 TripNova API Server running on port 5000
+🚀 Terrain Wise API Server running on port 5000
    URL: http://localhost:5000
    Database: SQLite (Loaded 229 locations & 1417 spots)
 ```
@@ -206,7 +206,7 @@ DB_FILE=./database/tripnova.db
 
 ## 🗄️ Database & Master Dataset
 
-TripNova includes an automated local **SQLite** (`tripnova.db`) database pre-configured out-of-the-box:
+Terrain Wise includes an automated local **SQLite** (`tripnova.db`) database pre-configured out-of-the-box:
 - **Coverage**: **229 destination districts** and **1,417 tourist attractions** across all 36 Indian States and Union Territories.
 - **Attributes Included**: Accurate latitude/longitude coordinates, Google Maps navigation links, category classification, ticket entry fees, visiting hours, best seasons, nearby food/stay recommendations, and local transportation guidelines.
 - **Re-Syncing Datasets** (Optional):

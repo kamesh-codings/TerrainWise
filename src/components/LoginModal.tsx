@@ -201,8 +201,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         alignItems: 'center', 
         justifyContent: 'center', 
         padding: '16px', 
-        background: 'rgba(5, 8, 16, 0.88)', 
-        backdropFilter: 'blur(16px)' 
+        background: 'rgba(3, 7, 18, 0.75)', 
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)' 
       }}
       className="animate-fade"
     >
@@ -211,11 +212,14 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         style={{ 
           width: '100%', 
           maxWidth: '480px', 
-          background: '#090e17', 
+          background: 'rgba(11, 17, 32, 0.86)', 
+          backdropFilter: 'blur(28px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
           borderRadius: '24px', 
           overflow: 'hidden', 
-          border: '1px solid rgba(255,255,255,0.12)',
-          boxShadow: '0 25px 60px rgba(0,0,0,0.85)'
+          border: '1px solid rgba(255,255,255,0.15)',
+          borderTop: '1px solid rgba(255,255,255,0.3)',
+          boxShadow: '0 25px 60px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.18)'
         }}
       >
         {/* Header */}
