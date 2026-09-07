@@ -1528,30 +1528,6 @@ export const TravelTools: React.FC = () => {
                 </div>
               </div>
 
-              {/* Search Form */}
-              <div className="flex gap-2">
-                <div style={{ position: 'relative', flex: 1 }}>
-                  <Search style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', width: '18px', height: '18px', color: '#64748b' }} />
-                  <input
-                    type="text"
-                    value={timezoneSearchQuery}
-                    onChange={e => setTimezoneSearchQuery(e.target.value)}
-                    placeholder="Search 195 countries, capitals, IANA timezones (e.g., India, Tokyo, Asia/Kolkata, Paris, London, America/New_York...)"
-                    className="input-glass"
-                    style={{ paddingLeft: '44px', width: '100%', fontSize: '0.88rem', fontWeight: 700 }}
-                  />
-                  {timezoneSearchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => setTimezoneSearchQuery('')}
-                      style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '0.85rem' }}
-                    >
-                      ✕
-                    </button>
-                  )}
-                </div>
-              </div>
-
               {/* Continent Filter Tabs */}
               <div className="flex items-center justify-between flex-wrap gap-2 pt-1">
                 <div className="flex items-center gap-1 flex-wrap">
