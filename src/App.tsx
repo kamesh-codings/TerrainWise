@@ -15,7 +15,7 @@ import { NovaAIBot } from './components/NovaAIBot';
 import { WelcomeGateway } from './components/WelcomeGateway';
 import { SpotsExplorer } from './components/SpotsExplorer';
 import { SOSBroadcastModal } from './components/SOSBroadcastModal';
-import { ProfileCompletionForm } from './components/ProfileCompletionForm';
+import { ProfilePasswordModal, ProfileTargetAction } from './components/ProfilePasswordModal';
 import { UserProfile, TripPlan, ServiceProviderProfile, UserLocation } from './types';
 import { DEFAULT_USER_PROFILE } from './data/mockData';
 import { 
@@ -36,6 +36,8 @@ const GATEWAY_SHOWN_KEY = 'tripnova_gateway_dismissed';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const [tabHistory, setTabHistory] = useState<string[]>(['dashboard']);
+  const [historyIndex, setHistoryIndex] = useState<number>(0);
   const [userProfile, setUserProfile] = useState<UserProfile>(getStoredProfile);
   const [providerProfile, setProviderProfile] = useState<ServiceProviderProfile | null>(getStoredProviderProfile);
   const [trips, setTrips] = useState<TripPlan[]>(getStoredTrips);
@@ -81,12 +83,61 @@ export const App: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
   const [isSOSModalOpen, setIsSOSModalOpen] = useState<boolean>(false);
   const [isChatbotOpen, setIsChatbotOpen] = useState<boolean>(false);
-  const [isProfileCompletionOpen, setIsProfileCompletionOpen] = useState<boolean>(false);
-  const [googleProfileData, setGoogleProfileData] = useState<{ googleId: string; name: string; email: string; picture: string } | null>(null);
+  const [isProfilePasswordOpen, setIsProfilePasswordOpen] = useState<boolean>(false);
+  const [profileTargetAction, setProfileTargetAction] = useState<ProfileTargetAction>('view_profile');
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  const requestViewProfile = () => {
+    if (userProfile.isRegistered || providerProfile) {
+      setProfileTargetAction('view_profile');
+      setIsProfilePasswordOpen(true);
+    } else if (isGatewayOpen || !sessionStorage.getItem(GATEWAY_SHOWN_KEY)) {
+      setIsGatewayOpen(true);
+    } else {
+      setIsRegisterOpen(true);
+    }
+  };
+
+  const requestEditProfile = () => {
+    if (userProfile.isRegistered) {
+      setProfileTargetAction('edit_tourist');
+      setIsProfilePasswordOpen(true);
+    } else {
+      setIsRegisterOpen(true);
+    }
+  };
+
+  const requestEditProviderProfile = () => {
+    if (providerProfile) {
+      setProfileTargetAction('edit_provider');
+      setIsProfilePasswordOpen(true);
+    } else {
+      setIsProviderRegisterOpen(true);
+    }
+  };
+
+  const handleProfilePasswordSuccess = (action: ProfileTargetAction) => {
+    if (action === 'view_profile') {
+      if (activeTab !== 'profile') {
+        const nextHistory = tabHistory.slice(0, historyIndex + 1);
+        nextHistory.push('profile');
+        setTabHistory(nextHistory);
+        setHistoryIndex(nextHistory.length - 1);
+        setActiveTab('profile');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      showToast('🔓 Profile unlocked successfully');
+    } else if (action === 'edit_tourist') {
+      setIsRegisterOpen(true);
+      showToast('🔓 Edit Profile unlocked');
+    } else if (action === 'edit_provider') {
+      setIsProviderRegisterOpen(true);
+      showToast('🔓 Edit Partner Details unlocked');
+    }
   };
 
   const handleNavigateTab = (tab: string, stateDestination?: string, spotDestination?: string) => {
@@ -96,8 +147,36 @@ export const App: React.FC = () => {
     if (spotDestination) {
       setPlannerInitialSpot(spotDestination);
     }
+    if (tab === 'profile' && (userProfile.isRegistered || providerProfile) && activeTab !== 'profile') {
+      requestViewProfile();
+      return;
+    }
+    if (tab !== activeTab) {
+      const nextHistory = tabHistory.slice(0, historyIndex + 1);
+      nextHistory.push(tab);
+      setTabHistory(nextHistory);
+      setHistoryIndex(nextHistory.length - 1);
+    }
     setActiveTab(tab);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleGoBack = () => {
+    if (historyIndex > 0) {
+      const prevIndex = historyIndex - 1;
+      setHistoryIndex(prevIndex);
+      setActiveTab(tabHistory[prevIndex]);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleGoForward = () => {
+    if (historyIndex < tabHistory.length - 1) {
+      const nextIndex = historyIndex + 1;
+      setHistoryIndex(nextIndex);
+      setActiveTab(tabHistory[nextIndex]);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleSelectRegisterFromGateway = () => {
@@ -219,23 +298,34 @@ export const App: React.FC = () => {
   };
 
   const activeTrip = trips.length > 0 ? trips[0] : undefined;
+  const isAuthOverlayActive = isGatewayOpen || isRegisterOpen || isProviderRegisterOpen || isLoginOpen;
+
+  const canGoBack = historyIndex > 0;
+  const canGoForward = historyIndex < tabHistory.length - 1;
 
   return (
     <div className="app-container">
-      {/* Top Navbar */}
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        userProfile={userProfile}
-        providerProfile={providerProfile}
-        onOpenSOS={() => setIsSOSModalOpen(true)}
-        onOpenRegister={() => setIsRegisterOpen(true)}
-        onOpenGateway={() => setIsGatewayOpen(true)}
-        onOpenProviderRegister={() => setIsProviderRegisterOpen(true)}
-        onOpenChatbot={() => setIsChatbotOpen(!isChatbotOpen)}
-        onOpenLogin={() => setIsLoginOpen(true)}
-        onLogout={handleLogout}
-      />
+      {/* Top Navbar - Hidden on Welcome Gateway, Registration, and Onboarding Pages */}
+      {!isAuthOverlayActive && (
+        <Navbar
+          activeTab={activeTab}
+          setActiveTab={(tab) => handleNavigateTab(tab)}
+          userProfile={userProfile}
+          providerProfile={providerProfile}
+          onOpenProfile={requestViewProfile}
+          onOpenSOS={() => setIsSOSModalOpen(true)}
+          onOpenRegister={requestEditProfile}
+          onOpenGateway={() => setIsGatewayOpen(true)}
+          onOpenProviderRegister={requestEditProviderProfile}
+          onOpenChatbot={() => setIsChatbotOpen(!isChatbotOpen)}
+          onOpenLogin={() => setIsLoginOpen(true)}
+          onLogout={handleLogout}
+          canGoBack={canGoBack}
+          canGoForward={canGoForward}
+          onGoBack={handleGoBack}
+          onGoForward={handleGoForward}
+        />
+      )}
 
       {/* Toast Notification */}
       {toastMessage && (
@@ -263,7 +353,7 @@ export const App: React.FC = () => {
       )}
 
       {/* Explore Mode Banner if not yet registered */}
-      {!userProfile.isRegistered && (
+      {!userProfile.isRegistered && !isAuthOverlayActive && (
         <div style={{
           background: 'linear-gradient(90deg, rgba(88, 28, 135, 0.6) 0%, rgba(15, 23, 42, 0.95) 100%)',
           borderBottom: '1px solid rgba(168, 85, 247, 0.3)',
@@ -295,14 +385,8 @@ export const App: React.FC = () => {
             providerProfile={providerProfile}
             activeTrip={activeTrip}
             onNavigateTab={handleNavigateTab}
-            onOpenRegister={() => {
-              if (!userProfile.isRegistered && !providerProfile) {
-                setIsGatewayOpen(true);
-              } else {
-                setIsRegisterOpen(true);
-              }
-            }}
-            onOpenProviderRegister={() => setIsProviderRegisterOpen(true)}
+            onOpenRegister={requestEditProfile}
+            onOpenProviderRegister={requestEditProviderProfile}
             onOpenSOS={() => setIsSOSModalOpen(true)}
           />
         )}
@@ -326,7 +410,7 @@ export const App: React.FC = () => {
         {activeTab === 'emergency-card' && (
           <EmergencyCard
             userProfile={userProfile}
-            onOpenRegister={() => setIsRegisterOpen(true)}
+            onOpenRegister={requestEditProfile}
             onTriggerSOS={() => setIsSOSModalOpen(true)}
           />
         )}
@@ -351,9 +435,9 @@ export const App: React.FC = () => {
           <ProfileView
             userProfile={userProfile}
             providerProfile={providerProfile}
-            onEditProfile={() => setIsRegisterOpen(true)}
-            onEditProviderProfile={() => setIsProviderRegisterOpen(true)}
-            onNavigateTab={setActiveTab}
+            onEditProfile={requestEditProfile}
+            onEditProviderProfile={requestEditProviderProfile}
+            onNavigateTab={handleNavigateTab}
             onDeleteProfile={handleDeleteProfile}
             onDeleteProviderProfile={handleDeleteProviderProfile}
             onLogout={handleLogout}
@@ -362,31 +446,33 @@ export const App: React.FC = () => {
       </main>
 
       {/* Floating AI Chatbot Button */}
-      <button
-        onClick={() => setIsChatbotOpen(!isChatbotOpen)}
-        className="floating-bot-btn"
-        style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          zIndex: 40,
-          width: '52px',
-          height: '52px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, #a855f7 0%, #6366f1 100%)',
-          color: '#ffffff',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          boxShadow: '0 8px 24px rgba(168, 85, 247, 0.4)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          transition: 'all 0.2s'
-        }}
-        title="Open Nova AI Travel Concierge"
-      >
-        <Sparkles style={{ width: '22px', height: '22px' }} />
-      </button>
+      {!isAuthOverlayActive && (
+        <button
+          onClick={() => setIsChatbotOpen(!isChatbotOpen)}
+          className="floating-bot-btn"
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            right: '24px',
+            zIndex: 40,
+            width: '52px',
+            height: '52px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #a855f7 0%, #6366f1 100%)',
+            color: '#ffffff',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 8px 24px rgba(168, 85, 247, 0.4)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.2s'
+          }}
+          title="Open Nova AI Travel Concierge"
+        >
+          <Sparkles style={{ width: '22px', height: '22px' }} />
+        </button>
+      )}
 
       {/* 1. Welcome Gateway: 3 Options + Login */}
       <WelcomeGateway
@@ -416,10 +502,6 @@ export const App: React.FC = () => {
         onOpenProviderRegister={() => {
           setIsLoginOpen(false);
           setIsProviderRegisterOpen(true);
-        }}
-        onGoogleNewUser={(googleProfile) => {
-          setGoogleProfileData(googleProfile);
-          setIsProfileCompletionOpen(true);
         }}
       />
 
@@ -455,25 +537,24 @@ export const App: React.FC = () => {
         userProfile={userProfile}
       />
 
-      {/* 7. Mobile Bottom Navigation */}
-      <MobileNav activeTab={activeTab} setActiveTab={setActiveTab} />
+      {/* 7. Profile View & Edit Password Security Modal */}
+      <ProfilePasswordModal
+        isOpen={isProfilePasswordOpen}
+        onClose={() => setIsProfilePasswordOpen(false)}
+        targetAction={profileTargetAction}
+        userProfile={userProfile}
+        providerProfile={providerProfile}
+        onSuccess={handleProfilePasswordSuccess}
+        onOpenForgotPassword={() => setIsLoginOpen(true)}
+      />
 
-      {/* 8. Google OAuth Profile Completion Modal */}
-      {googleProfileData && (
-        <ProfileCompletionForm
-          isOpen={isProfileCompletionOpen}
-          onClose={() => {
-            setIsProfileCompletionOpen(false);
-            setGoogleProfileData(null);
-          }}
-          googleProfile={googleProfileData}
-          onComplete={(result) => {
-            setIsProfileCompletionOpen(false);
-            setGoogleProfileData(null);
-            handleLoginSuccess(result);
-          }}
-        />
-      )}
+      {/* 8. Mobile Bottom Navigation */}
+      <MobileNav 
+        activeTab={activeTab} 
+        setActiveTab={(tab) => handleNavigateTab(tab)} 
+        canGoBack={canGoBack}
+        onGoBack={handleGoBack}
+      />
     </div>
   );
 };

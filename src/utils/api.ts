@@ -5,7 +5,7 @@ import { SafetyPlace } from '../types';
  * Connects Frontend to Backend with API Key Authentication
  */
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:5001/api';
 const API_KEY = 'tripnova_live_api_key_2026';
 
 const defaultHeaders = {
@@ -471,75 +471,3 @@ export async function checkSOSEmailHealth(): Promise<any> {
   return { status: 'OFFLINE' };
 }
 
-// =============================================================================
-// Google OAuth 2.0 API Functions
-// =============================================================================
-
-export interface GoogleSignInResponse {
-  success: boolean;
-  isNewUser: boolean;
-  type?: 'tourist' | 'provider';
-  profile?: any;
-  googleProfile?: {
-    googleId: string;
-    name: string;
-    email: string;
-    picture: string;
-  };
-  message?: string;
-  error?: string;
-}
-
-// Sends the Google credential token to backend for verification & login/registration check
-export async function googleSignInAPI(credential: string): Promise<GoogleSignInResponse | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/auth/google`, {
-      method: 'POST',
-      headers: defaultHeaders,
-      body: JSON.stringify({ credential }),
-      signal: AbortSignal.timeout(6000)
-    });
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.error('Google Sign-In API error:', err);
-    return null;
-  }
-}
-
-// Submits the completed profile form data for new Google users
-export async function completeGoogleProfileAPI(profileData: {
-  googleId: string;
-  name: string;
-  email: string;
-  dob?: string;
-  age?: number;
-  bloodGroup?: string;
-  gender?: string;
-  role?: string;
-  avatarUrl?: string;
-}): Promise<any | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/users/complete-profile`, {
-      method: 'POST',
-      headers: defaultHeaders,
-      body: JSON.stringify({
-        google_id: profileData.googleId,
-        full_name: profileData.name,
-        email: profileData.email,
-        dob: profileData.dob || null,
-        age: profileData.age || 0,
-        blood_group: profileData.bloodGroup || 'O+',
-        gender: profileData.gender || 'Male',
-        role: profileData.role || 'tourist',
-        avatar_url: profileData.avatarUrl || null
-      }),
-      signal: AbortSignal.timeout(6000)
-    });
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.error('Complete Google Profile API error:', err);
-    return null;
-  }
-}

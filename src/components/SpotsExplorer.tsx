@@ -67,6 +67,29 @@ export const SpotsExplorer: React.FC<SpotsExplorerProps> = ({ onSelectSpot, onNa
   // Spot Detail Modal State
   const [selectedSpotModal, setSelectedSpotModal] = useState<PlaceItem | null>(null);
 
+  const handleOpenSpotModal = (place: PlaceItem) => {
+    setSelectedSpotModal(place);
+    window.history.pushState({ tab: 'spots', spotId: place.id }, '', `#spots?spot=${encodeURIComponent(place.id)}`);
+  };
+
+  const handleCloseSpotModal = () => {
+    setSelectedSpotModal(null);
+    if (window.location.hash.includes('spot=')) {
+      window.history.pushState({ tab: 'spots' }, '', '#spots');
+    }
+  };
+
+  // Popstate listener to close spot modal on browser back
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      if (selectedSpotModal && (!e.state || !e.state.spotId)) {
+        setSelectedSpotModal(null);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [selectedSpotModal]);
+
   // Initial Data Load
   useEffect(() => {
     async function loadInitialData() {
@@ -616,7 +639,7 @@ export const SpotsExplorer: React.FC<SpotsExplorerProps> = ({ onSelectSpot, onNa
                     gap: '8px'
                   }}>
                     <button
-                      onClick={() => setSelectedSpotModal(place)}
+                      onClick={() => handleOpenSpotModal(place)}
                       className="btn-secondary"
                       style={{ padding: '6px 12px', fontSize: '0.74rem', display: 'flex', alignItems: 'center', gap: '4px' }}
                     >
@@ -861,7 +884,7 @@ export const SpotsExplorer: React.FC<SpotsExplorerProps> = ({ onSelectSpot, onNa
               </div>
 
               <button
-                onClick={() => setSelectedSpotModal(null)}
+                onClick={handleCloseSpotModal}
                 style={{
                   background: 'rgba(255, 255, 255, 0.08)',
                   border: 'none',
@@ -1014,7 +1037,7 @@ export const SpotsExplorer: React.FC<SpotsExplorerProps> = ({ onSelectSpot, onNa
 
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button
-                  onClick={() => setSelectedSpotModal(null)}
+                  onClick={handleCloseSpotModal}
                   className="btn-secondary"
                   style={{ fontSize: '0.8rem', padding: '8px 16px' }}
                 >
@@ -1024,7 +1047,7 @@ export const SpotsExplorer: React.FC<SpotsExplorerProps> = ({ onSelectSpot, onNa
                   onClick={() => {
                     if (onSelectSpot) onSelectSpot(selectedSpotModal.name);
                     if (onNavigateTab) onNavigateTab('planner');
-                    setSelectedSpotModal(null);
+                    handleCloseSpotModal();
                   }}
                   className="btn-primary"
                   style={{ fontSize: '0.8rem', padding: '8px 18px' }}

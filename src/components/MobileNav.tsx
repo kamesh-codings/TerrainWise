@@ -7,15 +7,18 @@ import {
   Scale, 
   Languages,
   Landmark,
-  User
+  User,
+  ArrowLeft
 } from 'lucide-react';
 
 interface MobileNavProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  canGoBack?: boolean;
+  onGoBack?: () => void;
 }
 
-export const MobileNav: React.FC<MobileNavProps> = ({ activeTab, setActiveTab }) => {
+export const MobileNav: React.FC<MobileNavProps> = ({ activeTab, setActiveTab, canGoBack, onGoBack }) => {
   const items = [
     { id: 'dashboard', label: 'Explore', icon: Compass },
     { id: 'spots', label: 'Spots', icon: Landmark },

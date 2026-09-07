@@ -336,10 +336,20 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
     return allLocations.filter(l => l.state.toLowerCase() === destState.toLowerCase());
   }, [allLocations, destState]);
 
-  // Filtered Spots for Destination City (prioritizes top attractions, monuments, viewpoints)
+  // Filtered Spots for Destination (City or State level from database, prioritizes top attractions)
   const destCitySpots = useMemo(() => {
-    if (!destCityId) return [];
-    const spots = allPlaces.filter(p => p.location_id === destCityId);
+    let spots: PlaceItem[] = [];
+    if (destCityId) {
+      spots = allPlaces.filter(p => p.location_id === destCityId);
+    } else if (destState) {
+      const stateLocationIds = allLocations
+        .filter(l => l.state.toLowerCase() === destState.toLowerCase())
+        .map(l => l.id);
+      spots = allPlaces.filter(p => stateLocationIds.includes(p.location_id));
+    } else {
+      spots = allPlaces.slice(0, 20);
+    }
+
     const touristCategories = ['historical', 'nature', 'beach', 'hill_station', 'cultural', 'religious', 'viewpoint', 'wildlife', 'museum', 'monument', 'park', 'attraction', 'shopping'];
     return spots.slice().sort((a, b) => {
       const aIsTourist = touristCategories.includes(a.category) ? 1 : 0;
@@ -347,7 +357,7 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
       if (aIsTourist !== bIsTourist) return bIsTourist - aIsTourist;
       return (b.avg_rating || 0) - (a.avg_rating || 0);
     });
-  }, [allPlaces, destCityId]);
+  }, [allPlaces, destCityId, destState, allLocations]);
 
   // Selected Boarding Object & Coordinates
   const currentBoardingCity = allLocations.find(l => l.id === boardingCityId);

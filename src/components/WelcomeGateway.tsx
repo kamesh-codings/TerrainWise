@@ -104,7 +104,7 @@ export const WelcomeGateway: React.FC<WelcomeGatewayProps> = ({
     <div style={{
       position: 'fixed',
       inset: 0,
-      zIndex: 100,
+      zIndex: 1000,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

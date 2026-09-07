@@ -11,12 +11,6 @@ const router = express.Router();
 const crypto = require('crypto');
 const db = require('../config/db');
 const { extractApiKey, getValidKeys } = require('../middleware/auth');
-const { OAuth2Client } = require('google-auth-library');
-
-// Google OAuth 2.0 Client
-const googleClient = new OAuth2Client(
-  process.env.GOOGLE_CLIENT_ID || '41671720068-7smhesmvqm4m446hj5nv1k6l6e8meims.apps.googleusercontent.com'
-);
 
 // In-memory OTP cache for password resets (email -> { code, expiresAt })
 const otpStore = new Map();
@@ -96,10 +90,15 @@ router.post('/register-tourist', async (req, res) => {
     } = req.body;
 
     const cleanUsername = username ? username.trim().toLowerCase() : null;
-    const cleanEmail = email ? email.trim().toLowerCase() : null;
+    const cleanEmail = email && email.trim() ? email.trim().toLowerCase() : null;
+    const effectiveId = id && id.trim() ? id.trim() : (cleanUsername ? `usr_${cleanUsername}` : `usr_${Date.now()}`);
+    const effectiveEmail = cleanEmail || (cleanUsername ? `${cleanUsername}@tripnova.local` : `${effectiveId}@tripnova.local`);
 
-    // Check if user with same id exists
-    const existing = await db.query('SELECT id FROM users WHERE id = ? OR (email = ? AND email IS NOT NULL)', [id, cleanEmail]);
+    // Check if user with same id, email, or username exists
+    const existing = await db.query(
+      'SELECT id FROM users WHERE id = ? OR (email = ? AND email IS NOT NULL AND email != "") OR (username = ? AND username IS NOT NULL AND username != "")',
+      [effectiveId, cleanEmail, cleanUsername]
+    );
 
     const languagesJson = JSON.stringify(languages_known);
     const trustedContactsJson = JSON.stringify(trusted_contacts);
@@ -112,7 +111,7 @@ router.post('/register-tourist', async (req, res) => {
         UPDATE users SET
           username = COALESCE(?, username),
           password = CASE WHEN ? != '' THEN ? ELSE password END,
-          email = ?,
+          email = COALESCE(?, email),
           full_name = ?,
           dob = ?,
           age = ?,
@@ -143,8 +142,8 @@ router.post('/register-tourist', async (req, res) => {
 
       return res.json({
         success: true,
-        message: 'Tourist profile updated successfully in MySQL database',
-        data: { id: targetId, username: cleanUsername, email: cleanEmail, name: full_name }
+        message: 'Tourist profile updated successfully in database',
+        data: { id: targetId, username: cleanUsername, email: cleanEmail || effectiveEmail, name: full_name }
       });
     } else {
       await db.query(`
@@ -155,7 +154,7 @@ router.post('/register-tourist', async (req, res) => {
           trusted_contacts, interested_top_picks, is_registered, avatar_url
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
       `, [
-        id, cleanUsername, password, cleanEmail, full_name, dob, age, gender, blood_group,
+        effectiveId, cleanUsername, password, effectiveEmail, full_name, dob, age, gender, blood_group,
         allergies, medical_conditions, disability, address, govt_id_type, govt_id_number, govt_id_state,
         languagesJson, preferred_language, native_currency, current_location, locCoordJson,
         trustedContactsJson, topPicksJson, avatarUrl
@@ -163,8 +162,8 @@ router.post('/register-tourist', async (req, res) => {
 
       return res.status(201).json({
         success: true,
-        message: 'Tourist profile registered successfully in MySQL database',
-        data: { id, username: cleanUsername, email: cleanEmail, name: full_name }
+        message: 'Tourist profile registered successfully in database',
+        data: { id: effectiveId, username: cleanUsername, email: effectiveEmail, name: full_name }
       });
     }
   } catch (err) {
@@ -213,9 +212,14 @@ router.post('/register-provider', async (req, res) => {
     } = req.body;
 
     const cleanUsername = username ? username.trim().toLowerCase() : null;
-    const cleanEmail = email ? email.trim().toLowerCase() : null;
+    const cleanEmail = email && email.trim() ? email.trim().toLowerCase() : null;
+    const effectiveId = id && id.trim() ? id.trim() : (cleanUsername ? `PRV_${cleanUsername}` : `PRV_${Date.now()}`);
+    const effectiveEmail = cleanEmail || (cleanUsername ? `${cleanUsername}@partner.tripnova.local` : `${effectiveId}@partner.tripnova.local`);
 
-    const existing = await db.query('SELECT id FROM service_providers WHERE id = ? OR (username = ? AND username IS NOT NULL)', [id, cleanUsername]);
+    const existing = await db.query(
+      'SELECT id FROM service_providers WHERE id = ? OR (email = ? AND email IS NOT NULL AND email != "") OR (username = ? AND username IS NOT NULL AND username != "")',
+      [effectiveId, cleanEmail, cleanUsername]
+    );
 
     const transportJson = transport_details ? JSON.stringify(transport_details) : null;
     const guideJson = tour_guide_details ? JSON.stringify(tour_guide_details) : null;
@@ -229,7 +233,7 @@ router.post('/register-provider', async (req, res) => {
         UPDATE service_providers SET
           username = COALESCE(?, username),
           password = CASE WHEN ? != '' THEN ? ELSE password END,
-          email = ?,
+          email = COALESCE(?, email),
           phone = ?,
           provider_name = ?,
           business_name = ?,
@@ -252,7 +256,7 @@ router.post('/register-provider', async (req, res) => {
 
       return res.json({
         success: true,
-        message: 'Service Provider profile updated in MySQL database',
+        message: 'Service Provider profile updated in database',
         data: { id: targetId, username: cleanUsername, businessName: business_name, category }
       });
     } else {
@@ -264,15 +268,15 @@ router.post('/register-provider', async (req, res) => {
           rental_agency_details, registered_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `, [
-        id, cleanUsername, password, cleanEmail, phone, provider_name, business_name, category,
+        effectiveId, cleanUsername, password, effectiveEmail, phone, provider_name, business_name, category,
         operating_city, operating_state, native_currency, is_verified ? 1 : 0,
         transportJson, guideJson, homestayJson, medicalJson, rentalJson, registered_at
       ]);
 
       return res.status(201).json({
         success: true,
-        message: 'Service Provider registered in MySQL database',
-        data: { id, username: cleanUsername, businessName: business_name, category }
+        message: 'Service Provider registered in database',
+        data: { id: effectiveId, username: cleanUsername, businessName: business_name, category }
       });
     }
   } catch (err) {
@@ -514,97 +518,5 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
-// =============================================================================
-// 5. GOOGLE OAUTH 2.0 SIGN-IN
-// =============================================================================
-// POST /api/auth/google
-router.post('/google', async (req, res) => {
-  try {
-    const { credential } = req.body;
-    if (!credential) {
-      return res.status(400).json({ success: false, error: 'Google credential token is required' });
-    }
-
-    // Verify the Google ID token
-    const ticket = await googleClient.verifyIdToken({
-      idToken: credential,
-      audience: process.env.GOOGLE_CLIENT_ID || '41671720068-7smhesmvqm4m446hj5nv1k6l6e8meims.apps.googleusercontent.com'
-    });
-
-    const payload = ticket.getPayload();
-    const googleId = payload.sub;
-    const email = (payload.email || '').trim().toLowerCase();
-    const name = payload.name || '';
-    const picture = payload.picture || '';
-
-    if (!email) {
-      return res.status(400).json({ success: false, error: 'Google account does not have an email address' });
-    }
-
-    // 1. Check Tourist Users table by email
-    const userRows = await db.query(
-      'SELECT * FROM users WHERE LOWER(TRIM(email)) = ?',
-      [email]
-    );
-
-    if (userRows && userRows.length > 0) {
-      const user = userRows[0];
-
-      // Update google_id if not set yet
-      if (!user.google_id) {
-        try {
-          await db.query('UPDATE users SET google_id = ? WHERE id = ?', [googleId, user.id]);
-        } catch (e) { /* ignore */ }
-      }
-
-      const formattedProfile = formatTouristProfile(user);
-      return res.json({
-        success: true,
-        isNewUser: false,
-        type: 'tourist',
-        profile: formattedProfile,
-        message: `Google Sign-In successful. Welcome back, ${formattedProfile.name}!`
-      });
-    }
-
-    // 2. Check Service Providers table by email
-    const providerRows = await db.query(
-      'SELECT * FROM service_providers WHERE LOWER(TRIM(email)) = ?',
-      [email]
-    );
-
-    if (providerRows && providerRows.length > 0) {
-      const provider = providerRows[0];
-      const formattedProfile = formatProviderProfile(provider);
-      return res.json({
-        success: true,
-        isNewUser: false,
-        type: 'provider',
-        profile: formattedProfile,
-        message: `Google Sign-In successful. Welcome back, ${formattedProfile.businessName}!`
-      });
-    }
-
-    // 3. User not found — return Google profile for registration
-    return res.json({
-      success: true,
-      isNewUser: true,
-      googleProfile: {
-        googleId,
-        name,
-        email,
-        picture
-      },
-      message: 'No account found with this Google email. Please complete your profile to create a new account.'
-    });
-
-  } catch (err) {
-    console.error('Google OAuth error:', err);
-    if (err.message && err.message.includes('Token used too late')) {
-      return res.status(401).json({ success: false, error: 'Google token has expired. Please try signing in again.' });
-    }
-    res.status(500).json({ success: false, error: 'Failed to verify Google credentials: ' + err.message });
-  }
-});
-
 module.exports = router;
+

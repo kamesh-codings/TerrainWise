@@ -124,14 +124,16 @@ export const EmergencyCard: React.FC<EmergencyCardProps> = ({
 
   const copyEmergencyInfo = () => {
     const text = `EMERGENCY TOURIST PASS - TERRAIN WISE [Token: ${userUniqueToken}]
-Status: ${isRevealed ? 'UNMASKED' : 'MASKED'}
+Status: ${isRevealed ? 'UNMASKED' : 'MASKED (ID & Contacts Masked)'}
 Name: ${userProfile.name}
-Blood Group: ${isRevealed ? userProfile.bloodGroup : 'MASKED (Scan QR to reveal)'}
-Age: ${isRevealed ? userProfile.age : '••'} | Gender: ${isRevealed ? userProfile.gender : '•'}
-Allergies: ${isRevealed ? (userProfile.allergies || 'None') : 'MASKED'}
-Medical: ${isRevealed ? (userProfile.medicalConditions || 'None') : 'MASKED'}
+ID: ${userProfile.govtIdType} (${isRevealed ? (userProfile.govtIdNumber || 'TN-VERIFIED') : maskGovtId(userProfile.govtIdNumber)})
+Blood Group: ${userProfile.bloodGroup || 'O+'}
+Age: ${userProfile.age || 24} | Gender: ${userProfile.gender || 'Male'}
+Origin: ${userProfile.govtIdState || 'Tamil Nadu'}
+Allergies: ${userProfile.allergies || 'None reported'}
+Medical Conditions: ${userProfile.medicalConditions || 'None reported'}
 Emergency Contacts:
-${userProfile.trustedContacts.map((c, i) => `${i + 1}. ${c.name} (${c.relationship}): ${isRevealed ? c.phone : '••••••••' + (c.phone ? c.phone.slice(-4) : '')}`).join('\n')}`;
+${userProfile.trustedContacts.map((c, i) => `${i + 1}. ${c.name} (${c.relationship}): ${isRevealed ? (c.phone || 'N/A') : maskPhone(c.phone)} | ${isRevealed ? (c.email || 'N/A') : maskEmail(c.email)}`).join('\n')}`;
 
     navigator.clipboard.writeText(text);
     setCopied(true);
@@ -226,8 +228,8 @@ ${userProfile.trustedContacts.map((c, i) => `${i + 1}. ${c.name} (${c.relationsh
             </h2>
             <p style={{ fontSize: '0.78rem', color: '#cbd5e1' }}>
               {isRevealed
-                ? 'Pass details unlocked via QR token verification. Paramedics & authorities can access unmasked vitals.'
-                : 'Sensitive medical & contact details are masked. Scan the individual user QR code to reveal unmasked details.'}
+                ? 'Pass details unlocked via QR token verification. Paramedics & authorities can access unmasked emergency contacts & ID.'
+                : 'Aadhaar ID and trusted contact phone & email are masked for privacy. Medical vitals are readily accessible.'}
             </p>
           </div>
         </div>
@@ -385,33 +387,33 @@ ${userProfile.trustedContacts.map((c, i) => `${i + 1}. ${c.name} (${c.relationsh
               {/* Blood Group */}
               <div style={{ 
                 padding: '12px', 
-                background: isRevealed ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.12)', 
-                border: isRevealed ? '1px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(239, 68, 68, 0.3)', 
+                background: 'rgba(239, 68, 68, 0.15)', 
+                border: '1px solid rgba(239, 68, 68, 0.4)', 
                 borderRadius: '14px', 
                 textAlign: 'center',
                 position: 'relative'
               }}>
-                <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', fontWeight: 800, color: isRevealed ? '#a7f3d0' : '#fca5a5', display: 'block' }}>
+                <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', fontWeight: 800, color: '#fca5a5', display: 'block' }}>
                   Blood Group
                 </span>
-                <span style={{ fontSize: isRevealed ? '1.4rem' : '1.2rem', fontWeight: 900, color: isRevealed ? '#ffffff' : '#f87171', fontFamily: 'monospace' }}>
-                  {isRevealed ? userProfile.bloodGroup : '🔒 ••'}
+                <span style={{ fontSize: '1.4rem', fontWeight: 900, color: '#ffffff', fontFamily: 'monospace' }}>
+                  {userProfile.bloodGroup || 'O+'}
                 </span>
               </div>
 
               {/* Age / Gender */}
               <div style={{ padding: '12px', background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '14px', textAlign: 'center' }}>
                 <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', fontWeight: 800, color: '#94a3b8', display: 'block' }}>Age / Gender</span>
-                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: isRevealed ? '#ffffff' : '#94a3b8', fontFamily: 'monospace' }}>
-                  {isRevealed ? `${userProfile.age} yrs • ${userProfile.gender.charAt(0)}` : '•• yrs • •'}
+                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#ffffff', fontFamily: 'monospace' }}>
+                  {userProfile.age ? `${userProfile.age} yrs • ${(userProfile.gender || 'M').charAt(0)}` : '24 yrs • M'}
                 </span>
               </div>
 
               {/* Origin State */}
               <div style={{ padding: '12px', background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '14px', textAlign: 'center' }}>
                 <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', fontWeight: 800, color: '#94a3b8', display: 'block' }}>Origin State</span>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: isRevealed ? '#e2e8f0' : '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'block' }}>
-                  {isRevealed ? (userProfile.govtIdState || 'Tamil Nadu') : '••••••••'}
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#e2e8f0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'block' }}>
+                  {userProfile.govtIdState || 'Tamil Nadu'}
                 </span>
               </div>
 
@@ -419,7 +421,7 @@ ${userProfile.trustedContacts.map((c, i) => `${i + 1}. ${c.name} (${c.relationsh
               <div style={{ padding: '12px', background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '14px', textAlign: 'center' }}>
                 <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', fontWeight: 800, color: '#94a3b8', display: 'block' }}>Languages</span>
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#38bdf8', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'block' }}>
-                  {userProfile.languagesKnown.slice(0, 2).join(', ')}
+                  {userProfile.languagesKnown && userProfile.languagesKnown.length > 0 ? userProfile.languagesKnown.slice(0, 2).join(', ') : 'English, Tamil'}
                 </span>
               </div>
             </div>
@@ -430,13 +432,9 @@ ${userProfile.trustedContacts.map((c, i) => `${i + 1}. ${c.name} (${c.relationsh
                 <AlertTriangle style={{ width: '18px', height: '18px', color: '#fbbf24', flexShrink: 0, marginTop: '2px' }} />
                 <div style={{ flex: 1 }}>
                   <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#fef08a' }}>Allergies & Reactions: </span>
-                  {isRevealed ? (
-                    <span style={{ fontSize: '0.78rem', color: '#fef9c3', fontWeight: 600 }}>{userProfile.allergies || 'None reported'}</span>
-                  ) : (
-                    <span style={{ fontSize: '0.78rem', color: '#f87171', fontWeight: 700, fontFamily: 'monospace' }}>
-                      🔒 •••••••••••••••• (Scan QR to reveal)
-                    </span>
-                  )}
+                  <span style={{ fontSize: '0.78rem', color: '#fef9c3', fontWeight: 600 }}>
+                    {userProfile.allergies || 'None reported'}
+                  </span>
                 </div>
               </div>
 
@@ -445,13 +443,9 @@ ${userProfile.trustedContacts.map((c, i) => `${i + 1}. ${c.name} (${c.relationsh
                   <Info style={{ width: '18px', height: '18px', color: '#38bdf8', flexShrink: 0, marginTop: '2px' }} />
                   <div style={{ flex: 1 }}>
                     <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#bae6fd' }}>Medical Conditions: </span>
-                    {isRevealed ? (
-                      <span style={{ fontSize: '0.78rem', color: '#e0f2fe', fontWeight: 600 }}>{userProfile.medicalConditions}</span>
-                    ) : (
-                      <span style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 700, fontFamily: 'monospace' }}>
-                        🔒 •••••••••••••••• (Scan QR to reveal)
-                      </span>
-                    )}
+                    <span style={{ fontSize: '0.78rem', color: '#e0f2fe', fontWeight: 600 }}>
+                      {userProfile.medicalConditions}
+                    </span>
                   </div>
                 </div>
               )}

@@ -430,12 +430,12 @@ export const ServiceProviderModal: React.FC<ServiceProviderModalProps> = ({
     <div style={{
       position: 'fixed',
       inset: 0,
-      zIndex: 110,
+      zIndex: 1000,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '16px',
-      background: 'rgba(3, 7, 18, 0.75)',
+      background: 'rgba(3, 7, 18, 0.85)',
       backdropFilter: 'blur(24px)',
       WebkitBackdropFilter: 'blur(24px)'
     }} className="animate-fade">

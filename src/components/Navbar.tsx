@@ -12,7 +12,9 @@ import {
   PhoneCall, 
   Landmark,
   LogOut,
-  Lock
+  Lock,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { UserProfile, ServiceProviderProfile, UserLocation } from '../types';
 import { getStoredLocation, detectUserCurrentLocation } from '../utils/geoLocator';
@@ -22,6 +24,7 @@ interface NavbarProps {
   setActiveTab: (tab: string) => void;
   userProfile: UserProfile;
   providerProfile?: ServiceProviderProfile | null;
+  onOpenProfile?: () => void;
   onOpenSOS: () => void;
   onOpenRegister: () => void;
   onOpenGateway?: () => void;
@@ -29,6 +32,10 @@ interface NavbarProps {
   onOpenChatbot: () => void;
   onOpenLogin?: () => void;
   onLogout?: () => void;
+  canGoBack?: boolean;
+  canGoForward?: boolean;
+  onGoBack?: () => void;
+  onGoForward?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -36,13 +43,18 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   userProfile,
   providerProfile,
+  onOpenProfile,
   onOpenSOS,
   onOpenRegister,
   onOpenGateway,
   onOpenProviderRegister,
   onOpenChatbot,
   onOpenLogin,
-  onLogout
+  onLogout,
+  canGoBack = false,
+  canGoForward = false,
+  onGoBack,
+  onGoForward
 }) => {
   const [activeLocation, setActiveLocation] = useState<UserLocation | null>(() => getStoredLocation());
   const [isRefreshingLoc, setIsRefreshingLoc] = useState<boolean>(false);
@@ -81,23 +93,70 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="navbar-wrapper">
       <div className="navbar-content">
-        {/* Brand Logo */}
-        <div 
-          className="brand-logo"
-          onClick={() => setActiveTab('dashboard')}
-          title="Terrain Wise Home"
-        >
-          <div className="brand-icon-box">
-            <div className="brand-icon-inner">
-              <Compass style={{ width: '20px', height: '20px', color: '#38bdf8' }} />
-            </div>
+        {/* Left Side: Basic Back & Forward Controls + Brand Logo */}
+        <div className="flex items-center gap-2">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+            <button
+              onClick={onGoBack}
+              disabled={!canGoBack}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '32px',
+                height: '32px',
+                borderRadius: '8px',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                background: canGoBack ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                color: canGoBack ? '#38bdf8' : 'rgba(148, 163, 184, 0.3)',
+                cursor: canGoBack ? 'pointer' : 'default',
+                transition: 'all 0.15s ease'
+              }}
+              title="Go Back"
+            >
+              <ChevronLeft style={{ width: '18px', height: '18px' }} />
+            </button>
+
+            <button
+              onClick={onGoForward}
+              disabled={!canGoForward}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '32px',
+                height: '32px',
+                borderRadius: '8px',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                background: canGoForward ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                color: canGoForward ? '#38bdf8' : 'rgba(148, 163, 184, 0.3)',
+                cursor: canGoForward ? 'pointer' : 'default',
+                transition: 'all 0.15s ease'
+              }}
+              title="Go Forward"
+            >
+              <ChevronRight style={{ width: '18px', height: '18px' }} />
+            </button>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="brand-title">Terrain Wise</span>
-              <span className="badge badge-blue hide-mobile" style={{ fontSize: '0.68rem', padding: '1px 6px' }}>AI Safety</span>
+
+          {/* Brand Logo */}
+          <div 
+            className="brand-logo"
+            onClick={() => setActiveTab('dashboard')}
+            title="Terrain Wise Home"
+          >
+            <div className="brand-icon-box">
+              <div className="brand-icon-inner">
+                <Compass style={{ width: '20px', height: '20px', color: '#38bdf8' }} />
+              </div>
             </div>
-            <p className="brand-subtitle hide-mobile">Smart AI Travel Companion</p>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="brand-title">Terrain Wise</span>
+                <span className="badge badge-blue hide-mobile" style={{ fontSize: '0.68rem', padding: '1px 6px' }}>AI Safety</span>
+              </div>
+              <p className="brand-subtitle hide-mobile">Smart AI Travel Companion</p>
+            </div>
           </div>
         </div>
 
@@ -200,7 +259,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Integrated Top-Right My Profile / Register Button (Dual-Mode: Tourist or Provider) */}
           <button
             onClick={() => {
-              if (userProfile.isRegistered || providerProfile) {
+              if (onOpenProfile) {
+                onOpenProfile();
+              } else if (userProfile.isRegistered || providerProfile) {
                 setActiveTab('profile');
               } else if (onOpenGateway) {
                 onOpenGateway();

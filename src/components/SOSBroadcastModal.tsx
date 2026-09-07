@@ -61,6 +61,29 @@ export const SOSBroadcastModal: React.FC<SOSBroadcastModalProps> = ({
   const [stopLocationVoice, setStopLocationVoice] = useState<(() => void) | null>(null);
   const [stopNoteVoice, setStopNoteVoice] = useState<(() => void) | null>(null);
 
+  // Privacy masking helpers for SOS Floating Window
+  const maskPhone = (phoneStr?: string) => {
+    if (!phoneStr) return '';
+    const clean = phoneStr.trim();
+    if (clean.length <= 4) return '••••' + clean;
+    return clean.slice(0, 3) + ' ••••• •' + clean.slice(-4);
+  };
+
+  const maskEmail = (emailStr?: string) => {
+    if (!emailStr) return '';
+    const parts = emailStr.split('@');
+    if (parts.length < 2) return '••••••••@••••.com';
+    const namePart = parts[0];
+    const maskedName = namePart.length > 2 ? namePart.slice(0, 2) + '••••' : '••••';
+    return `${maskedName}@${parts[1]}`;
+  };
+
+  const maskGovtId = (idStr?: string) => {
+    if (!idStr) return '';
+    if (idStr.length <= 4) return '••••' + idStr;
+    return '•••• •••• ' + idStr.slice(-4);
+  };
+
   useEffect(() => {
     if (isOpen) {
       setSosSending(false);
@@ -383,7 +406,9 @@ Terrain Wise Tourism Safety & Navigation Platform`;
             fontSize: '0.74rem'
           }}>
             <span style={{ color: '#94a3b8' }}>Registered User Email:</span>
-            <span style={{ color: '#38bdf8', fontWeight: 800 }}>{userProfile.email}</span>
+            <span style={{ color: '#38bdf8', fontWeight: 800, fontFamily: 'monospace' }}>
+              🔒 {maskEmail(userProfile.email)}
+            </span>
           </div>
         )}
 
@@ -400,7 +425,7 @@ Terrain Wise Tourism Safety & Navigation Platform`;
           <div className="flex items-center justify-between">
             <span style={{ fontSize: '0.74rem', fontWeight: 800, color: '#fca5a5', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <Mail style={{ width: '13px', height: '13px' }} />
-              {editableContacts.length} Trusted Email Recipients (Max 5):
+              {editableContacts.length} Trusted Email Recipients (Privacy Protected):
             </span>
             {editableContacts.length < 5 && !sosResponse && (
               <button
@@ -445,7 +470,11 @@ Terrain Wise Tourism Safety & Navigation Platform`;
                     <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#ffffff' }}>
                       {c.name || `Contact ${i + 1}`}
                     </span>
-                    {c.phone && <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>({c.phone})</span>}
+                    {c.phone && (
+                      <span style={{ fontSize: '0.7rem', color: '#94a3b8', fontFamily: 'monospace' }}>
+                        ({maskPhone(c.phone)})
+                      </span>
+                    )}
                   </div>
                   {!sosResponse && (
                     <div className="flex items-center gap-1">
@@ -493,7 +522,9 @@ Terrain Wise Tourism Safety & Navigation Platform`;
                 ) : (
                   <div style={{ fontSize: '0.72rem', color: c.email ? '#38bdf8' : '#f87171', display: 'flex', alignItems: 'center', gap: '4px' }}>
                     <Mail style={{ width: '11px', height: '11px' }} />
-                    <span>{c.email || '⚠️ No email specified (click edit to add)'}</span>
+                    <span style={{ fontFamily: c.email ? 'monospace' : 'inherit' }}>
+                      {c.email ? maskEmail(c.email) : '⚠️ No email specified (click edit to add)'}
+                    </span>
                   </div>
                 )}
               </div>

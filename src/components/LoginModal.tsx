@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import { 
   X, 
   User, 
@@ -28,8 +27,7 @@ import {
 import {
   loginWithBackendAPI,
   requestPasswordResetAPI,
-  completePasswordResetAPI,
-  googleSignInAPI
+  completePasswordResetAPI
 } from '../utils/api';
 
 interface LoginModalProps {
@@ -38,7 +36,6 @@ interface LoginModalProps {
   onLoginSuccess: (result: { type: 'tourist'; profile: UserProfile } | { type: 'provider'; profile: ServiceProviderProfile }) => void;
   onOpenTouristRegister: () => void;
   onOpenProviderRegister: () => void;
-  onGoogleNewUser?: (googleProfile: { googleId: string; name: string; email: string; picture: string }) => void;
 }
 
 type ModalView = 'login' | 'forgot_email' | 'reset_otp_password' | 'reset_success';
@@ -48,8 +45,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   onClose,
   onLoginSuccess,
   onOpenTouristRegister,
-  onOpenProviderRegister,
-  onGoogleNewUser
+  onOpenProviderRegister
 }) => {
   const [view, setView] = useState<ModalView>('login');
   const [roleType, setRoleType] = useState<'tourist' | 'provider'>('tourist');
@@ -60,7 +56,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
 
   // Forgot password flow state
   const [recoveryEmail, setRecoveryEmail] = useState('');
@@ -196,13 +191,13 @@ export const LoginModal: React.FC<LoginModalProps> = ({
       style={{ 
         position: 'fixed', 
         inset: 0, 
-        zIndex: 120, 
+        zIndex: 1000, 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center', 
         padding: '16px', 
-        background: 'rgba(3, 7, 18, 0.75)', 
-        backdropFilter: 'blur(24px)',
+        background: 'rgba(3, 7, 18, 0.85)', 
+        backdropFilter: 'blur(24px)', 
         WebkitBackdropFilter: 'blur(24px)' 
       }}
       className="animate-fade"
@@ -463,90 +458,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                 gap: '8px',
                 textAlign: 'center'
               }}>
-                {/* Google Sign-In Divider & Button */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  margin: '0 0 8px'
-                }}>
-                  <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.1)' }} />
-                  <span style={{ fontSize: '0.72rem', color: '#64748b', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>or continue with</span>
-                  <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.1)' }} />
-                </div>
-
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  position: 'relative'
-                }}>
-                  {googleLoading && (
-                    <div style={{
-                      position: 'absolute',
-                      inset: 0,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: 'rgba(9, 14, 23, 0.8)',
-                      borderRadius: '12px',
-                      zIndex: 5,
-                      color: '#38bdf8',
-                      fontSize: '0.78rem',
-                      fontWeight: 700
-                    }}>
-                      Verifying Google account...
-                    </div>
-                  )}
-                  <GoogleLogin
-                    onSuccess={async (credentialResponse: CredentialResponse) => {
-                      if (!credentialResponse.credential) {
-                        setLoginError('Google Sign-In did not return a credential. Please try again.');
-                        return;
-                      }
-                      setGoogleLoading(true);
-                      setLoginError(null);
-                      try {
-                        const result = await googleSignInAPI(credentialResponse.credential);
-                        if (!result || !result.success) {
-                          setLoginError(result?.error || 'Google Sign-In failed. Please try again.');
-                          return;
-                        }
-                        if (result.isNewUser && result.googleProfile) {
-                          // New user — open profile completion form
-                          onClose();
-                          if (onGoogleNewUser) {
-                            onGoogleNewUser(result.googleProfile);
-                          }
-                        } else if (result.profile) {
-                          // Existing user — log in directly
-                          onLoginSuccess({
-                            type: result.type || 'tourist',
-                            profile: result.profile
-                          });
-                          onClose();
-                          setIdentifier('');
-                          setPassword('');
-                        }
-                      } catch (err) {
-                        setLoginError('Google Sign-In encountered an error. Please try again.');
-                      } finally {
-                        setGoogleLoading(false);
-                      }
-                    }}
-                    onError={() => {
-                      setLoginError('Google Sign-In was cancelled or failed. Please try again.');
-                    }}
-                    theme="filled_black"
-                    size="large"
-                    width="380"
-                    text="signin_with"
-                    shape="pill"
-                  />
-                </div>
-
-                <div style={{ marginTop: '6px' }}>
+                <div style={{ marginTop: '12px' }}>
                   <span style={{ fontSize: '0.74rem', color: '#94a3b8' }}>
                     Don't have an account yet?
                   </span>
