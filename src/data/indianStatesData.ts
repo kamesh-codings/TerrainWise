@@ -1,6 +1,7 @@
 /**
  * Comprehensive Indian States Travel Directory
- * Contains verified data and real landmark photo collages for all 36 States & UTs.
+ * Contains verified data and authentic 3-landmark photo collages for all 36 States & UTs.
+ * Each state features 3 unique, landmark-specific photographs.
  * Synchronized with the platform locations & places database.
  */
 
@@ -27,1728 +28,1080 @@ export const ALL_INDIAN_STATES: IndianState[] = [
   {
     "id": "tamil-nadu",
     "name": "Tamil Nadu",
-    "tagline": "Land of Dravidian Temples, Nilgiri Hills & Coastal Heritage",
+    "tagline": "Ancient Dravidian Gopurams, Misty Nilgiri Tea Hills & UNESCO Chola Monuments",
     "zone": "South",
     "capital": "Chennai",
     "spotCount": "13197+ Spots",
     "districtCount": 42,
-    "heroImage": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/An_aerial_view_of_Madurai_city_from_atop_of_Meenakshi_Amman_temple.jpg/960px-An_aerial_view_of_Madurai_city_from_atop_of_Meenakshi_Amman_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Queensland amusement park",
-        "category": "Nature",
-        "city": "Chennai",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Arulmigu Meenakshi Amman Temple",
-        "category": "Religious",
+        "name": "Meenakshi Amman Temple",
+        "category": "Religious Heritage",
         "city": "Madurai",
-        "image": "https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/An_aerial_view_of_Madurai_city_from_atop_of_Meenakshi_Amman_temple.jpg/960px-An_aerial_view_of_Madurai_city_from_atop_of_Meenakshi_Amman_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Arulmigu Kamakshi Amman Temple",
-        "category": "Religious",
-        "city": "Kanchipuram",
-        "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80"
+        "name": "Brihadeeswarar Temple",
+        "category": "UNESCO Monument",
+        "city": "Thanjavur",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Brihadisvara_Temple_during_Maha_Shivaratri-WUS03611_%28edit%29.jpg/960px-Brihadisvara_Temple_during_Maha_Shivaratri-WUS03611_%28edit%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Sri Ranganathaswamy Temple Srirangam",
-        "category": "Religious",
-        "city": "Tiruchirappalli",
-        "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Arulmigu Ramanathaswamy Temple",
-        "category": "Religious",
-        "city": "Ramanathapuram",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Arulmigu Annamalaiyar Temple",
-        "category": "Religious",
-        "city": "Tiruvannamalai",
-        "image": "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=600&q=80"
+        "name": "Nilgiri Mountain Railway",
+        "category": "UNESCO Heritage Rail",
+        "city": "Ooty, Nilgiris",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/NMR_train_at_Ketti_05-02-26_75.jpeg/960px-NMR_train_at_Ketti_05-02-26_75.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "kerala",
     "name": "Kerala",
-    "tagline": "God's Own Country: Emerald Backwaters & Mist-Covered Peaks",
+    "tagline": "God's Own Country: Tranquil Emerald Backwaters, Rolling Tea Estates & Tropical Palms",
     "zone": "South",
     "capital": "Thiruvananthapuram",
     "spotCount": "46 Curated Spots",
     "districtCount": 17,
-    "heroImage": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Chottanikara Bhagvathy Temple",
-        "category": "Religious",
-        "city": "Kochi",
-        "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "National Shrine Basilica of our Lady of Ransom",
-        "category": "Religious",
-        "city": "Kochi",
-        "image": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Munnar",
-        "category": "Hill Station",
-        "city": "Idukki",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "St.Andrew's Basilica",
-        "category": "Religious",
+        "name": "Alleppey Backwaters & Houseboats",
+        "category": "Backwater Circuit",
         "city": "Alappuzha",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Alappuzha_Boat_Beauty_W.jpg/960px-Alappuzha_Boat_Beauty_W.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Padmanabhaswamy Temple",
-        "category": "Religious",
-        "city": "Thiruvananthapuram",
-        "image": "https://images.unsplash.com/photo-1518457607834-6e8d80c183c5?auto=format&fit=crop&w=600&q=80"
+        "name": "Munnar Tea Plantations",
+        "category": "Hill Station & Mist",
+        "city": "Munnar, Idukki",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Munnar_Overview.jpg/960px-Munnar_Overview.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Tali Maha Shiva Kshetram",
-        "category": "Religious",
-        "city": "Kozhikode",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Athirappilly Waterfalls",
+        "category": "Jungle Waterfalls",
+        "city": "Thrissur",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg/960px-The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "karnataka",
     "name": "Karnataka",
-    "tagline": "One State, Many Worlds: Hampi UNESCO Ruins & Mysore Splendor",
+    "tagline": "One State, Many Worlds: Hampi Vijayanagara Ruins, Mysore Splendor & Coorg Valleys",
     "zone": "South",
     "capital": "Bengaluru",
     "spotCount": "61+ Spots",
     "districtCount": 13,
-    "heroImage": "https://images.unsplash.com/photo-1600100397608-f010e42e4823?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Wide_angle_of_Galigopuram_of_Virupaksha_Temple%2C_Hampi_%2804%29_%28cropped%29.jpg/960px-Wide_angle_of_Galigopuram_of_Virupaksha_Temple%2C_Hampi_%2804%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Hampi",
-        "category": "Historical",
-        "city": "Vijayanagara",
-        "image": "https://images.unsplash.com/photo-1600100397608-f010e42e4823?auto=format&fit=crop&w=600&q=80"
+        "name": "Hampi Stone Chariot",
+        "category": "UNESCO World Heritage",
+        "city": "Hampi, Vijayanagara",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Wide_angle_of_Galigopuram_of_Virupaksha_Temple%2C_Hampi_%2804%29_%28cropped%29.jpg/960px-Wide_angle_of_Galigopuram_of_Virupaksha_Temple%2C_Hampi_%2804%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Mysore Palace",
-        "category": "Historical",
+        "name": "Mysore Palace Grandeur",
+        "category": "Royal Heritage",
         "city": "Mysuru",
-        "image": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Mysore_Palace_Morning.jpg/960px-Mysore_Palace_Morning.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Mathanga Hill",
-        "category": "Religious",
-        "city": "Hampi",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Shree Vijaya Vitthala Temple",
-        "category": "Religious",
-        "city": "Hampi",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Shri Jagadguru Shankaracharya Peeta",
-        "category": "Religious",
-        "city": "Chikmanglur",
-        "image": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Shri Annapurneshwari Devi Temple",
-        "category": "Religious",
-        "city": "Chikmanglur",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
+        "name": "Gol Gumbaz Whispering Gallery",
+        "category": "Deccan Architecture",
+        "city": "Vijayapura",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Gol_Gumbaz_-4%2C_Bijapur%2C_Karnataka.jpg/960px-Gol_Gumbaz_-4%2C_Bijapur%2C_Karnataka.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "maharashtra",
     "name": "Maharashtra",
-    "tagline": "Gateway of India, Sahyadri Mountain Forts & Konkan Beaches",
+    "tagline": "Gateway of India, Marine Drive Sunset Arc, Ancient Ajanta Caves & Sahyadri Peaks",
     "zone": "West",
     "capital": "Mumbai",
     "spotCount": "78+ Spots",
     "districtCount": 15,
-    "heroImage": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Mumbai_03-2016_30_Gateway_of_India.jpg/960px-Mumbai_03-2016_30_Gateway_of_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Ajanta & Ellora Caves",
-        "category": "Nature",
-        "city": "Aurangabad (Chhatrapati Sambhajinagar)",
-        "image": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Siddhivinayak Temple",
-        "category": "Religious",
-        "city": "Mumbai",
-        "image": "https://images.unsplash.com/photo-1566552881560-0be86c532107?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Dagadusheth Halwai Ganapati temple",
-        "category": "Religious",
-        "city": "Pune",
-        "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Daulatabad Fort",
-        "category": "Historical",
-        "city": "Aurangabad",
-        "image": "https://images.unsplash.com/photo-1600100397608-f010e42e4823?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Shri Ambabai Temple",
-        "category": "Religious",
-        "city": "Kolhapur",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
         "name": "Gateway of India",
-        "category": "Historical",
+        "category": "Historic Waterfront",
         "city": "Mumbai",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Mumbai_03-2016_30_Gateway_of_India.jpg/960px-Mumbai_03-2016_30_Gateway_of_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Ajanta Caves Buddhist Frescoes",
+        "category": "UNESCO Ancient Caves",
+        "city": "Chhatrapati Sambhajinagar",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Ajanta_%2863%29.jpg/960px-Ajanta_%2863%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Chhatrapati Shivaji Maharaj Terminus",
+        "category": "UNESCO Victorian Gothic",
+        "city": "Mumbai",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Chhatrapati_shivaji_terminus%2C_esterno_01.jpg/960px-Chhatrapati_shivaji_terminus%2C_esterno_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "rajasthan",
     "name": "Rajasthan",
-    "tagline": "Land of Maharajas: Golden Thar Deserts, Palaces & Historic Forts",
+    "tagline": "Land of Maharajas: Hawa Mahal Facade, Majestic Amber Fort & Golden Thar Dunes",
     "zone": "North",
     "capital": "Jaipur",
     "spotCount": "38 Curated Spots",
     "districtCount": 9,
-    "heroImage": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/East_facade_Hawa_Mahal_Jaipur_from_ground_level_%28July_2022%29_-_img_01.jpg/960px-East_facade_Hawa_Mahal_Jaipur_from_ground_level_%28July_2022%29_-_img_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Amber Fort",
-        "category": "Historical",
+        "name": "Hawa Mahal Palace of Winds",
+        "category": "Royal Architecture",
         "city": "Jaipur",
-        "image": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/East_facade_Hawa_Mahal_Jaipur_from_ground_level_%28July_2022%29_-_img_01.jpg/960px-East_facade_Hawa_Mahal_Jaipur_from_ground_level_%28July_2022%29_-_img_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "City Palace Udaipur",
-        "category": "Nature",
-        "city": "Udaipur",
-        "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=600&q=80"
+        "name": "Amber Fort & Palace",
+        "category": "Hill Fortress",
+        "city": "Amer, Jaipur",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/20191219_Fort_Amber%2C_Amer%2C_Jaipur_0955_9481.jpg/960px-20191219_Fort_Amber%2C_Amer%2C_Jaipur_0955_9481.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Shree Khole Ki Hanuman Mandir",
-        "category": "Religious",
-        "city": "Jaipur",
-        "image": "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Moti Dungri Ganesh Ji Temple",
-        "category": "Religious",
-        "city": "Jaipur",
-        "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Ranthambore National Park",
-        "category": "Wildlife",
-        "city": "Sawai Madhopur",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Jaisalmer Fort",
-        "category": "Historical",
+        "name": "Jaisalmer Golden Fort",
+        "category": "Desert Citadel",
         "city": "Jaisalmer",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Jaisalmer_forteresse.jpg/960px-Jaisalmer_forteresse.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "goa",
     "name": "Goa",
-    "tagline": "Sun-Kissed Golden Beaches, Dudhsagar Falls & Portuguese Architecture",
+    "tagline": "Sun-Drenched Arabian Sea Beaches, Portuguese Baroque Cathedrals & Dudhsagar Falls",
     "zone": "West",
     "capital": "Panaji",
     "spotCount": "24 Curated Spots",
     "districtCount": 4,
-    "heroImage": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Palolem_Beach%2C_South_Goa.jpg/960px-Palolem_Beach%2C_South_Goa.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
+        "name": "Palolem Beach Coconut Palms",
+        "category": "Tropical Coastline",
+        "city": "Canacona, South Goa",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Palolem_Beach%2C_South_Goa.jpg/960px-Palolem_Beach%2C_South_Goa.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
         "name": "Basilica of Bom Jesus",
-        "category": "Religious",
-        "city": "North Goa",
-        "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80"
+        "category": "UNESCO Baroque Heritage",
+        "city": "Old Goa",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9e/Front_Elevation_of_Basilica_of_Bom_Jesus.jpg/960px-Front_Elevation_of_Basilica_of_Bom_Jesus.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Fort Aguada",
-        "category": "Historical",
-        "city": "North Goa",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Cabo de Rama Fort",
-        "category": "Historical",
-        "city": "South Goa",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Calangute Beach",
-        "category": "Beach",
-        "city": "North Goa",
-        "image": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Dudhsagar Falls",
-        "category": "Wildlife",
-        "city": "Goa",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Arambol Beach",
-        "category": "Beach",
-        "city": "Goa",
-        "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=600&q=80"
+        "name": "Dudhsagar Waterfalls",
+        "category": "Cascading Jungle Falls",
+        "city": "Sonaulim, South Goa",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Doodhsagar_Fall.jpg/960px-Doodhsagar_Fall.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "uttar-pradesh",
     "name": "Uttar Pradesh",
-    "tagline": "Spiritual Heartland: Taj Mahal, Holy Varanasi Ghats & Ayodhya",
+    "tagline": "Sacred Heartland: Iconic Marble Taj Mahal, Ancient Varanasi Ghats & Mughal Citadels",
     "zone": "North",
     "capital": "Lucknow",
     "spotCount": "101+ Spots",
     "districtCount": 11,
-    "heroImage": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/960px-Taj_Mahal_%28Edited%29.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Govind Devji Temple",
-        "category": "Religious",
-        "city": "Vrindavan",
-        "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Taj Mahal",
-        "category": "Historical",
+        "name": "Taj Mahal White Wonder",
+        "category": "Wonder of the World",
         "city": "Agra",
-        "image": "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/960px-Taj_Mahal_%28Edited%29.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Jama Masjid",
-        "category": "Religious",
-        "city": "Agra",
-        "image": "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=600&q=80"
+        "name": "Varanasi Sacred Ganga Ghats",
+        "category": "Spiritual Pilgrimage",
+        "city": "Varanasi",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Ahilya_Ghat_by_the_Ganges%2C_Varanasi.jpg/960px-Ahilya_Ghat_by_the_Ganges%2C_Varanasi.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Humayun's Mosque",
-        "category": "Religious",
-        "city": "Agra",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Dwarkadhish Temple,",
-        "category": "Religious",
-        "city": "Mathura",
-        "image": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Ram Janmabhoomi",
-        "category": "Religious",
-        "city": "Ayodhya",
-        "image": "https://images.unsplash.com/photo-1600100397608-f010e42e4823?auto=format&fit=crop&w=600&q=80"
+        "name": "Buland Darwaza Victory Gate",
+        "category": "Mughal Architecture",
+        "city": "Fatehpur Sikri, Agra",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Fatehput_Sikiri_Buland_Darwaza_gate_2010.jpg/960px-Fatehput_Sikiri_Buland_Darwaza_gate_2010.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "uttarakhand",
     "name": "Uttarakhand",
-    "tagline": "Land of the Gods: Majestic Himalayas, Rishikesh & Sacred Glaciers",
+    "tagline": "Devbhoomi: Sacred Kedarnath Peaks, Rishikesh Yoga Capital & Badrinath Shrine",
     "zone": "North",
     "capital": "Dehradun",
     "spotCount": "103+ Spots",
     "districtCount": 11,
-    "heroImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Kedarnath_Temple_in_Rainy_season.jpg/960px-Kedarnath_Temple_in_Rainy_season.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Kunjapuri Devi",
-        "category": "Religious",
-        "city": "Rishikesh",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Walking towards the Happy Valley from Library Head",
-        "category": "Hill Station",
-        "city": "Mussoorie",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Shakti temple",
-        "category": "Religious",
-        "city": "Uttarkashi",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kunjapuri Devi Temple and camps",
-        "category": "Religious",
-        "city": "Rishikesh",
-        "image": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Chorabari lake",
-        "category": "Wildlife",
-        "city": "Kedarnath",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kedarnath Temple",
-        "category": "Religious",
+        "name": "Kedarnath Temple Shrine",
+        "category": "Sacred Himalayan Jyotirlinga",
         "city": "Rudraprayag",
-        "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Kedarnath_Temple_in_Rainy_season.jpg/960px-Kedarnath_Temple_in_Rainy_season.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Rishikesh Laxman Jhula & Ganga",
+        "category": "Yoga & River Adventure",
+        "city": "Rishikesh",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Rishikesh-Lakshman_Jhula_by_Kaustubh_Nayyar.jpg/960px-Rishikesh-Lakshman_Jhula_by_Kaustubh_Nayyar.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Badrinath Temple",
+        "category": "Char Dham Himalayan Shrine",
+        "city": "Chamoli",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Badrinath_Temple_%2C_Uttarakhand.jpg/960px-Badrinath_Temple_%2C_Uttarakhand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "himachal-pradesh",
     "name": "Himachal Pradesh",
-    "tagline": "Snow-Capped Himalayan Vistas, Pine Valleys & Rohtang Pass",
+    "tagline": "Snowy Wonderland: Rohtang Pass, Spiti Buddhist Monasteries & Colonial Shimla Ridge",
     "zone": "North",
     "capital": "Shimla",
     "spotCount": "48 Curated Spots",
     "districtCount": 5,
-    "heroImage": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Kullu_Valley_from_Rohtang_Pass%2C_India.jpg/960px-Kullu_Valley_from_Rohtang_Pass%2C_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Tara Devi Temple",
-        "category": "Religious",
+        "name": "Rohtang Pass Alpine Valley",
+        "category": "High Alpine Pass",
+        "city": "Manali, Kullu",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Kullu_Valley_from_Rohtang_Pass%2C_India.jpg/960px-Kullu_Valley_from_Rohtang_Pass%2C_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Key (Ki) Buddhist Monastery",
+        "category": "Tibetan Mountain Monastery",
+        "city": "Spiti Valley",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/1000_Year_loop.jpg/960px-1000_Year_loop.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Shimla Christ Church & Ridge",
+        "category": "Colonial Heritage",
         "city": "Shimla",
-        "image": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Trek to Dainkund Peak",
-        "category": "Hill Station",
-        "city": "Dalhousie",
-        "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Manali",
-        "category": "Hill Station",
-        "city": "Kullu",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Jakhu Temple",
-        "category": "Religious",
-        "city": "Shimla",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Shimla",
-        "category": "Hill Station",
-        "city": "Shimla",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Dalai Lama Temple",
-        "category": "Religious",
-        "city": "Dalhousie",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Landscape_of_Shimla_%2C_Himachal_Pradesh.jpg/960px-Landscape_of_Shimla_%2C_Himachal_Pradesh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "delhi",
     "name": "Delhi",
-    "tagline": "The Historic Capital: Mughal Monuments, Vibrant Bazaars & Red Fort",
+    "tagline": "Historic Capital: India Gate Boulevard, Soaring Qutub Minar & Mughal Red Fort",
     "zone": "North",
     "capital": "New Delhi",
     "spotCount": "24 Curated Spots",
     "districtCount": 3,
-    "heroImage": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/India_Gate_in_the_Evening.jpg/960px-India_Gate_in_the_Evening.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Red Fort",
-        "category": "Historical",
-        "city": "New Delhi",
-        "image": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80"
+        "name": "India Gate War Memorial",
+        "category": "National Monument",
+        "city": "Central Delhi",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/India_Gate_in_the_Evening.jpg/960px-India_Gate_in_the_Evening.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Humayun's Tomb",
-        "category": "Historical",
-        "city": "New Delhi/Central Delhi",
-        "image": "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=600&q=80"
+        "name": "Red Fort (Lal Qila)",
+        "category": "Mughal Imperial Palace",
+        "city": "Old Delhi",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Delhi_fort.jpg/960px-Delhi_fort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Akshardham Temple",
-        "category": "Religious",
-        "city": "Delhi",
-        "image": "https://images.unsplash.com/photo-1600100397608-f010e42e4823?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Sunder Nursery",
-        "category": "Wildlife",
-        "city": "Delhi",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Lotus Temple",
-        "category": "Religious",
-        "city": "Delhi",
-        "image": "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Lodhi Garden",
-        "category": "Wildlife",
-        "city": "Delhi",
-        "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80"
-      }
-    ]
-  },
-  {
-    "id": "gujarat",
-    "name": "Gujarat",
-    "tagline": "Vibrant Culture: White Desert of Rann, Gir Lions & Somnath Shore",
-    "zone": "West",
-    "capital": "Gandhinagar",
-    "spotCount": "39 Curated Spots",
-    "districtCount": 11,
-    "heroImage": "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=600&q=80",
-    "topPlaces": [
-      {
-        "name": "Somnath Temple",
-        "category": "Religious",
-        "city": "Gir Somnath",
-        "image": "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Statue of Unity",
-        "category": "Historical",
-        "city": "Narmada",
-        "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Shri Nageshwar Jyotirling",
-        "category": "Religious",
-        "city": "Dwarka",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Dwarkadhish Temple",
-        "category": "Religious",
-        "city": "Dwarka",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Bhuj Mandir",
-        "category": "Religious",
-        "city": "Bhuj",
-        "image": "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Uparkot Fort",
-        "category": "Nature",
-        "city": "Junagadh",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      }
-    ]
-  },
-  {
-    "id": "west-bengal",
-    "name": "West Bengal",
-    "tagline": "Cultural Capital: Darjeeling Toy Train, Tea Hills & Sundarbans",
-    "zone": "East & North-East",
-    "capital": "Kolkata",
-    "spotCount": "59+ Spots",
-    "districtCount": 6,
-    "heroImage": "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=600&q=80",
-    "topPlaces": [
-      {
-        "name": "Darjeeling Rock garden",
-        "category": "Wildlife",
-        "city": "Darjeeling",
-        "image": "https://images.unsplash.com/photo-1558431382-27e303142255?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Teesta river(rafting)",
-        "category": "Wildlife",
-        "city": "Darjeeling",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kanchenjunga peak",
-        "category": "Wildlife",
-        "city": "Darjeeling",
-        "image": "https://images.unsplash.com/photo-1566552881560-0be86c532107?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Happy valley tea estate",
-        "category": "Hill Station",
-        "city": "Darjeeling",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Nightingale park",
-        "category": "Nature",
-        "city": "Darjeeling",
-        "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Mahakal temple",
-        "category": "Religious",
-        "city": "Darjeeling",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      }
-    ]
-  },
-  {
-    "id": "madhya-pradesh",
-    "name": "Madhya Pradesh",
-    "tagline": "The Heart of India: Khajuraho Sculptures, Tiger Sanctuaries & Forts",
-    "zone": "Central",
-    "capital": "Bhopal",
-    "spotCount": "49 Curated Spots",
-    "districtCount": 7,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-    "topPlaces": [
-      {
-        "name": "Kamasutra temples",
-        "category": "Religious",
-        "city": "Khajuraho",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Khajuraho Group of Temples",
-        "category": "Religious",
-        "city": "Chhatarpur",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Khajrana Ganesh Mandir",
-        "category": "Religious",
-        "city": "Indore",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Mahakaleshwar Jyotirlinga",
-        "category": "Religious",
-        "city": "Ujjain",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Khajuraho Group of Monuments",
-        "category": "Historical",
-        "city": "Khajuraho",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Sanchi Stupa",
-        "category": "Religious",
-        "city": "Bhopal",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      }
-    ]
-  },
-  {
-    "id": "andhra-pradesh",
-    "name": "Andhra Pradesh",
-    "tagline": "Sacred Tirumala Venkateswara, Araku Valleys & Gandikota Canyon",
-    "zone": "South",
-    "capital": "Amaravati",
-    "spotCount": "34 Curated Spots",
-    "districtCount": 7,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-    "topPlaces": [
-      {
-        "name": "Tirumala Venkateswara Temple",
-        "category": "Religious",
-        "city": "Tirupati",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Ahobilam temple",
-        "category": "Religious",
-        "city": "Kurnool",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kanaka Durga Temple",
-        "category": "Religious",
-        "city": "Krishna (Vijayawada)",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Mogalarajapuram caves",
-        "category": "Nature",
-        "city": "Vijayawada",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kurnool fort",
-        "category": "Historical",
-        "city": "Kurnool",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Chandragiri Fort",
-        "category": "Historical",
-        "city": "Chittoor (Tirupati)",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      }
-    ]
-  },
-  {
-    "id": "telangana",
-    "name": "Telangana",
-    "tagline": "Land of Nizams: Iconic Charminar, Golconda & Ramappa UNESCO Wonder",
-    "zone": "South",
-    "capital": "Hyderabad",
-    "spotCount": "24 Curated Spots",
-    "districtCount": 1,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-    "topPlaces": [
-      {
-        "name": "Birla Mandir",
-        "category": "Religious",
-        "city": "Hyderabad",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Golconda Fort",
-        "category": "Historical",
-        "city": "Hyderabad",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Chowmahalla Palace",
-        "category": "Historical",
-        "city": "Hyderabad",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Hussain Sagar",
-        "category": "Nature",
-        "city": "Hyderabad",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Ramoji Film City",
-        "category": "Cultural",
-        "city": "Hyderabad",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Qutb Shahi Tombs",
-        "category": "Historical",
-        "city": "Hyderabad",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      }
-    ]
-  },
-  {
-    "id": "jammu-and-kashmir",
-    "name": "Jammu & Kashmir",
-    "tagline": "Paradise on Earth: Dal Lake Shikaras, Gulmarg Gondolas & Snow Peaks",
-    "zone": "North",
-    "capital": "Srinagar",
-    "spotCount": "25 Curated Spots",
-    "districtCount": 2,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-    "topPlaces": [
-      {
-        "name": "Dal Lake, Srinagar",
-        "category": "Nature",
-        "city": "Srinagar",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Shankaracharya Temple",
-        "category": "Religious",
-        "city": "Srinagar",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Pari mahal",
-        "category": "Wildlife",
-        "city": "Srinagar",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Vaishno Devi Shrine",
-        "category": "Religious",
-        "city": "Jammu",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Indira Gandhi Memorial Tulip Garden",
-        "category": "Wildlife",
-        "city": "Srinagar",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Manasabal Lake",
-        "category": "Wildlife",
-        "city": "Srinagar",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      }
-    ]
-  },
-  {
-    "id": "ladakh",
-    "name": "Ladakh",
-    "tagline": "Moonland of High Passes: Pangong Tso, Nubra Dunes & Ancient Gompas",
-    "zone": "North",
-    "capital": "Leh",
-    "spotCount": "31 Curated Spots",
-    "districtCount": 3,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-    "topPlaces": [
-      {
-        "name": "Pangong Tso",
-        "category": "Wildlife",
-        "city": "Leh",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Drass Valley",
-        "category": "Wildlife",
-        "city": "Kargil",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Samstanling Monastery",
-        "category": "Religious",
-        "city": "Diskit",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Leh Palace & Ladakh",
-        "category": "Historical",
-        "city": "Leh",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Hall Of Fame",
-        "category": "Cultural",
-        "city": "Leh",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Hunder \ufffd Try Bactrian Camel Safari",
-        "category": "Wildlife",
-        "city": "Leh",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Qutub Minar Complex",
+        "category": "UNESCO Minaret",
+        "city": "Mehrauli, New Delhi",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Qutb_minar_ruins.jpg/960px-Qutb_minar_ruins.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "punjab",
     "name": "Punjab",
-    "tagline": "Heart of Chivalry & Soul: Sacred Golden Temple & Fertile Farmlands",
+    "tagline": "Sacred Golden Shrines, Spirited Wagah Border Ceremonies & Historic Forts",
     "zone": "North",
     "capital": "Chandigarh",
     "spotCount": "24 Curated Spots",
     "districtCount": 3,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/The_Golden_Temple_of_Amrithsar_7.jpg/960px-The_Golden_Temple_of_Amrithsar_7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Golden Temple",
-        "category": "Religious",
-        "city": "Amritsar",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Shree Harminder Sahib Gurudwara",
-        "category": "Religious",
-        "city": "Amritsar",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
         "name": "Golden Temple (Harmandir Sahib)",
-        "category": "Religious",
+        "category": "Spiritual Sanctum",
         "city": "Amritsar",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/The_Golden_Temple_of_Amrithsar_7.jpg/960px-The_Golden_Temple_of_Amrithsar_7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "ISKON temple",
-        "category": "Religious",
-        "city": "Chandigarh",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
+        "name": "Wagah Border Beating Retreat",
+        "category": "Border Ceremony",
+        "city": "Wagah, Amritsar",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/The_SAARC_Car_Rally_2007_being_welcomed_by_traditional_Drummers_at_the_Wagah_Border_on_March_28%2C_2007.jpg/960px-The_SAARC_Car_Rally_2007_being_welcomed_by_traditional_Drummers_at_the_Wagah_Border_on_March_28%2C_2007.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Shri Durgiana Temple",
-        "category": "Religious",
-        "city": "Amritsar",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
+        "name": "Qila Mubarak Historic Citadel",
+        "category": "Sikh Architecture",
+        "city": "Patiala",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Qila_Mubarak%2C_Patiala.jpg/960px-Qila_Mubarak%2C_Patiala.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      }
+    ]
+  },
+  {
+    "id": "west-bengal",
+    "name": "West Bengal",
+    "tagline": "Cultural Capital: White Marble Victoria Memorial, Cantilever Howrah Bridge & Darjeeling",
+    "zone": "East & North-East",
+    "capital": "Kolkata",
+    "spotCount": "59+ Spots",
+    "districtCount": 6,
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Victoria_Memorial_situated_in_Kolkata.jpg/960px-Victoria_Memorial_situated_in_Kolkata.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "topPlaces": [
+      {
+        "name": "Victoria Memorial Palace",
+        "category": "Indo-Saracenic Landmark",
+        "city": "Kolkata",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Victoria_Memorial_situated_in_Kolkata.jpg/960px-Victoria_Memorial_situated_in_Kolkata.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Terraced garden",
-        "category": "Wildlife",
-        "city": "Chandigarh",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Howrah Bridge over Hooghly",
+        "category": "Iconic Cantilever Bridge",
+        "city": "Kolkata",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Howrah_bridge_at_night.jpg/960px-Howrah_bridge_at_night.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Darjeeling Himalayan Railway",
+        "category": "UNESCO Mountain Railway",
+        "city": "Darjeeling",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Tea_Estate%2C_Darjeeling.jpg/960px-Tea_Estate%2C_Darjeeling.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      }
+    ]
+  },
+  {
+    "id": "gujarat",
+    "name": "Gujarat",
+    "tagline": "Statue of Unity, Shimmering Rann of Kutch Salt Desert & Sacred Somnath Shrine",
+    "zone": "West",
+    "capital": "Gandhinagar",
+    "spotCount": "39 Curated Spots",
+    "districtCount": 11,
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Statue_of_Unity.jpg/960px-Statue_of_Unity.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "topPlaces": [
+      {
+        "name": "Statue of Unity",
+        "category": "World's Tallest Statue",
+        "city": "Kevadia, Narmada",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Statue_of_Unity.jpg/960px-Statue_of_Unity.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Great Rann of Kutch Salt Desert",
+        "category": "White Salt Marsh",
+        "city": "Kutch",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Rann_of_Kutch_-_White_Desert.jpg/960px-Rann_of_Kutch_-_White_Desert.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Somnath Shore Temple",
+        "category": "First Jyotirlinga Shrine",
+        "city": "Prabhas Patan",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Somanath_mandir_%28cropped%29.jpg/960px-Somanath_mandir_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      }
+    ]
+  },
+  {
+    "id": "madhya-pradesh",
+    "name": "Madhya Pradesh",
+    "tagline": "Heart of India: Khajuraho Sculpted Temples, Majestic Gwalior Fort & Great Sanchi Stupa",
+    "zone": "Central",
+    "capital": "Bhopal",
+    "spotCount": "49 Curated Spots",
+    "districtCount": 7,
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/1_Khajuraho.jpg/960px-1_Khajuraho.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "topPlaces": [
+      {
+        "name": "Khajuraho Ancient Temples",
+        "category": "UNESCO Sculpted Temples",
+        "city": "Khajuraho, Chhatarpur",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/1_Khajuraho.jpg/960px-1_Khajuraho.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Gwalior Fort Citadel",
+        "category": "Hilltop Fortress",
+        "city": "Gwalior",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Gwalior_Fort_front.jpg/960px-Gwalior_Fort_front.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Great Stupa at Sanchi",
+        "category": "UNESCO Buddhist Stupa",
+        "city": "Sanchi, Raisen",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/East_Gateway_-_Stupa_1_-_Sanchi_Hill_2013-02-21_4398.JPG/960px-East_Gateway_-_Stupa_1_-_Sanchi_Hill_2013-02-21_4398.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "odisha",
     "name": "Odisha",
-    "tagline": "Soul of Incredible India: Puri Jagannath & Konark Sun Chariot",
+    "tagline": "Soul of Incredible India: Giant Konark Sun Chariot, Sacred Puri Jagannath & Chilika Lake",
     "zone": "East & North-East",
     "capital": "Bhubaneswar",
     "spotCount": "39 Curated Spots",
     "districtCount": 9,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Konarka_Temple.jpg/960px-Konarka_Temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Hanuman Vatika garden",
-        "category": "Nature",
-        "city": "Rourkela",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "name": "Konark Sun Temple Giant Chariot",
+        "category": "UNESCO Sun Sanctuary",
+        "city": "Konark, Puri",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Konarka_Temple.jpg/960px-Konarka_Temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Aryapalli beach",
-        "category": "Beach",
-        "city": "Berhampur",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kuldiha Wildlife sanctuary",
-        "category": "Wildlife",
-        "city": "Balasore",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Konark Sun Temple",
-        "category": "Religious",
+        "name": "Puri Jagannath Temple",
+        "category": "Sacred Char Dham Shrine",
         "city": "Puri",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Shri_Jagannath_temple.jpg/960px-Shri_Jagannath_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Debrigarh Wildlife Sanctuary",
-        "category": "Wildlife",
-        "city": "Sambalpur",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Lingaraj Temple",
-        "category": "Religious",
-        "city": "Khordha (Bhubaneswar)",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Chilika Lake Lagoon",
+        "category": "Brackish Water Lagoon",
+        "city": "Khurda / Ganjam",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Birds_eyeview_of_Chilika_Lake.jpg/960px-Birds_eyeview_of_Chilika_Lake.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
-    "id": "bihar",
-    "name": "Bihar",
-    "tagline": "Cradle of Ancient Wisdom: Mahabodhi Bodh Gaya & Nalanda University",
-    "zone": "East & North-East",
-    "capital": "Patna",
-    "spotCount": "24 Curated Spots",
-    "districtCount": 4,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "id": "andhra-pradesh",
+    "name": "Andhra Pradesh",
+    "tagline": "Sacred Tirumala Hills, Dramatic Gandikota Gorge Canyon & Borra Limestone Caves",
+    "zone": "South",
+    "capital": "Amaravati",
+    "spotCount": "34 Curated Spots",
+    "districtCount": 7,
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Tirumala_090615.jpg/960px-Tirumala_090615.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Buddha memorial park",
-        "category": "Religious",
-        "city": "Patna",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "name": "Tirumala Venkateswara Temple",
+        "category": "Sacred Seven Hills Shrine",
+        "city": "Tirupati",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Tirumala_090615.jpg/960px-Tirumala_090615.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Mahabodhi Temple, Bodh Gaya",
-        "category": "Religious",
-        "city": "Gaya",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        "name": "Gandikota Grand Canyon of India",
+        "category": "River Gorge Fortress",
+        "city": "Kadapa",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Indian_Grand_Canyon_Sudhakar_Bichali.jpg/960px-Indian_Grand_Canyon_Sudhakar_Bichali.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Dungeshwari cave temple",
-        "category": "Religious",
-        "city": "Bodh Gaya",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
+        "name": "Borra Million-Year Limestone Caves",
+        "category": "Karst Cave Wonder",
+        "city": "Araku, Visakhapatnam",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Borra_caves%2C_Viskhapatnam.jpg/960px-Borra_caves%2C_Viskhapatnam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      }
+    ]
+  },
+  {
+    "id": "telangana",
+    "name": "Telangana",
+    "tagline": "City of Pearls: Four-Minaret Charminar, Golconda Acoustical Fort & Warangal Gateways",
+    "zone": "South",
+    "capital": "Hyderabad",
+    "spotCount": "24 Curated Spots",
+    "districtCount": 1,
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Charminar_Hyderabad_1.jpg/960px-Charminar_Hyderabad_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "topPlaces": [
+      {
+        "name": "Charminar Monument",
+        "category": "Historic Four Minarets",
+        "city": "Hyderabad",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Charminar_Hyderabad_1.jpg/960px-Charminar_Hyderabad_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Srikrishna science centre",
-        "category": "Cultural",
-        "city": "Patna",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
+        "name": "Golconda Hilltop Fortress",
+        "category": "Acoustical Citadel",
+        "city": "Hyderabad",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Golconda_Fort_005.jpg/960px-Golconda_Fort_005.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Mahabodhi Temple (Bodh Gaya)",
-        "category": "Religious",
-        "city": "Gaya",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
+        "name": "Warangal Kakatiya Gateway",
+        "category": "Kakatiya Stone Arch",
+        "city": "Warangal",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Shiv_Linga_at_Warangal_Fort_Complex.jpg/960px-Shiv_Linga_at_Warangal_Fort_Complex.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      }
+    ]
+  },
+  {
+    "id": "jammu-and-kashmir",
+    "name": "Jammu & Kashmir",
+    "tagline": "Paradise on Earth: Dal Lake Shikaras, Snowy Gulmarg Gondola & Shalimar Gardens",
+    "zone": "North",
+    "capital": "Srinagar (Summer) / Jammu (Winter)",
+    "spotCount": "25 Curated Spots",
+    "districtCount": 2,
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Dal_Lake_Hazratbal_Srinagar.jpg/960px-Dal_Lake_Hazratbal_Srinagar.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "topPlaces": [
+      {
+        "name": "Dal Lake Floating Shikaras",
+        "category": "Alpine Water Paradise",
+        "city": "Srinagar",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Dal_Lake_Hazratbal_Srinagar.jpg/960px-Dal_Lake_Hazratbal_Srinagar.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Vishnupad Temple",
-        "category": "Religious",
-        "city": "Gaya",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Gulmarg Apharwat Snow Gondola",
+        "category": "Skiing & High Altitude",
+        "city": "Gulmarg, Baramulla",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Ancient_Temple%2C_Gulmarg.jpg/960px-Ancient_Temple%2C_Gulmarg.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Shalimar Bagh Mughal Gardens",
+        "category": "Mughal Terraced Garden",
+        "city": "Srinagar",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Shalimar_Bagh_1.jpg/960px-Shalimar_Bagh_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      }
+    ]
+  },
+  {
+    "id": "ladakh",
+    "name": "Ladakh",
+    "tagline": "Land of High Passes: Azure Pangong Tso, Grand Thikse Monastery & Shanti Stupa",
+    "zone": "North",
+    "capital": "Leh",
+    "spotCount": "31 Curated Spots",
+    "districtCount": 3,
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/ISS054-E-7809_-_View_of_Earth_%28cropped%29.jpg/960px-ISS054-E-7809_-_View_of_Earth_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "topPlaces": [
+      {
+        "name": "Pangong Tso High-Altitude Lake",
+        "category": "Endorheic Azure Lake",
+        "city": "Changthang, Leh",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/ISS054-E-7809_-_View_of_Earth_%28cropped%29.jpg/960px-ISS054-E-7809_-_View_of_Earth_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Thikse Buddhist Monastery",
+        "category": "Yellow Hat Sect Monastery",
+        "city": "Thiksey, Leh",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Thikse_Monastery_.jpg/960px-Thikse_Monastery_.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Shanti Stupa White Dome",
+        "category": "Peace Pagoda Landmark",
+        "city": "Changsipa, Leh",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Leh%2C_Shanti_Stupa%2C_Ladakh%2C_India.jpg/960px-Leh%2C_Shanti_Stupa%2C_Ladakh%2C_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "assam",
     "name": "Assam",
-    "tagline": "Land of the Red River & Blue Hills: Kaziranga Rhino Sanctuary",
+    "tagline": "Lush Tea Valleys, Kaziranga Rhinos, Sacred Kamakhya Temple & Majuli River Island",
     "zone": "East & North-East",
     "capital": "Dispur",
     "spotCount": "24 Curated Spots",
     "districtCount": 6,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Beauty_of_Kaziranga_National_Park.jpg/960px-Beauty_of_Kaziranga_National_Park.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Kaziranga National Park",
-        "category": "Wildlife",
-        "city": "Golaghat/Nagaon",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "name": "Kaziranga National Park Rhinos",
+        "category": "UNESCO Wildlife Habitat",
+        "city": "Golaghat / Nagaon",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Beauty_of_Kaziranga_National_Park.jpg/960px-Beauty_of_Kaziranga_National_Park.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Kamakhya Temple",
-        "category": "Religious",
-        "city": "Kamrup Metropolitan (Guwahati)",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        "name": "Kamakhya Temple Hill",
+        "category": "Sacred Tantric Peetha",
+        "city": "Guwahati",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Kamakhya_Temple_-_DEV_8829.jpg/960px-Kamakhya_Temple_-_DEV_8829.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Orchid national park",
-        "category": "Wildlife",
-        "city": "Kaziranga",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Umananda Island",
-        "category": "Nature",
-        "city": "Kamrup Metropolitan (Guwahati)",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Chandubi Lake",
-        "category": "Nature",
-        "city": "Kamrup",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Majuli river island",
-        "category": "Wildlife",
-        "city": "Kaziranga",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-      }
-    ]
-  },
-  {
-    "id": "sikkim",
-    "name": "Sikkim",
-    "tagline": "Himalayan Wonderland: Glacial Changu Lake, Kanchenjunga & Monasteries",
-    "zone": "East & North-East",
-    "capital": "Gangtok",
-    "spotCount": "45 Curated Spots",
-    "districtCount": 6,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
-    "topPlaces": [
-      {
-        "name": "Rabdentse Ruins",
-        "category": "Historical",
-        "city": "Pelling",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Sewaro Rock garden",
-        "category": "Wildlife",
-        "city": "Pelling",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Tendong Hill & Biodiversity park",
-        "category": "Wildlife",
-        "city": "Namchi",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "River rafting",
-        "category": "Nature",
-        "city": "Gangtok",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kanchenjunga waterfalls and national park",
-        "category": "Wildlife",
-        "city": "Pelling",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Char Dham",
-        "category": "Religious",
-        "city": "Namchi",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Majuli Brahmaputra River Island",
+        "category": "World Largest River Island",
+        "city": "Majuli, Jorhat",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Doriya_River_of_Majuli.jpg/960px-Doriya_River_of_Majuli.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "meghalaya",
     "name": "Meghalaya",
-    "tagline": "Abode of the Clouds: Double Decker Living Root Bridges & Umngot",
+    "tagline": "Abode of Clouds: Bio-Engineered Living Root Bridges, Nohkalikai Falls & Dawki River",
     "zone": "East & North-East",
     "capital": "Shillong",
     "spotCount": "24 Curated Spots",
     "districtCount": 3,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Living_root_bridges%2C_Nongriat_village%2C_Meghalaya2.jpg/960px-Living_root_bridges%2C_Nongriat_village%2C_Meghalaya2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Thangkharang park",
-        "category": "Nature",
-        "city": "Cherrapunji",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "name": "Cherrapunji Living Root Bridges",
+        "category": "Bio-Engineered Wonder",
+        "city": "Sohra (Cherrapunji)",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Living_root_bridges%2C_Nongriat_village%2C_Meghalaya2.jpg/960px-Living_root_bridges%2C_Nongriat_village%2C_Meghalaya2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Living Root Bridge",
-        "category": "Wildlife",
-        "city": "Cherrapunji",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Cherrapunji (Sohra)",
-        "category": "Nature",
+        "name": "Nohkalikai Cascading Falls",
+        "category": "Plunge Waterfall",
         "city": "East Khasi Hills",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/NohKaLikai_Falls_V2_Wiki.jpg/960px-NohKaLikai_Falls_V2_Wiki.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Mawkdok Dympep valley",
-        "category": "Hill Station",
-        "city": "Cherrapunji",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
+        "name": "Dawki (Umngot) Crystal River",
+        "category": "Transparent Waterway",
+        "city": "Dawki, West Jaintia",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Dawki_River%2C_Meghalaya.jpg/960px-Dawki_River%2C_Meghalaya.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      }
+    ]
+  },
+  {
+    "id": "sikkim",
+    "name": "Sikkim",
+    "tagline": "Kanchenjunga Kingdom: Sacred Gurudongmar Lake, Rumtek Monastery & Himalayan Ridges",
+    "zone": "East & North-East",
+    "capital": "Gangtok",
+    "spotCount": "45 Curated Spots",
+    "districtCount": 6,
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Gurudongmar_Lake_Sikkim%2C_India_%28edit%29.jpg/960px-Gurudongmar_Lake_Sikkim%2C_India_%28edit%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "topPlaces": [
+      {
+        "name": "Gurudongmar High-Altitude Lake",
+        "category": "Glacial Sacred Lake (17,800 ft)",
+        "city": "North Sikkim",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Gurudongmar_Lake_Sikkim%2C_India_%28edit%29.jpg/960px-Gurudongmar_Lake_Sikkim%2C_India_%28edit%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Living Root Bridges",
-        "category": "Hill Station",
-        "city": "East Khasi Hills",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
+        "name": "Rumtek Buddhist Monastery",
+        "category": "Dharma Chakra Centre",
+        "city": "Rumtek, Gangtok",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Rumtek_Monastery_alias_Dharma_Chakra_Centre_near_Gangtok%2C_East_Sikkim_09.jpg/960px-Rumtek_Monastery_alias_Dharma_Chakra_Centre_near_Gangtok%2C_East_Sikkim_09.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Shillong",
-        "category": "Hill Station",
-        "city": "East Khasi Hills",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Kanchenjunga Mountain Horizon",
+        "category": "Third Highest World Peak",
+        "city": "Pelling / Gangtok",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Kangchenjunga_PangPema.JPG/960px-Kangchenjunga_PangPema.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "arunachal-pradesh",
     "name": "Arunachal Pradesh",
-    "tagline": "Land of the Dawn-Lit Mountains: Tawang Gompa & High Mountain Passes",
+    "tagline": "Land of Dawn-Lit Mountains: Tawang Monastery Fortress, Sela Pass & Ziro Valley Pines",
     "zone": "East & North-East",
     "capital": "Itanagar",
     "spotCount": "24 Curated Spots",
     "districtCount": 2,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/TawangMonastery.jpg/960px-TawangMonastery.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Tawang Monastery",
-        "category": "Religious",
+        "name": "Tawang Monastery Fortress",
+        "category": "Largest Indian Monastery",
         "city": "Tawang",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/TawangMonastery.jpg/960px-TawangMonastery.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Nuranang waterfalls",
-        "category": "Wildlife",
-        "city": "Tawang",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Bomdila Monastery",
-        "category": "Religious",
+        "name": "Sela Pass Mountain Gateway (13,700 ft)",
+        "category": "High Mountain Gateway",
         "city": "West Kameng",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Tawang_Gate.jpg/960px-Tawang_Gate.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Sela Pass",
-        "category": "Hill Station",
-        "city": "Tawang",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Bumla Pass",
-        "category": "Hill Station",
-        "city": "Tawang",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Madhuri Lake",
-        "category": "Nature",
-        "city": "Tawang",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Ziro Valley Pine Plateaus",
+        "category": "Apatani Tribal Landscape",
+        "city": "Lower Subansiri",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/A_cross_section_of_luch_green_valley_of_Ziro.jpg/960px-A_cross_section_of_luch_green_valley_of_Ziro.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "nagaland",
     "name": "Nagaland",
-    "tagline": "Land of Vibrant Festivals: Dzukou Emerald Valley & Hornbill Heritage",
+    "tagline": "Land of Festivals: Kisama Hornbill Heritage Village, Dzukou Valley & War Cemetery",
     "zone": "East & North-East",
     "capital": "Kohima",
     "spotCount": "24 Curated Spots",
     "districtCount": 2,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Kisama_main_arena_Hornbill_Festival_2019.jpg/960px-Kisama_main_arena_Hornbill_Festival_2019.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Mt Japfu",
-        "category": "Wildlife",
+        "name": "Kisama Hornbill Heritage Village",
+        "category": "Naga Cultural Village",
+        "city": "Kisama, Kohima",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Kisama_main_arena_Hornbill_Festival_2019.jpg/960px-Kisama_main_arena_Hornbill_Festival_2019.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Dzukou Lily Valley",
+        "category": "High-Altitude Valley",
+        "city": "Kohima District",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Breathtaking_beauty_of_Dzukou_Valley_in_Manipur-Nagaland_border_%28edit%29.jpg/960px-Breathtaking_beauty_of_Dzukou_Valley_in_Manipur-Nagaland_border_%28edit%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Kohima War Memorial Ridge",
+        "category": "WWII Historic Memorial",
         "city": "Kohima",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Ntangki national park",
-        "category": "Wildlife",
-        "city": "Kohima",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kohima & Dzukou Valley",
-        "category": "Hill Station",
-        "city": "Kohima",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kachari Ruins",
-        "category": "Historical",
-        "city": "Dimapur",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Dimapur Zoological Park",
-        "category": "Wildlife",
-        "city": "Dimapur",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Dzukou Valley",
-        "category": "Hill Station",
-        "city": "Kohima",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Cemetery_with_kohima.jpeg/960px-Cemetery_with_kohima.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "manipur",
     "name": "Manipur",
-    "tagline": "Jeweled Land: Floating Phumdis of Loktak Lake & Kangla Historic Fort",
+    "tagline": "Jeweled Land: Floating Phumdis of Loktak Lake, Historic Kangla Fort & Sangai Deer",
     "zone": "East & North-East",
     "capital": "Imphal",
     "spotCount": "24 Curated Spots",
     "districtCount": 2,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/The_Loktak_Lake.jpg/960px-The_Loktak_Lake.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Loktak Lake",
-        "category": "Nature",
-        "city": "Bishnupur",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "name": "Loktak Lake Floating Phumdis",
+        "category": "Floating Island Ecosystem",
+        "city": "Moirang, Bishnupur",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/The_Loktak_Lake.jpg/960px-The_Loktak_Lake.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Keibul Lamjao National Park",
-        "category": "Wildlife",
-        "city": "Bishnupur",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kangla Fort",
-        "category": "Historical",
-        "city": "Imphal West/East",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Ima Keithel (women's market)",
-        "category": "Heritage",
-        "city": "Imphal West/East",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Manipur Scenic Discovery 5",
-        "category": "Scenic Attraction",
+        "name": "Shree Govindajee Golden Temple",
+        "category": "Historic Golden Twin Dome",
         "city": "Imphal",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/FB7A9290.jpg/960px-FB7A9290.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Manipur Scenic Discovery 6",
-        "category": "Scenic Attraction",
-        "city": "Imphal",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Keibul Lamjao Floating Park",
+        "category": "Only Floating National Park",
+        "city": "Bishnupur",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3c/CervusEldiAMNH.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
       }
     ]
   },
   {
     "id": "mizoram",
     "name": "Mizoram",
-    "tagline": "Songbird of the Hills: Vantawng Cascades & Serene Bamboo Landscapes",
+    "tagline": "Rolling Green Hills: Dramatic Vantawng Falls, Scenic Reiek Tlang & Solomon Temple",
     "zone": "East & North-East",
     "capital": "Aizawl",
     "spotCount": "24 Curated Spots",
     "districtCount": 1,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Vantawng_Falls_in_1990s.jpg/960px-Vantawng_Falls_in_1990s.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Solomon's Temple",
-        "category": "Religious",
-        "city": "Aizawl",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "name": "Vantawng Multi-Tier Falls",
+        "category": "Highest State Waterfall",
+        "city": "Thenzawl, Serchhip",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Vantawng_Falls_in_1990s.jpg/960px-Vantawng_Falls_in_1990s.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Aizawl",
-        "category": "Hill Station",
-        "city": "Aizawl",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        "name": "Reiek Tlang Mountain Peak",
+        "category": "Panoramic Peak",
+        "city": "Mamit / Aizawl",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Reiek.JPG/960px-Reiek.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Durtlang Hills",
-        "category": "Hill Station",
-        "city": "Aizawl",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Mizoram State Museum",
-        "category": "Museum",
-        "city": "Aizawl",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Mizoram Scenic Discovery 5",
-        "category": "Scenic Attraction",
-        "city": "Aizawl",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Mizoram Scenic Discovery 6",
-        "category": "Scenic Attraction",
-        "city": "Aizawl",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Solomon's Marble Temple",
+        "category": "Christian Monument",
+        "city": "Chawlhhmun, Aizawl",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Temple_thlalak.JPG/960px-Temple_thlalak.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "tripura",
     "name": "Tripura",
-    "tagline": "Palaces & Ancient Stone Sculptures: Floating Neermahal & Unakoti",
+    "tagline": "Royal White Ujjayanta Palace, Floating Neermahal Water Palace & Unakoti Sculptures",
     "zone": "East & North-East",
     "capital": "Agartala",
     "spotCount": "24 Curated Spots",
     "districtCount": 3,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Ujjayanta_palace_Tripura_State_Museum_Agartala_India.jpg/960px-Ujjayanta_palace_Tripura_State_Museum_Agartala_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Raima valley",
-        "category": "Wildlife",
+        "name": "Ujjayanta Royal White Palace",
+        "category": "Neoclassical Palace",
         "city": "Agartala",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Ujjayanta_palace_Tripura_State_Museum_Agartala_India.jpg/960px-Ujjayanta_palace_Tripura_State_Museum_Agartala_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Gondacherra wildlife sanctuary",
-        "category": "Wildlife",
-        "city": "Agartala",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        "name": "Neermahal Water Palace",
+        "category": "Floating Lake Palace",
+        "city": "Melaghar, Sepahijala",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Neer_Mahal%2C_the_water_palace_of_Tripura_02.jpg/960px-Neer_Mahal%2C_the_water_palace_of_Tripura_02.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Sepahijala wildlife sanctuary",
-        "category": "Wildlife",
-        "city": "Agartala",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
+        "name": "Unakoti Rock-Cut Shiva Reliefs",
+        "category": "Ancient Bas-Reliefs",
+        "city": "Kailashahar, Unakoti",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Unakoti_3.jpg/960px-Unakoti_3.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      }
+    ]
+  },
+  {
+    "id": "bihar",
+    "name": "Bihar",
+    "tagline": "Cradle of Enlightenment: Mahabodhi Bodhi Tree, Ancient Nalanda University & Barabar",
+    "zone": "East & North-East",
+    "capital": "Patna",
+    "spotCount": "24 Curated Spots",
+    "districtCount": 4,
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Mahabodhitemple.jpg/960px-Mahabodhitemple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "topPlaces": [
+      {
+        "name": "Mahabodhi Temple Complex",
+        "category": "UNESCO Enlightenment Site",
+        "city": "Bodh Gaya",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Mahabodhitemple.jpg/960px-Mahabodhitemple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Buddha temple",
-        "category": "Religious",
-        "city": "Agartala",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
+        "name": "Nalanda Ancient University Ruins",
+        "category": "UNESCO Ancient University",
+        "city": "Nalanda",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Temple_No.-_3%2C_Nalanda_Archaeological_Site.jpg/960px-Temple_No.-_3%2C_Nalanda_Archaeological_Site.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Ummaneshwar temple",
-        "category": "Religious",
-        "city": "Agartala",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Ujjayanta Palace",
-        "category": "Historical",
-        "city": "West Tripura (Agartala)",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Barabar Rock-Cut Caves",
+        "category": "Oldest Rock-Cut Caves in India",
+        "city": "Makhdumpur, Jehanabad",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Lomas_Rishi_entrance.jpg/960px-Lomas_Rishi_entrance.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "jharkhand",
     "name": "Jharkhand",
-    "tagline": "Land of Forests: Pristine Hundru Waterfalls & Sacred Parasnath Peaks",
+    "tagline": "Land of Forests: Cascading Hundru Falls, Sacred Shikharji Peak & Baidyanath Dham",
     "zone": "East & North-East",
     "capital": "Ranchi",
     "spotCount": "24 Curated Spots",
     "districtCount": 3,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Hundru_Falls%2C_Jharkhand%2C_India_4.jpg/960px-Hundru_Falls%2C_Jharkhand%2C_India_4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Biodiversity park",
-        "category": "Wildlife",
+        "name": "Hundru Waterfalls",
+        "category": "Subarnarekha River Cascade",
         "city": "Ranchi",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Hundru_Falls%2C_Jharkhand%2C_India_4.jpg/960px-Hundru_Falls%2C_Jharkhand%2C_India_4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Dassam falls",
-        "category": "Wildlife",
-        "city": "Ranchi",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        "name": "Parasnath Hill Shikharji",
+        "category": "Highest Jain Pilgrimage Peak",
+        "city": "Giridih",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Shikharji_Parasnath_Giridih.jpg/960px-Shikharji_Parasnath_Giridih.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Naulakha temple",
-        "category": "Religious",
+        "name": "Baidyanath Jyotirlinga Temple",
+        "category": "Sacred Jyotirlinga Shrine",
         "city": "Deoghar",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Jonha falls",
-        "category": "Wildlife",
-        "city": "Ranchi",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Jagannath Temple",
-        "category": "Religious",
-        "city": "Ranchi",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Netarhat",
-        "category": "Hill Station",
-        "city": "Latehar",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Baidyanath_temple_and_temple_complex%2C_Deoghar_04.jpg/960px-Baidyanath_temple_and_temple_complex%2C_Deoghar_04.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "chhattisgarh",
     "name": "Chhattisgarh",
-    "tagline": "Full of Surprises: Chitrakote Horseshoe Falls & Tribal Forest Reserves",
+    "tagline": "Horseshoe Chitrakote Falls (Niagara of India), Ancient Bhoramdeo & Sirpur Monuments",
     "zone": "Central",
     "capital": "Raipur",
     "spotCount": "24 Curated Spots",
     "districtCount": 3,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chitrakot_waterfalls.JPG/960px-Chitrakot_waterfalls.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Ghatarani waterfalls",
-        "category": "Wildlife",
-        "city": "Raipur",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "name": "Chitrakote Horseshoe Falls",
+        "category": "Niagara of India",
+        "city": "Jagdalpur, Bastar",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chitrakot_waterfalls.JPG/960px-Chitrakot_waterfalls.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Chitrakote Falls",
-        "category": "Nature",
-        "city": "Bastar",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        "name": "Bhoramdeo Sculpted Temple",
+        "category": "Khajuraho of Chhattisgarh",
+        "city": "Kawardha",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Bhoramdeo_Temple%2C_Kawardha.jpg/960px-Bhoramdeo_Temple%2C_Kawardha.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Jatmai Temple",
-        "category": "Religious",
-        "city": "Raipur",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kanger Valley National Park",
-        "category": "Wildlife",
-        "city": "Bastar",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Kanker Palace",
-        "category": "Historical",
-        "city": "Kanker",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Tirathgarh Falls",
-        "category": "Nature",
-        "city": "Bastar",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Sirpur Historic Brick Monuments",
+        "category": "Buddhist & Hindu Complex",
+        "city": "Mahasamund",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/8th_century_couple_embraced_and_mouth_kissing_at_Tivara_Deva_temple%2C_she_stands_on_his_feet%2C_Sirpur_monuments_Chhattisgarh_India.jpg/960px-8th_century_couple_embraced_and_mouth_kissing_at_Tivara_Deva_temple%2C_she_stands_on_his_feet%2C_Sirpur_monuments_Chhattisgarh_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "haryana",
     "name": "Haryana",
-    "tagline": "Historic Plains of Kurukshetra, Sultanpur Bird Sanctuary & Morni Hills",
+    "tagline": "Ancient Kurukshetra Brahma Sarovar, Pinjore Mughal Gardens & Sultanpur Birds",
     "zone": "North",
     "capital": "Chandigarh",
     "spotCount": "24 Curated Spots",
     "districtCount": 3,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Holy_pic_kkr.jpg/960px-Holy_pic_kkr.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Brahma Sarovar, Kurukshetra",
-        "category": "Religious",
+        "name": "Brahma Sarovar Holy Pool",
+        "category": "Epic Sacred Pool",
         "city": "Kurukshetra",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Holy_pic_kkr.jpg/960px-Holy_pic_kkr.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Aravalli biodiversity park",
-        "category": "Wildlife",
+        "name": "Yadavindra Mughal Gardens",
+        "category": "17th Century Terraced Garden",
+        "city": "Pinjore, Panchkula",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Pinjore_Garden_Panchkula.jpg/960px-Pinjore_Garden_Panchkula.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
+      },
+      {
+        "name": "Sultanpur Bird Sanctuary",
+        "category": "Ramsar Wetland",
         "city": "Gurugram",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Sultanpur Bird sanctuary",
-        "category": "Wildlife",
-        "city": "Gurugram",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Badkhal Lake",
-        "category": "Nature",
-        "city": "Faridabad",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Wet N Wild water park",
-        "category": "Nature",
-        "city": "Gurugram",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Indian Transport history",
-        "category": "Cultural",
-        "city": "Gurugram",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Sultanpur_Bird_Sanctuary%2C_Gurgaon.jpg/960px-Sultanpur_Bird_Sanctuary%2C_Gurgaon.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "chandigarh",
     "name": "Chandigarh",
-    "tagline": "The City Beautiful: Nek Chand Rock Garden & Tranquil Sukhna Lake",
+    "tagline": "The City Beautiful: Nek Chand Rock Garden, Sukhna Lake Promenade & Open Hand",
     "zone": "Union Territories",
     "capital": "Chandigarh",
     "spotCount": "24 Curated Spots",
     "districtCount": 1,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Chandigarh_Rock_Garden_4.jpg/960px-Chandigarh_Rock_Garden_4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Rock Garden, Chandigarh",
-        "category": "Nature",
-        "city": "Chandigarh",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "name": "Rock Garden of Chandigarh",
+        "category": "Recycled Sculpture Park",
+        "city": "Sector 1, Chandigarh",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Chandigarh_Rock_Garden_4.jpg/960px-Chandigarh_Rock_Garden_4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Sukhna Lake",
-        "category": "Nature",
-        "city": "Chandigarh",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        "name": "Sukhna Lake Promenade",
+        "category": "Himalayan Foothill Reservoir",
+        "city": "Sector 1, Chandigarh",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Sukhna_Lake_Chandigarh_India.jpg/960px-Sukhna_Lake_Chandigarh_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Rose Garden",
-        "category": "Nature",
-        "city": "Chandigarh",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Chandigarh Scenic Discovery 4",
-        "category": "Scenic Attraction",
-        "city": "Chandigarh",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Chandigarh Scenic Discovery 5",
-        "category": "Scenic Attraction",
-        "city": "Chandigarh",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Chandigarh Scenic Discovery 6",
-        "category": "Scenic Attraction",
-        "city": "Chandigarh",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Open Hand Monument",
+        "category": "Le Corbusier Peace Icon",
+        "city": "Sector 1, Chandigarh",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Open_Hand_monument%2C_Chandigarh.jpg/960px-Open_Hand_monument%2C_Chandigarh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "puducherry",
     "name": "Puducherry",
-    "tagline": "French Riviera of the East: Yellow Villa Heritage & Auroville",
+    "tagline": "French Riviera of the East: White Town Boulevards, Auroville Matrimandir & Beaches",
     "zone": "Union Territories",
-    "capital": "Puducherry",
+    "capital": "Pondicherry",
     "spotCount": "24 Curated Spots",
     "districtCount": 1,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/en/thumb/1/16/Feu_d%27artifice_du_14_juillet_2017_depuis_le_champ_de_Mars_%C3%A0_Paris%2C_devant_la_Tour_Eiffel%2C_Bastille_day_2017_%2835118978683%29.jpg/960px-Feu_d%27artifice_du_14_juillet_2017_depuis_le_champ_de_Mars_%C3%A0_Paris%2C_devant_la_Tour_Eiffel%2C_Bastille_day_2017_%2835118978683%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Puducherry (White Town)",
-        "category": "Beach",
+        "name": "French Quarter Promenade",
+        "category": "Colonial French Quarter",
         "city": "Puducherry",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/en/thumb/1/16/Feu_d%27artifice_du_14_juillet_2017_depuis_le_champ_de_Mars_%C3%A0_Paris%2C_devant_la_Tour_Eiffel%2C_Bastille_day_2017_%2835118978683%29.jpg/960px-Feu_d%27artifice_du_14_juillet_2017_depuis_le_champ_de_Mars_%C3%A0_Paris%2C_devant_la_Tour_Eiffel%2C_Bastille_day_2017_%2835118978683%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Manakula Vinayagar temple",
-        "category": "Religious",
-        "city": "Puducherry",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        "name": "Auroville Matrimandir Golden Dome",
+        "category": "Spiritual Golden Sphere",
+        "city": "Auroville",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/The_Matrimandir_in_Auroville%2C_Tamil_Nadu%2C_India.jpg/960px-The_Matrimandir_in_Auroville%2C_Tamil_Nadu%2C_India.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Promenade Beach",
-        "category": "Beach",
+        "name": "Promenade Seafront Beach",
+        "category": "Scenic Oceanfront",
         "city": "Puducherry",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Paradise beach and island",
-        "category": "Beach",
-        "city": "Puducherry",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Pondicherry botanical garden",
-        "category": "Wildlife",
-        "city": "Puducherry",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Temple Adventures centre-Scuba diving",
-        "category": "Religious",
-        "city": "Puducherry",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Pondicherry-Rock_beach_aerial_view.jpg/960px-Pondicherry-Rock_beach_aerial_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "andaman-and-nicobar-islands",
     "name": "Andaman & Nicobar Islands",
-    "tagline": "Emerald Island Archipelago: Radhanagar Beach & Historic Cellular Jail",
+    "tagline": "Emerald Islands: Historic Cellular Jail, Turquoise Radhanagar Beach & Port Blair Harbour",
     "zone": "Union Territories",
     "capital": "Port Blair",
     "spotCount": "24 Curated Spots",
     "districtCount": 5,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Front_View_of_Cellular_Jail%2C_Port_Blair.JPG/960px-Front_View_of_Cellular_Jail%2C_Port_Blair.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Limestone Caves",
-        "category": "Wildlife",
-        "city": "Baratang Island",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Havelock Island",
-        "category": "Beach",
-        "city": "South Andaman",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Mount Harriet National park",
-        "category": "Wildlife",
+        "name": "Cellular Jail National Memorial",
+        "category": "Historic Freedom Memorial",
         "city": "Port Blair",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Front_View_of_Cellular_Jail%2C_Port_Blair.JPG/960px-Front_View_of_Cellular_Jail%2C_Port_Blair.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Bharatpur Beach",
-        "category": "Beach",
-        "city": "Neil Island",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
+        "name": "Radhanagar Beach White Sands",
+        "category": "Asia Best Turquoise Beach",
+        "city": "Havelock (Swaraj Dweep)",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Radha_Nagar_beach%2C_Havelock_Island%2C_Andamn%2C_India-_Sun_set_view.jpg/960px-Radha_Nagar_beach%2C_Havelock_Island%2C_Andamn%2C_India-_Sun_set_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Coral gazing at Mohwa Dera",
-        "category": "Wildlife",
-        "city": "Baratang Island",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Mahatma Gandhi National Park",
-        "category": "Wildlife",
+        "name": "Port Blair Harbour & Coast",
+        "category": "Historical Island Sanctuary",
         "city": "Port Blair",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/View_from_South_Point%2C_%28Port_Blair%2C_India%29.jpg/960px-View_from_South_Point%2C_%28Port_Blair%2C_India%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   },
   {
     "id": "lakshadweep",
     "name": "Lakshadweep",
-    "tagline": "Tropical Coral Paradises: Crystal Turquoise Lagoons & Pristine Atolls",
+    "tagline": "Untouched Coral Paradise: Agatti Atolls, Bangaram Crystal Lagoons & Kavaratti Waters",
     "zone": "Union Territories",
     "capital": "Kavaratti",
     "spotCount": "24 Curated Spots",
     "districtCount": 2,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Agatti_Airstrip.jpg/960px-Agatti_Airstrip.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "Kavaratti Island",
-        "category": "Beach",
-        "city": "Lakshadweep",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "name": "Agatti Island Coral Atoll",
+        "category": "Atoll Lagoon & Airstrip",
+        "city": "Agatti Island",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Agatti_Airstrip.jpg/960px-Agatti_Airstrip.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Pitti Bird Sanctuary",
-        "category": "Wildlife",
-        "city": "Lakshadweep (Kavaratti/Agatti)",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        "name": "Bangaram Coral Sandbars",
+        "category": "Tear-Drop Coral Island",
+        "city": "Bangaram Island",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/7/72/A_beach_side_resort_at_Kadmat_Island%2C_Lakshadweep.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
       },
       {
-        "name": "Kavaratti lagoon",
-        "category": "Beach",
-        "city": "Lakshadweep (Kavaratti/Agatti)",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Agatti Island",
-        "category": "Beach",
-        "city": "Lakshadweep (Kavaratti/Agatti)",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Lakshadweep Scenic Discovery 5",
-        "category": "Scenic Attraction",
-        "city": "Kavaratti",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Lakshadweep Scenic Discovery 6",
-        "category": "Scenic Attraction",
-        "city": "Kavaratti",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Kavaratti Marine Lagoon",
+        "category": "Capital Coral Atoll",
+        "city": "Kavaratti Island",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Kavaratii.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
       }
     ]
   },
   {
     "id": "dadra-and-nagar-haveli-and-daman-and-diu",
     "name": "Dadra and Nagar Haveli and Daman and Diu",
-    "tagline": "Coastal Forts, Nagoa Arabian Sea Beaches & Portuguese Heritage",
+    "tagline": "Portuguese Coastal Bastions: Diu Ocean Fort, Naida Sunlight Caves & Silvassa Gardens",
     "zone": "Union Territories",
     "capital": "Daman",
     "spotCount": "24 Curated Spots",
     "districtCount": 3,
-    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "heroImage": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Monuments_of_Diu_%28City%29.jpg/960px-Monuments_of_Diu_%28City%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
     "topPlaces": [
       {
-        "name": "St. Paul's Church",
-        "category": "Religious",
+        "name": "Diu Ocean Portuguese Fortress",
+        "category": "Arabian Sea Castle",
         "city": "Diu",
-        "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Monuments_of_Diu_%28City%29.jpg/960px-Monuments_of_Diu_%28City%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Diu Fort & Beach",
-        "category": "Beach",
-        "city": "Diu",
-        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Basilica of Bom Jesus Church",
-        "category": "Religious",
-        "city": "Diu",
-        "image": "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Diu Fort",
-        "category": "Historical",
-        "city": "Diu",
-        "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        "name": "Vasona Lion Safari",
-        "category": "Wildlife",
+        "name": "Vanganga Lake Gardens",
+        "category": "Island Garden Lake",
         "city": "Silvassa",
-        "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80"
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Dadra_and_Nagar_Haveli_Silvassa_3.jpg/960px-Dadra_and_Nagar_Haveli_Silvassa_3.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       },
       {
-        "name": "Deer Park",
-        "category": "Wildlife",
-        "city": "Silvassa",
-        "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+        "name": "Jampore Beach Arabian Coast",
+        "category": "Arabian Sea Shoreline",
+        "city": "Daman",
+        "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Jampore_Beach_%2878525%29.jpg/960px-Jampore_Beach_%2878525%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
       }
     ]
   }

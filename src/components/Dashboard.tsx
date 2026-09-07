@@ -906,69 +906,144 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 className="state-card"
                 onClick={() => onNavigateTab('planner', state.name)}
               >
-                {/* 6-Photo Real Landmark Collage (3 cols x 2 rows) */}
+                {/* 3-Image Curated Authentic Landmark Collage */}
                 <div style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gridTemplateRows: 'repeat(2, 92px)',
+                  gridTemplateColumns: '1.45fr 1fr',
+                  height: '190px',
                   gap: '4px',
                   background: 'rgba(10, 15, 29, 0.95)',
                   padding: '4px',
                   position: 'relative'
                 }}>
-                  {state.topPlaces.slice(0, 6).map((place, pIdx) => (
+                  {/* Left Hero: Place #1 (Full Height) */}
+                  {state.topPlaces[0] && (
                     <div
-                      key={pIdx}
                       onClick={(e) => {
                         e.stopPropagation();
-                        onNavigateTab('planner', state.name, place.name);
+                        onNavigateTab('planner', state.name, state.topPlaces[0].name);
                       }}
                       style={{
                         position: 'relative',
                         overflow: 'hidden',
                         borderRadius: '8px',
                         background: '#0a0f1d',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        height: '100%'
                       }}
-                      title={`Click to set destination to ${place.name} (${place.category}) in ${place.city}, ${state.name}`}
+                      title={`Click to set destination to ${state.topPlaces[0].name} in ${state.topPlaces[0].city}, ${state.name}`}
                     >
                       <img
-                        src={place.image}
-                        alt={place.name}
+                        src={state.topPlaces[0].image}
+                        alt={state.topPlaces[0].name}
                         loading="lazy"
+                        referrerPolicy="no-referrer"
                         className="state-collage-thumb"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80';
+                        }}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       />
                       <div style={{
                         position: 'absolute',
                         inset: 0,
-                        background: 'linear-gradient(to top, rgba(9, 14, 23, 0.92) 0%, rgba(9, 14, 23, 0.2) 65%, transparent 100%)'
+                        background: 'linear-gradient(to top, rgba(9, 14, 23, 0.95) 0%, rgba(9, 14, 23, 0.25) 55%, transparent 100%)'
                       }} />
                       <div style={{
                         position: 'absolute',
-                        bottom: '4px',
-                        left: '5px',
-                        right: '5px',
+                        bottom: '8px',
+                        left: '8px',
+                        right: '8px',
                         display: 'flex',
-                        flexDirection: 'column'
+                        flexDirection: 'column',
+                        gap: '2px'
                       }}>
                         <span style={{
                           fontSize: '0.62rem',
+                          fontWeight: 700,
+                          color: '#38bdf8',
+                          letterSpacing: '0.03em',
+                          textTransform: 'uppercase'
+                        }}>
+                          {state.topPlaces[0].category}
+                        </span>
+                        <span style={{
+                          fontSize: '0.78rem',
                           fontWeight: 800,
                           color: '#ffffff',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          textShadow: '0 1px 3px rgba(0,0,0,0.9)'
+                          lineHeight: 1.2,
+                          textShadow: '0 1px 4px rgba(0,0,0,0.95)'
                         }}>
-                          {place.name}
+                          {state.topPlaces[0].name}
                         </span>
-                        <span style={{ fontSize: '0.54rem', color: '#94a3b8' }}>
-                          {place.city}
+                        <span style={{ fontSize: '0.64rem', color: '#cbd5e1' }}>
+                          📍 {state.topPlaces[0].city}
                         </span>
                       </div>
                     </div>
-                  ))}
+                  )}
+
+                  {/* Right Column: Place #2 & Place #3 Stacked */}
+                  <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: '4px', height: '100%' }}>
+                    {state.topPlaces.slice(1, 3).map((place, pIdx) => (
+                      <div
+                        key={pIdx}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onNavigateTab('planner', state.name, place.name);
+                        }}
+                        style={{
+                          position: 'relative',
+                          overflow: 'hidden',
+                          borderRadius: '8px',
+                          background: '#0a0f1d',
+                          cursor: 'pointer',
+                          height: '100%'
+                        }}
+                        title={`Click to set destination to ${place.name} in ${place.city}, ${state.name}`}
+                      >
+                        <img
+                          src={place.image}
+                          alt={place.name}
+                          loading="lazy"
+                          referrerPolicy="no-referrer"
+                          className="state-collage-thumb"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80';
+                          }}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                        <div style={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: 'linear-gradient(to top, rgba(9, 14, 23, 0.94) 0%, rgba(9, 14, 23, 0.2) 65%, transparent 100%)'
+                        }} />
+                        <div style={{
+                          position: 'absolute',
+                          bottom: '5px',
+                          left: '6px',
+                          right: '6px',
+                          display: 'flex',
+                          flexDirection: 'column'
+                        }}>
+                          <span style={{
+                            fontSize: '0.66rem',
+                            fontWeight: 800,
+                            color: '#ffffff',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            textShadow: '0 1px 3px rgba(0,0,0,0.9)'
+                          }}>
+                            {place.name}
+                          </span>
+                          <span style={{ fontSize: '0.58rem', color: '#94a3b8' }}>
+                            {place.city}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
 
                   {/* Badges on Collage */}
                   <div style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 2 }}>
@@ -1002,10 +1077,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
                     <div>
                       <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>
-                        Top 6 Famous Landmarks (Click to Plan):
+                        Top Iconic Landmarks (Click to Plan):
                       </span>
                       <div className="flex flex-wrap gap-1">
-                        {state.topPlaces.slice(0, 6).map((pl, idx) => (
+                        {state.topPlaces.map((pl, idx) => (
                           <button
                             key={idx}
                             type="button"
