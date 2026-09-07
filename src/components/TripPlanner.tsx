@@ -8,6 +8,9 @@ import {
   Bus, 
   Car, 
   Hotel, 
+  Building2,
+  HeartPulse,
+  ShoppingBag,
   Sparkles, 
   Plus, 
   Minus,
@@ -27,10 +30,28 @@ import {
   Info,
   ChevronRight,
   Trash2,
-  AlertCircle
+  AlertCircle,
+  ExternalLink
 } from 'lucide-react';
-import { TripPlan, TransportMode, LocalGuide, ItineraryItem, ServiceProviderProfile } from '../types';
-import { LOCAL_GUIDES } from '../data/mockData';
+import { 
+  TripPlan, 
+  TransportMode, 
+  LocalGuide, 
+  ItineraryItem, 
+  ServiceProviderProfile,
+  ProviderCategory 
+} from '../types';
+import { 
+  LOCAL_GUIDES, 
+  LOCAL_DRIVERS, 
+  LOCAL_HOMESTAYS, 
+  LOCAL_MEDICAL_SERVICES, 
+  LOCAL_RENTAL_AGENCIES,
+  MockTransportProvider,
+  MockHomestayProvider,
+  MockEmergencyMedicalProvider,
+  MockRentalAgencyProvider
+} from '../data/mockData';
 import { 
   fetchLocations, 
   fetchPlaces, 
@@ -38,6 +59,7 @@ import {
   LocationItem, 
   PlaceItem 
 } from '../utils/api';
+import { getAllRegisteredProviders } from '../utils/storage';
 
 interface TripPlannerProps {
   trips: TripPlan[];
@@ -72,6 +94,62 @@ const calculateHaversineKm = (lat1: number, lon1: number, lat2: number, lon2: nu
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return Math.max(15, Math.round(R * c));
 };
+
+const PROVIDER_CATEGORIES: {
+  id: ProviderCategory;
+  title: string;
+  subtitle: string;
+  badge: string;
+  badgeClass: string;
+  icon: any;
+  color: string;
+}[] = [
+  {
+    id: 'tour_guide',
+    title: 'Tour Guides & Interpreters',
+    subtitle: 'Certified Heritage, Trekking, Wildlife & Multilingual Guides',
+    badge: 'Govt Certified',
+    badgeClass: 'badge-blue',
+    icon: Compass,
+    color: '#38bdf8'
+  },
+  {
+    id: 'transport',
+    title: 'Transport & Drivers',
+    subtitle: 'Auto Rickshaws, Taxi/Cabs, Tourist Vans, Bus & Bike Taxi',
+    badge: 'Fair Fare Verified',
+    badgeClass: 'badge-amber',
+    icon: Car,
+    color: '#fbbf24'
+  },
+  {
+    id: 'homestay',
+    title: 'Homestay & Hospitality',
+    subtitle: 'Heritage Cottages, Mountain Villas, Homestays & Eco-Resorts',
+    badge: 'Safe Stay Approved',
+    badgeClass: 'badge-purple',
+    icon: Building2,
+    color: '#a855f7'
+  },
+  {
+    id: 'emergency_medical',
+    title: 'Emergency & Medical Assistance',
+    subtitle: 'Ambulance Operators, 24/7 Clinics, Pharmacies & Rescue Units',
+    badge: '24/7 SOS Network',
+    badgeClass: 'badge-red',
+    icon: HeartPulse,
+    color: '#ef4444'
+  },
+  {
+    id: 'rental_agency',
+    title: 'Travel Agency & Activity Rentals',
+    subtitle: 'Trekking/Camping Gear, Bike/Scooter Rentals & Safari Agents',
+    badge: 'Verified Equipment',
+    badgeClass: 'badge-green',
+    icon: ShoppingBag,
+    color: '#34d399'
+  }
+];
 
 export const TripPlanner: React.FC<TripPlannerProps> = ({
   trips,
@@ -109,7 +187,19 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
   // Selected spots list for the itinerary
   const [selectedSpots, setSelectedSpots] = useState<string[]>([]);
   const [newSpotInput, setNewSpotInput] = useState<string>('');
-  const [selectedGuide, setSelectedGuide] = useState<LocalGuide | null>(null);
+  
+  // Active Category Selection for Service Providers (5 Categories)
+  const [activeProviderCategory, setActiveProviderCategory] = useState<ProviderCategory>('tour_guide');
+  
+  // Assigned selections per category
+  const [assignedProviders, setAssignedProviders] = useState<Record<ProviderCategory, any>>({
+    tour_guide: null,
+    transport: null,
+    homestay: null,
+    emergency_medical: null,
+    rental_agency: null
+  });
+
   const [savedSuccess, setSavedSuccess] = useState<boolean>(false);
   const [validationError, setValidationError] = useState<string | null>(null);
 
@@ -121,7 +211,7 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
         const [locs, pls, provs] = await Promise.all([
           fetchLocations(),
           fetchPlaces(),
-          fetchProvidersFromAPI('tour_guide')
+          fetchProvidersFromAPI(activeProviderCategory)
         ]);
         setAllLocations(locs);
         setAllPlaces(pls);
@@ -134,6 +224,15 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
     }
     loadMasterData();
   }, []);
+
+  // Sync API providers whenever active category or destination changes
+  useEffect(() => {
+    fetchProvidersFromAPI(activeProviderCategory, destCityId ? allLocations.find(l => l.id === destCityId)?.name : undefined)
+      .then(provs => {
+        if (provs && Array.isArray(provs)) setApiProviders(provs);
+      })
+      .catch(() => {});
+  }, [activeProviderCategory, destCityId]);
 
   // Available unique States & UTs (Alphabetical with Tamil Nadu & Kerala prominent)
   const availableStates = useMemo(() => {
@@ -337,72 +436,226 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
   };
 
   // ===========================================================================
-  // Local Guide Reach Engine (Filtered relevant to selected destination)
+  // Destination-Relevant Service Provider Engine (5 Tourism Categories)
+  // Filters and prioritizes verified & user-registered providers by destination
   // ===========================================================================
-  const relevantGuides = useMemo(() => {
+  const relevantCategoryProviders = useMemo(() => {
     const destCityName = currentDestCity ? currentDestCity.name.toLowerCase() : '';
     const destStateName = destState.toLowerCase();
 
-    // 1. Check if user's own registered provider profile matches
-    const registeredGuide: (LocalGuide & { isPartner?: boolean; badgeNumber?: string; currency?: string }) | null = 
-      providerProfile && providerProfile.category === 'tour_guide'
-        ? {
-            id: providerProfile.id || 'reg_partner_guide',
-            name: `${providerProfile.providerName}`,
-            photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-            location: `${providerProfile.operatingCity || destCityName}, ${providerProfile.operatingState || destState}`,
-            languages: providerProfile.tourGuideDetails?.languagesSpoken?.length ? providerProfile.tourGuideDetails.languagesSpoken : ['English', 'Tamil'],
-            rating: 5.0,
-            reviewsCount: 28,
-            specialty: providerProfile.tourGuideDetails?.specialization || 'Certified Local Heritage & Tour Guide',
-            hourlyRate: providerProfile.tourGuideDetails?.hourlyRate || 450,
-            phone: providerProfile.phone || '+91 90000 00000',
-            verified: true,
-            bio: `Verified Partner Guide. Badge: ${providerProfile.tourGuideDetails?.guideBadgeNumber || 'GOVT-PARTNER'} • ${providerProfile.tourGuideDetails?.experienceYears || 3} yrs experience. ${providerProfile.tourGuideDetails?.hasFirstAidCert ? 'First-Aid Certified.' : ''}`,
-            isPartner: true,
-            badgeNumber: providerProfile.tourGuideDetails?.guideBadgeNumber,
-            currency: providerProfile.nativeCurrency || 'INR'
-          }
-        : null;
+    // 1. Gather all registered providers from storage and current logged-in profile
+    const allStoredProviders = getAllRegisteredProviders();
+    const registeredPool: ServiceProviderProfile[] = [
+      ...(providerProfile ? [providerProfile] : []),
+      ...allStoredProviders
+    ];
+    // Deduplicate by ID
+    const uniqueRegistered = Array.from(new Map(registeredPool.map(p => [p.id, p])).values());
 
-    // Combine static verified guides + API registered guides
-    const apiGuidesFormatted: LocalGuide[] = apiProviders.map((p, idx) => ({
-      id: p.id || `api_guide_${idx}`,
-      name: p.providerName,
-      photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
-      location: `${p.operatingCity || ''}, ${p.operatingState || ''}`,
-      languages: p.tourGuideDetails?.languagesSpoken || ['English', 'Hindi'],
-      rating: 4.9,
-      reviewsCount: 15,
-      specialty: p.tourGuideDetails?.specialization || 'Registered Local Guide',
-      hourlyRate: p.tourGuideDetails?.hourlyRate || 500,
-      phone: p.phone || '',
-      verified: true,
-      bio: `Registered Travel Guide operating in ${p.operatingCity || 'regional sector'}.`
-    }));
+    let categoryItems: any[] = [];
 
-    const pool = [...(registeredGuide ? [registeredGuide] : []), ...apiGuidesFormatted, ...LOCAL_GUIDES];
-    const uniquePool = Array.from(new Map(pool.map(g => [g.id, g])).values());
+    if (activeProviderCategory === 'transport') {
+      // Formatted user-registered transport partners
+      const registeredDrivers: MockTransportProvider[] = uniqueRegistered
+        .filter(p => p.category === 'transport')
+        .map(p => ({
+          id: p.id || 'reg_driver_partner',
+          name: p.providerName,
+          businessName: p.businessName || `${p.providerName}'s Tourist Transport`,
+          photo: p.avatarUrl || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
+          location: `${p.operatingCity || (currentDestCity?.name || 'Local')}, ${p.operatingState || (destState || 'India')}`,
+          vehicleType: p.transportDetails?.vehicleType || 'Tourist Cab AC (Verified)',
+          vehicleRegNumber: p.transportDetails?.vehicleRegNumber || 'GOVT-VERIFIED',
+          operatingStand: p.transportDetails?.operatingStand || `${p.operatingCity || 'Destination'} Central Hub`,
+          ratePerKm: p.transportDetails?.baseTariffPerKm || 24,
+          dailyRate: (p.transportDetails?.baseTariffPerKm || 24) * 120,
+          phone: p.phone || '+91 90000 00000',
+          rating: 5.0,
+          reviewsCount: 36,
+          verified: true,
+          isPartner: true,
+          badgeNumber: p.id,
+          currency: p.nativeCurrency || 'INR',
+          acAvailable: p.transportDetails?.hasAC ?? true,
+          seatingCapacity: p.transportDetails?.seatingCapacity || 4,
+          hillStationCertified: true
+        }));
 
-    const scored = uniquePool.map(guide => {
-      const gLoc = guide.location.toLowerCase();
+      // API formatted drivers
+      const apiDrivers: MockTransportProvider[] = apiProviders
+        .filter(p => p.category === 'transport')
+        .map((p, idx) => ({
+          id: p.id || `api_drv_${idx}`,
+          name: p.providerName,
+          businessName: p.businessName || `${p.providerName}'s Cabs`,
+          photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150',
+          location: `${p.operatingCity || ''}, ${p.operatingState || ''}`,
+          vehicleType: p.transportDetails?.vehicleType || 'Verified Cab',
+          vehicleRegNumber: p.transportDetails?.vehicleRegNumber || 'REG-TAX-2026',
+          operatingStand: p.transportDetails?.operatingStand || 'City Hub',
+          ratePerKm: p.transportDetails?.baseTariffPerKm || 25,
+          dailyRate: 2800,
+          phone: p.phone || '',
+          rating: 4.9,
+          reviewsCount: 22,
+          verified: true,
+          acAvailable: p.transportDetails?.hasAC ?? true,
+          seatingCapacity: p.transportDetails?.seatingCapacity || 4
+        }));
+
+      categoryItems = [...registeredDrivers, ...apiDrivers, ...LOCAL_DRIVERS];
+
+    } else if (activeProviderCategory === 'tour_guide') {
+      // Formatted user-registered guide partners
+      const registeredGuides: LocalGuide[] = uniqueRegistered
+        .filter(p => p.category === 'tour_guide')
+        .map(p => ({
+          id: p.id || 'reg_partner_guide',
+          name: p.providerName,
+          photo: p.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
+          location: `${p.operatingCity || (currentDestCity?.name || 'Local')}, ${p.operatingState || (destState || 'India')}`,
+          languages: p.tourGuideDetails?.languagesSpoken?.length ? p.tourGuideDetails.languagesSpoken : ['English', 'Tamil'],
+          rating: 5.0,
+          reviewsCount: 28,
+          specialty: p.tourGuideDetails?.specialization || 'Certified Local Heritage & Tour Guide',
+          hourlyRate: p.tourGuideDetails?.hourlyRate || 450,
+          phone: p.phone || '+91 90000 00000',
+          verified: true,
+          bio: `Verified Partner Guide. Badge: ${p.tourGuideDetails?.guideBadgeNumber || p.id} • ${p.tourGuideDetails?.experienceYears || 3} yrs experience.`,
+          isPartner: true,
+          badgeNumber: p.tourGuideDetails?.guideBadgeNumber || p.id,
+          currency: p.nativeCurrency || 'INR'
+        }));
+
+      // API formatted guides
+      const apiGuides: LocalGuide[] = apiProviders
+        .filter(p => p.category === 'tour_guide')
+        .map((p, idx) => ({
+          id: p.id || `api_guide_${idx}`,
+          name: p.providerName,
+          photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150',
+          location: `${p.operatingCity || ''}, ${p.operatingState || ''}`,
+          languages: p.tourGuideDetails?.languagesSpoken || ['English', 'Hindi'],
+          rating: 4.9,
+          reviewsCount: 15,
+          specialty: p.tourGuideDetails?.specialization || 'Registered Local Guide',
+          hourlyRate: p.tourGuideDetails?.hourlyRate || 500,
+          phone: p.phone || '',
+          verified: true,
+          bio: `Registered Travel Guide operating in ${p.operatingCity || 'regional sector'}.`
+        }));
+
+      categoryItems = [...registeredGuides, ...apiGuides, ...LOCAL_GUIDES];
+
+    } else if (activeProviderCategory === 'homestay') {
+      // Formatted user-registered homestay partners
+      const registeredHomestays: MockHomestayProvider[] = uniqueRegistered
+        .filter(p => p.category === 'homestay')
+        .map(p => ({
+          id: p.id || 'reg_partner_homestay',
+          name: p.providerName,
+          businessName: p.businessName || `${p.providerName}'s Heritage Homestay`,
+          photo: p.avatarUrl || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=150',
+          location: `${p.operatingCity || (currentDestCity?.name || 'Local')}, ${p.operatingState || (destState || 'India')}`,
+          propertyType: p.homestayDetails?.propertyType || 'Heritage Villa (Safe Stay Approved)',
+          address: p.homestayDetails?.address || `${p.operatingCity || 'City'} Scenic Point`,
+          totalRooms: p.homestayDetails?.totalRooms || 4,
+          nightlyRateMin: p.homestayDetails?.nightlyRateMin || 2200,
+          nightlyRateMax: p.homestayDetails?.nightlyRateMax || 4500,
+          phone: p.phone || '+91 90000 00000',
+          rating: 5.0,
+          reviewsCount: 24,
+          verified: true,
+          isPartner: true,
+          badgeNumber: p.id,
+          currency: p.nativeCurrency || 'INR',
+          amenities: p.homestayDetails?.amenities || ['Safe Stay Verified', 'High-Speed Wi-Fi', '24/7 Power Backup', 'Homecooked Meals'],
+          fssaiLicense: p.homestayDetails?.fssaiLicense
+        }));
+
+      categoryItems = [...registeredHomestays, ...LOCAL_HOMESTAYS];
+
+    } else if (activeProviderCategory === 'emergency_medical') {
+      // Formatted user-registered medical partners
+      const registeredMedical: MockEmergencyMedicalProvider[] = uniqueRegistered
+        .filter(p => p.category === 'emergency_medical')
+        .map(p => ({
+          id: p.id || 'reg_partner_med',
+          name: p.providerName,
+          businessName: p.businessName || `${p.providerName}'s Rapid Medical SOS`,
+          photo: p.avatarUrl || 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150',
+          location: `${p.operatingCity || (currentDestCity?.name || 'Local')}, ${p.operatingState || (destState || 'India')}`,
+          serviceType: p.emergencyMedicalDetails?.serviceType || '24/7 Rapid Ambulance & SOS Response',
+          medicalLicenseNumber: p.emergencyMedicalDetails?.medicalLicenseNumber || 'MED-GOVT-VERIFIED',
+          emergencyHotline: p.emergencyMedicalDetails?.emergencyHotline || p.phone || '+91 94432 00108',
+          availableVehiclesOrBeds: p.emergencyMedicalDetails?.availableVehiclesOrBeds || 4,
+          serviceRadiusKm: p.emergencyMedicalDetails?.serviceRadiusKm || 40,
+          equipmentSupported: p.emergencyMedicalDetails?.equipmentSupported || ['Defibrillator & ECG', 'Oxygen Cylinders', 'Trauma Kit'],
+          phone: p.phone || '+91 94432 00108',
+          rating: 5.0,
+          reviewsCount: 45,
+          verified: true,
+          isPartner: true,
+          badgeNumber: p.id,
+          currency: p.nativeCurrency || 'INR'
+        }));
+
+      categoryItems = [...registeredMedical, ...LOCAL_MEDICAL_SERVICES];
+
+    } else if (activeProviderCategory === 'rental_agency') {
+      // Formatted user-registered rental agency partners
+      const registeredRentals: MockRentalAgencyProvider[] = uniqueRegistered
+        .filter(p => p.category === 'rental_agency')
+        .map(p => ({
+          id: p.id || 'reg_partner_rental',
+          name: p.providerName,
+          businessName: p.businessName || `${p.providerName}'s Activity & Gear Rentals`,
+          photo: p.avatarUrl || 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=150',
+          location: `${p.operatingCity || (currentDestCity?.name || 'Local')}, ${p.operatingState || (destState || 'India')}`,
+          agencyType: p.rentalAgencyDetails?.agencyType || 'Trek Gear, Bikes & Safari Rentals',
+          gstOrMsmeNumber: p.rentalAgencyDetails?.gstOrMsmeNumber || 'MSME-VERIFIED',
+          itemsOffered: p.rentalAgencyDetails?.itemsOffered || ['Alpine Tents', 'Sleeping Bags', 'Trekking Poles', 'GoPro 12'],
+          insuranceIncluded: p.rentalAgencyDetails?.insuranceIncluded ?? true,
+          dailyRateMin: 300,
+          dailyRateMax: 1800,
+          phone: p.phone || '+91 90000 00000',
+          rating: 5.0,
+          reviewsCount: 30,
+          verified: true,
+          isPartner: true,
+          badgeNumber: p.id,
+          currency: p.nativeCurrency || 'INR'
+        }));
+
+      categoryItems = [...registeredRentals, ...LOCAL_RENTAL_AGENCIES];
+    }
+
+    // Deduplicate pool by ID
+    const uniquePool = Array.from(new Map(categoryItems.map(item => [item.id, item])).values());
+
+    // Score based on Destination Location Match
+    const scored = uniquePool.map(provider => {
+      const pLoc = (provider.location || '').toLowerCase();
       let score = 0;
-      if (destCityName && gLoc.includes(destCityName)) score += 100;
-      if (destStateName && gLoc.includes(destStateName)) score += 50;
-      if (guide.isPartner) score += 20;
-      return { guide, score };
+      if (destCityName && pLoc.includes(destCityName)) score += 100;
+      if (destStateName && pLoc.includes(destStateName)) score += 50;
+      if (provider.isPartner) score += 150; // Pin registered IDs with high priority
+      return { provider, score };
     });
 
     scored.sort((a, b) => b.score - a.score);
-    return scored.map(s => s.guide);
-  }, [currentDestCity, destState, providerProfile, apiProviders]);
+    return scored.map(s => s.provider);
+  }, [activeProviderCategory, currentDestCity, destState, providerProfile, apiProviders]);
 
-  // Auto-set guide on destination change
+  // Maintain assigned selection per category
   useEffect(() => {
-    if (relevantGuides.length > 0) {
-      setSelectedGuide(relevantGuides[0]);
+    if (relevantCategoryProviders.length > 0 && !assignedProviders[activeProviderCategory]) {
+      setAssignedProviders(prev => ({
+        ...prev,
+        [activeProviderCategory]: relevantCategoryProviders[0]
+      }));
     }
-  }, [relevantGuides]);
+  }, [relevantCategoryProviders, activeProviderCategory]);
 
   // Create and Save Itinerary
   const handleCreateTripPlan = () => {
@@ -457,7 +710,11 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
       selectedSpots,
       selectedResidencies: [`Verified Heritage Residency (${roomsCount} Room${roomsCount > 1 ? 's' : ''})`, `Highland View Boutique Lodge (${roomsCount} Room${roomsCount > 1 ? 's' : ''})`],
       itinerary: generatedItinerary,
-      assignedGuide: selectedGuide || undefined,
+      assignedGuide: assignedProviders.tour_guide || undefined,
+      assignedTransport: assignedProviders.transport || undefined,
+      assignedHomestay: assignedProviders.homestay || undefined,
+      assignedEmergencySupport: assignedProviders.emergency_medical || undefined,
+      assignedRentalAgency: assignedProviders.rental_agency || undefined,
       createdAt: new Date().toISOString(),
       status: 'ongoing'
     };
@@ -1398,123 +1655,286 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
         <div className="col-span-5 lg-col-span-12" style={{ display: 'flex', flexDirection: 'column', gap: '20px', minWidth: 0 }}>
           
           {/* ================================================================= */}
-          {/* 5. Local Guide Reach (Filtered by Destination) */}
+          {/* 5. Destination Service Providers & Verified Reach (5 Categories) */}
           {/* ================================================================= */}
-          <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px', borderColor: 'rgba(56, 189, 248, 0.3)', minWidth: 0 }}>
-            <div className="flex items-center justify-between">
+          <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px', borderColor: 'rgba(56, 189, 248, 0.3)', minWidth: 0 }}>
+            {/* Header */}
+            <div className="flex items-center justify-between flex-wrap gap-2">
               <div className="flex items-center gap-2">
-                <UserCheck style={{ width: '20px', height: '20px', color: '#38bdf8' }} />
+                <ShieldCheck style={{ width: '20px', height: '20px', color: '#38bdf8' }} />
                 <h3 style={{ fontSize: '0.95rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
-                  Local Guide Reach
+                  Verified Destination Services
                 </h3>
               </div>
               <span className="badge badge-green" style={{ fontSize: '0.68rem' }}>
                 Verified for {currentDestCity?.name || destState || 'India'}
               </span>
             </div>
-            
-            <p style={{ fontSize: '0.78rem', color: '#cbd5e1', margin: 0 }}>
-              Authorized government & regional heritage guides operating in <strong>{currentDestCity?.name || destState || 'India'}</strong>.
-            </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {relevantGuides.map(guide => {
-                const isSelected = selectedGuide?.id === guide.id;
-                const isPartner = guide.isPartner;
-                const currSymbol = getCurrencySymbol(guide.currency);
+            {/* 5-Category Horizontal Switcher Pills */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+              gap: '8px',
+              padding: '4px',
+              background: 'rgba(10, 15, 29, 0.75)',
+              borderRadius: '14px',
+              border: '1px solid rgba(255, 255, 255, 0.08)'
+            }}>
+              {PROVIDER_CATEGORIES.map(cat => {
+                const isActive = activeProviderCategory === cat.id;
+                const IconComponent = cat.icon;
+                const isSelectedAssigned = !!assignedProviders[cat.id];
                 return (
-                  <div
-                    key={guide.id}
-                    onClick={() => setSelectedGuide(guide)}
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setActiveProviderCategory(cat.id)}
                     style={{
-                      padding: '14px',
-                      borderRadius: '16px',
-                      border: isSelected 
-                        ? (isPartner ? '1.5px solid #fbbf24' : '1px solid #38bdf8') 
-                        : (isPartner ? '1px solid rgba(251, 191, 36, 0.4)' : '1px solid rgba(255,255,255,0.06)'),
-                      background: isSelected 
-                        ? (isPartner ? 'rgba(251, 191, 36, 0.16)' : 'rgba(56, 189, 248, 0.15)') 
-                        : (isPartner ? 'rgba(245, 158, 11, 0.08)' : 'rgba(10, 15, 29, 0.75)'),
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      padding: '8px 10px',
+                      borderRadius: '10px',
+                      border: isActive ? `1.5px solid ${cat.color}` : '1px solid transparent',
+                      background: isActive ? `rgba(${cat.color === '#fbbf24' ? '251, 191, 36' : cat.color === '#38bdf8' ? '56, 189, 248' : cat.color === '#a855f7' ? '168, 85, 247' : cat.color === '#ef4444' ? '239, 68, 68' : '52, 211, 153'}, 0.16)` : 'transparent',
+                      color: isActive ? '#ffffff' : '#94a3b8',
                       cursor: 'pointer',
                       transition: 'all 0.2s',
-                      boxShadow: isPartner ? '0 4px 18px rgba(245, 158, 11, 0.12)' : 'none',
+                      textAlign: 'left',
                       minWidth: 0
                     }}
                   >
-                    {isPartner && (
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                        <span className="badge badge-amber" style={{ fontSize: '0.66rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                          <Sparkles style={{ width: '10px', height: '10px' }} /> Registered Partner Guide
+                    <div className="flex items-center gap-1.5 w-full justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <IconComponent style={{ width: '14px', height: '14px', color: cat.color, flexShrink: 0 }} />
+                        <span style={{ fontSize: '0.74rem', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {cat.id === 'transport' ? 'Transport' : cat.id === 'tour_guide' ? 'Guides' : cat.id === 'homestay' ? 'Homestays' : cat.id === 'emergency_medical' ? 'Medical SOS' : 'Rentals'}
                         </span>
-                        {guide.badgeNumber && (
-                          <span style={{ fontSize: '0.68rem', color: '#fbbf24', fontFamily: 'monospace', fontWeight: 700 }}>
-                            ID: {guide.badgeNumber}
-                          </span>
-                        )}
                       </div>
-                    )}
+                      {isSelectedAssigned && (
+                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#34d399' }} title="Provider Assigned" />
+                      )}
+                    </div>
+                    <span style={{ fontSize: '0.62rem', color: cat.color, marginTop: '2px', fontWeight: 600 }}>
+                      {cat.badge}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', minWidth: 0 }}>
-                      <img
-                        src={guide.photo}
-                        alt={guide.name}
-                        style={{ 
-                          width: '48px', 
-                          height: '48px', 
-                          borderRadius: '12px', 
-                          objectFit: 'cover', 
-                          border: isPartner ? '1.5px solid rgba(251, 191, 36, 0.5)' : '1px solid rgba(255,255,255,0.1)',
-                          flexShrink: 0
-                        }}
-                      />
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div className="flex items-center justify-between gap-1">
-                          <h4 style={{ fontSize: '0.86rem', fontWeight: 800, color: '#ffffff', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {guide.name}
-                          </h4>
-                          <span style={{ fontSize: '0.78rem', color: '#fbbf24', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '2px', flexShrink: 0 }}>
-                            <Star style={{ width: '12px', height: '12px', fill: '#fbbf24' }} /> {guide.rating}
+            {/* Active Category Description */}
+            {(() => {
+              const currentCatObj = PROVIDER_CATEGORIES.find(c => c.id === activeProviderCategory) || PROVIDER_CATEGORIES[0];
+              return (
+                <div style={{
+                  padding: '8px 12px',
+                  borderRadius: '10px',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid rgba(255, 255, 255, 0.06)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px'
+                }}>
+                  <div>
+                    <span style={{ fontSize: '0.78rem', fontWeight: 800, color: currentCatObj.color, display: 'block' }}>
+                      {currentCatObj.title}
+                    </span>
+                    <span style={{ fontSize: '0.68rem', color: '#94a3b8' }}>
+                      {currentCatObj.subtitle} in <strong>{currentDestCity?.name || destState || 'India'}</strong>
+                    </span>
+                  </div>
+                  <span className={`badge ${currentCatObj.badgeClass}`} style={{ fontSize: '0.64rem', flexShrink: 0 }}>
+                    {currentCatObj.badge}
+                  </span>
+                </div>
+              );
+            })()}
+
+            {/* List of Destination-Relevant Providers */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {relevantCategoryProviders.length === 0 ? (
+                <div style={{
+                  padding: '24px',
+                  textAlign: 'center',
+                  background: 'rgba(10, 15, 29, 0.6)',
+                  borderRadius: '14px',
+                  border: '1px dashed rgba(255, 255, 255, 0.12)'
+                }}>
+                  <AlertCircle style={{ width: '24px', height: '24px', color: '#94a3b8', margin: '0 auto 8px' }} />
+                  <p style={{ fontSize: '0.78rem', color: '#cbd5e1', margin: 0 }}>
+                    No service providers registered for {currentDestCity?.name || destState || 'this location'} yet.
+                  </p>
+                  <span style={{ fontSize: '0.7rem', color: '#64748b', display: 'block', marginTop: '4px' }}>
+                    Register as a Service Provider to list your ID here!
+                  </span>
+                </div>
+              ) : (
+                relevantCategoryProviders.map(provider => {
+                  const isSelected = assignedProviders[activeProviderCategory]?.id === provider.id;
+                  const isPartner = provider.isPartner;
+                  const currSymbol = getCurrencySymbol(provider.currency);
+
+                  return (
+                    <div
+                      key={provider.id}
+                      onClick={() => {
+                        setAssignedProviders(prev => ({
+                          ...prev,
+                          [activeProviderCategory]: provider
+                        }));
+                      }}
+                      style={{
+                        padding: '14px',
+                        borderRadius: '16px',
+                        border: isSelected 
+                          ? (isPartner ? '1.5px solid #fbbf24' : '1.5px solid #38bdf8') 
+                          : (isPartner ? '1px solid rgba(251, 191, 36, 0.45)' : '1px solid rgba(255,255,255,0.08)'),
+                        background: isSelected 
+                          ? (isPartner ? 'rgba(251, 191, 36, 0.16)' : 'rgba(56, 189, 248, 0.15)') 
+                          : (isPartner ? 'rgba(245, 158, 11, 0.08)' : 'rgba(10, 15, 29, 0.75)'),
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        boxShadow: isPartner ? '0 4px 18px rgba(245, 158, 11, 0.15)' : 'none',
+                        minWidth: 0
+                      }}
+                    >
+                      {/* Registered Partner & ID Banner */}
+                      {isPartner && (
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                          <span className="badge badge-amber" style={{ fontSize: '0.66rem', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                            <Sparkles style={{ width: '10px', height: '10px' }} /> Registered Partner Provider
                           </span>
-                        </div>
-
-                        <span style={{ fontSize: '0.7rem', color: '#38bdf8', display: 'block', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                          📍 {guide.location}
-                        </span>
-
-                        <p style={{ fontSize: '0.74rem', color: '#94a3b8', margin: '4px 0', lineHeight: 1.3 }}>
-                          {guide.specialty}
-                        </p>
-
-                        <div className="flex items-center justify-between gap-2" style={{ marginTop: '8px' }}>
-                          <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#34d399' }}>
-                            {currSymbol}{guide.hourlyRate} / hr
-                          </span>
-
-                          <div className="flex items-center gap-2">
-                            <a
-                              href={`tel:${guide.phone}`}
-                              onClick={e => e.stopPropagation()}
-                              className="btn-secondary"
-                              style={{ padding: '4px 8px', fontSize: '0.7rem', textDecoration: 'none' }}
-                            >
-                              <Phone style={{ width: '11px', height: '11px' }} /> Call
-                            </a>
-                            <span 
-                              style={{ 
-                                fontSize: '0.7rem', 
-                                fontWeight: 700, 
-                                color: isSelected ? '#38bdf8' : '#64748b' 
-                              }}
-                            >
-                              {isSelected ? '✓ Assigned' : 'Select'}
+                          {provider.badgeNumber && (
+                            <span style={{ fontSize: '0.68rem', color: '#fbbf24', fontFamily: 'monospace', fontWeight: 800 }}>
+                              ID: {provider.badgeNumber}
                             </span>
+                          )}
+                        </div>
+                      )}
+
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', minWidth: 0 }}>
+                        <img
+                          src={provider.photo || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'}
+                          alt={provider.name}
+                          style={{ 
+                            width: '48px', 
+                            height: '48px', 
+                            borderRadius: '12px', 
+                            objectFit: 'cover', 
+                            border: isPartner ? '1.5px solid rgba(251, 191, 36, 0.5)' : '1px solid rgba(255,255,255,0.1)',
+                            flexShrink: 0
+                          }}
+                        />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div className="flex items-center justify-between gap-1">
+                            <h4 style={{ fontSize: '0.86rem', fontWeight: 800, color: '#ffffff', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {provider.businessName ? `${provider.businessName} (${provider.name})` : provider.name}
+                            </h4>
+                            <span style={{ fontSize: '0.78rem', color: '#fbbf24', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '2px', flexShrink: 0 }}>
+                              <Star style={{ width: '12px', height: '12px', fill: '#fbbf24' }} /> {provider.rating}
+                            </span>
+                          </div>
+
+                          <span style={{ fontSize: '0.7rem', color: '#38bdf8', display: 'block', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            📍 {provider.location}
+                          </span>
+
+                          {/* Category-Specific Specs */}
+                          {activeProviderCategory === 'transport' && (
+                            <div style={{ marginTop: '4px', fontSize: '0.72rem', color: '#cbd5e1' }}>
+                              <div style={{ fontWeight: 700, color: '#fbbf24' }}>
+                                🚗 {provider.vehicleType}
+                              </div>
+                              <span style={{ fontSize: '0.66rem', color: '#94a3b8' }}>
+                                Reg: {provider.vehicleRegNumber} • Stand: {provider.operatingStand}
+                              </span>
+                            </div>
+                          )}
+
+                          {activeProviderCategory === 'tour_guide' && (
+                            <p style={{ fontSize: '0.74rem', color: '#94a3b8', margin: '4px 0', lineHeight: 1.3 }}>
+                              {provider.specialty}
+                            </p>
+                          )}
+
+                          {activeProviderCategory === 'homestay' && (
+                            <div style={{ marginTop: '4px', fontSize: '0.72rem', color: '#cbd5e1' }}>
+                              <div style={{ fontWeight: 700, color: '#c084fc' }}>
+                                🏡 {provider.propertyType}
+                              </div>
+                              <span style={{ fontSize: '0.66rem', color: '#94a3b8' }}>
+                                {provider.totalRooms} Rooms • {provider.address}
+                              </span>
+                            </div>
+                          )}
+
+                          {activeProviderCategory === 'emergency_medical' && (
+                            <div style={{ marginTop: '4px', fontSize: '0.72rem', color: '#cbd5e1' }}>
+                              <div style={{ fontWeight: 700, color: '#f87171' }}>
+                                🚑 {provider.serviceType}
+                              </div>
+                              <span style={{ fontSize: '0.66rem', color: '#94a3b8' }}>
+                                Response Radius: {provider.serviceRadiusKm} km • Hotline: {provider.emergencyHotline}
+                              </span>
+                            </div>
+                          )}
+
+                          {activeProviderCategory === 'rental_agency' && (
+                            <div style={{ marginTop: '4px', fontSize: '0.72rem', color: '#cbd5e1' }}>
+                              <div style={{ fontWeight: 700, color: '#34d399' }}>
+                                🎒 {provider.agencyType}
+                              </div>
+                              {provider.itemsOffered && (
+                                <span style={{ fontSize: '0.66rem', color: '#94a3b8', display: 'block', marginTop: '2px' }}>
+                                  Gear: {provider.itemsOffered.slice(0, 2).join(', ')}...
+                                </span>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Pricing & Actions */}
+                          <div className="flex items-center justify-between gap-2" style={{ marginTop: '8px' }}>
+                            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#34d399' }}>
+                              {activeProviderCategory === 'transport' 
+                                ? `${currSymbol}${provider.ratePerKm}/km • ${currSymbol}${provider.dailyRate}/day`
+                                : activeProviderCategory === 'tour_guide'
+                                ? `${currSymbol}${provider.hourlyRate} / hr`
+                                : activeProviderCategory === 'homestay'
+                                ? `${currSymbol}${provider.nightlyRateMin} - ${currSymbol}${provider.nightlyRateMax} / night`
+                                : activeProviderCategory === 'emergency_medical'
+                                ? `24/7 SOS Available`
+                                : `${currSymbol}${provider.dailyRateMin} - ${currSymbol}${provider.dailyRateMax} / day`}
+                            </span>
+
+                            <div className="flex items-center gap-2">
+                              <a
+                                href={`tel:${provider.phone || provider.emergencyHotline}`}
+                                onClick={e => e.stopPropagation()}
+                                className="btn-secondary"
+                                style={{ padding: '4px 8px', fontSize: '0.7rem', textDecoration: 'none' }}
+                              >
+                                <Phone style={{ width: '11px', height: '11px' }} /> Call
+                              </a>
+                              <span 
+                                style={{ 
+                                  fontSize: '0.7rem', 
+                                  fontWeight: 700, 
+                                  color: isSelected ? '#38bdf8' : '#64748b' 
+                                }}
+                              >
+                                {isSelected ? '✓ Assigned' : 'Select'}
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
           </div>
 

@@ -168,10 +168,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={onOpenSOS}
             className="btn-sos"
-            style={{ padding: '7px 16px', fontSize: '0.8rem', whiteSpace: 'nowrap', fontWeight: 800 }}
+            style={{ padding: '5px 12px', fontSize: '0.76rem', whiteSpace: 'nowrap', fontWeight: 800 }}
             title="Instant SOS to 5 Trusted Contacts"
           >
-            <PhoneCall style={{ width: '14px', height: '14px' }} />
+            <PhoneCall style={{ width: '13px', height: '13px' }} />
             <span>SOS</span>
           </button>
 
@@ -181,18 +181,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onOpenLogin}
               className="btn-secondary hide-mobile"
               style={{
-                padding: '6px 11px',
-                fontSize: '0.76rem',
+                padding: '5px 9px',
+                fontSize: '0.74rem',
                 color: '#38bdf8',
                 borderColor: 'rgba(56, 189, 248, 0.4)',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '5px',
+                gap: '4px',
                 whiteSpace: 'nowrap'
               }}
               title="Sign in with Username & Password"
             >
-              <Lock style={{ width: '13px', height: '13px' }} />
+              <Lock style={{ width: '12px', height: '12px' }} />
               <span>Log In</span>
             </button>
           )}
@@ -232,11 +232,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
               >
                 {userProfile.isRegistered ? (
-                  userProfile.name ? userProfile.name.charAt(0).toUpperCase() : <User style={{ width: '13px', height: '13px' }} />
+                  userProfile.name ? userProfile.name.charAt(0).toUpperCase() : <User style={{ width: '12px', height: '12px' }} />
                 ) : providerProfile ? (
-                  providerProfile.businessName ? providerProfile.businessName.charAt(0).toUpperCase() : <ShieldCheck style={{ width: '13px', height: '13px' }} />
+                  providerProfile.businessName ? providerProfile.businessName.charAt(0).toUpperCase() : <ShieldCheck style={{ width: '12px', height: '12px' }} />
                 ) : (
-                  <User style={{ width: '13px', height: '13px' }} />
+                  <User style={{ width: '12px', height: '12px' }} />
                 )}
               </div>
             )}
@@ -264,18 +264,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onLogout}
               className="btn-secondary"
               style={{
-                padding: '6px 10px',
-                fontSize: '0.76rem',
+                padding: '5px 9px',
+                fontSize: '0.74rem',
                 color: '#f87171',
                 borderColor: 'rgba(239, 68, 68, 0.35)',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '5px',
+                gap: '4px',
                 whiteSpace: 'nowrap'
               }}
               title="Log Out of Session"
             >
-              <LogOut style={{ width: '13px', height: '13px' }} />
+              <LogOut style={{ width: '12px', height: '12px' }} />
               <span className="hide-mobile">Logout</span>
             </button>
           )}
