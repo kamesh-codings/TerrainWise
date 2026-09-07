@@ -63,6 +63,13 @@ export const TOP_PICKS_CATEGORIES = [
     tagline: 'Chettinad spices, filter coffee & authentic street delicacies',
     image: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=800&q=80',
     spots: ['Karaikudi Chettinad Mansions', 'Madurai Jigarthanda Trail', 'Tirunelveli Halwa Stores', 'Chennai Sowcarpet Street Food']
+  },
+  {
+    id: 'parks',
+    title: 'Nature Parks & Botanical Reserves',
+    tagline: 'Lush botanical landscapes, national parks & deer sanctuaries',
+    image: 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=800&q=80',
+    spots: ['Ooty Government Botanical Garden', 'Guindy National Park & Deer Park', 'Semmozhi Poonga City Oasis', 'Sims Park & Tea Garden, Coonoor']
   }
 ];
 

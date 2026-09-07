@@ -39,6 +39,8 @@ export const App: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile>(getStoredProfile);
   const [providerProfile, setProviderProfile] = useState<ServiceProviderProfile | null>(getStoredProviderProfile);
   const [trips, setTrips] = useState<TripPlan[]>(getStoredTrips);
+  const [plannerInitialState, setPlannerInitialState] = useState<string>('');
+  const [plannerInitialSpot, setPlannerInitialSpot] = useState<string>('');
   
   // Auto-detect location silently on launch if none stored yet
   React.useEffect(() => {
@@ -85,6 +87,17 @@ export const App: React.FC = () => {
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  const handleNavigateTab = (tab: string, stateDestination?: string, spotDestination?: string) => {
+    if (stateDestination) {
+      setPlannerInitialState(stateDestination);
+    }
+    if (spotDestination) {
+      setPlannerInitialSpot(spotDestination);
+    }
+    setActiveTab(tab);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectRegisterFromGateway = () => {
@@ -281,7 +294,7 @@ export const App: React.FC = () => {
             userProfile={userProfile}
             providerProfile={providerProfile}
             activeTrip={activeTrip}
-            onNavigateTab={setActiveTab}
+            onNavigateTab={handleNavigateTab}
             onOpenRegister={() => {
               if (!userProfile.isRegistered && !providerProfile) {
                 setIsGatewayOpen(true);
@@ -296,7 +309,7 @@ export const App: React.FC = () => {
 
         {activeTab === 'spots' && (
           <SpotsExplorer
-            onNavigateTab={setActiveTab}
+            onNavigateTab={handleNavigateTab}
           />
         )}
 
@@ -305,6 +318,8 @@ export const App: React.FC = () => {
             trips={trips}
             onSaveTrip={handleSaveTrip}
             providerProfile={providerProfile}
+            initialDestState={plannerInitialState}
+            initialDestSpot={plannerInitialSpot}
           />
         )}
 

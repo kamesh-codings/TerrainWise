@@ -67,6 +67,8 @@ interface TripPlannerProps {
   trips: TripPlan[];
   onSaveTrip: (trip: TripPlan) => void;
   providerProfile?: ServiceProviderProfile | null;
+  initialDestState?: string;
+  initialDestSpot?: string;
 }
 
 const getCurrencySymbol = (curr?: string) => {
@@ -205,7 +207,9 @@ const renderHighlightedSpotName = (name: string, query: string) => {
 export const TripPlanner: React.FC<TripPlannerProps> = ({
   trips,
   onSaveTrip,
-  providerProfile
+  providerProfile,
+  initialDestState,
+  initialDestSpot
 }) => {
   // Master Datasets from live database
   const [allLocations, setAllLocations] = useState<LocationItem[]>([]);
@@ -220,12 +224,28 @@ export const TripPlanner: React.FC<TripPlannerProps> = ({
   const [boardingSpotId, setBoardingSpotId] = useState<string>('');
   const [customBoardingText, setCustomBoardingText] = useState<string>('');
 
-  // 2. Destination Hierarchical State (starts clean without prefilled demo values)
+  // 2. Destination Hierarchical State (starts clean or from initial props)
   const [destCountry, setDestCountry] = useState<string>('India');
-  const [destState, setDestState] = useState<string>('');
+  const [destState, setDestState] = useState<string>(initialDestState || '');
   const [destCityId, setDestCityId] = useState<string>('');
   const [destSpotId, setDestSpotId] = useState<string>('');
   const [customDestText, setCustomDestText] = useState<string>('');
+
+  // Sync initial destination state when passed from external state navigation
+  useEffect(() => {
+    if (initialDestState) {
+      setDestState(initialDestState);
+      setDestCityId('');
+      setDestSpotId('');
+    }
+  }, [initialDestState]);
+
+  // Sync initial spot if specified
+  useEffect(() => {
+    if (initialDestSpot) {
+      setSelectedSpots(prev => (prev.includes(initialDestSpot) ? prev : [initialDestSpot, ...prev]));
+    }
+  }, [initialDestSpot]);
 
   // Travel Dates & Config (clean initial state)
   const [transportMode, setTransportMode] = useState<TransportMode>('Train');

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Compass, 
   MapPin, 
@@ -17,16 +17,20 @@ import {
   CloudSun, 
   Activity, 
   Zap, 
-  PhoneCall,
-  Radio,
-  ExternalLink,
-  RefreshCw,
-  Check,
-  Mic,
-  MicOff
+  PhoneCall, 
+  Radio, 
+  ExternalLink, 
+  RefreshCw, 
+  Check, 
+  Mic, 
+  MicOff,
+  Search,
+  X,
+  Globe
 } from 'lucide-react';
 import { UserProfile, TripPlan, ServiceProviderProfile, UserLocation } from '../types';
 import { TOP_PICKS_CATEGORIES, NEARBY_HOSPITALS } from '../data/mockData';
+import { ALL_INDIAN_STATES, IndianState } from '../data/indianStatesData';
 import { 
   getStoredLocation, 
   saveStoredLocation,
@@ -42,7 +46,7 @@ interface DashboardProps {
   userProfile: UserProfile;
   providerProfile?: ServiceProviderProfile | null;
   activeTrip?: TripPlan;
-  onNavigateTab: (tab: string) => void;
+  onNavigateTab: (tab: string, destinationState?: string, destinationSpot?: string) => void;
   onOpenRegister: () => void;
   onOpenProviderRegister?: () => void;
   onOpenSOS: () => void;
@@ -115,6 +119,24 @@ export const Dashboard: React.FC<DashboardProps> = ({
   });
 
   const displayPicks = filteredCategories.length > 0 ? filteredCategories : TOP_PICKS_CATEGORIES;
+
+  // States Explorer & Photo Collages State
+  const [selectedZone, setSelectedZone] = useState<string>('All');
+  const [stateSearchQuery, setStateSearchQuery] = useState<string>('');
+
+  const filteredStates = useMemo(() => {
+    return ALL_INDIAN_STATES.filter(state => {
+      const matchZone = selectedZone === 'All' || state.zone === selectedZone;
+      if (!matchZone) return false;
+      if (!stateSearchQuery.trim()) return true;
+      const q = stateSearchQuery.trim().toLowerCase();
+      const matchName = state.name.toLowerCase().includes(q);
+      const matchCapital = state.capital.toLowerCase().includes(q);
+      const matchTagline = state.tagline.toLowerCase().includes(q);
+      const matchPlaces = state.topPlaces.some(p => p.name.toLowerCase().includes(q) || p.city.toLowerCase().includes(q));
+      return matchName || matchCapital || matchTagline || matchPlaces;
+    });
+  }, [selectedZone, stateSearchQuery]);
 
   return (
     <div className="animate-fade" style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
@@ -734,7 +756,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <div
               key={pick.id}
               className="pick-card"
-              onClick={() => onNavigateTab('planner')}
+              onClick={() => onNavigateTab('planner', 'Tamil Nadu', pick.spots[0]?.split(',')[0]?.trim())}
             >
               <div className="pick-image-container">
                 <img
@@ -759,14 +781,23 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   </span>
                   <div className="flex flex-wrap gap-1">
                     {pick.spots.map((spot, idx) => (
-                      <span key={idx} style={{ 
-                        fontSize: '0.72rem', 
-                        padding: '3px 8px', 
-                        borderRadius: '6px', 
-                        background: 'rgba(10, 15, 29, 0.9)', 
-                        color: '#cbd5e1', 
-                        border: '1px solid rgba(255, 255, 255, 0.05)' 
-                      }}>
+                      <span 
+                        key={idx} 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onNavigateTab('planner', 'Tamil Nadu', spot.split(',')[0].trim());
+                        }}
+                        style={{ 
+                          fontSize: '0.72rem', 
+                          padding: '3px 8px', 
+                          borderRadius: '6px', 
+                          background: 'rgba(10, 15, 29, 0.9)', 
+                          color: '#cbd5e1', 
+                          border: '1px solid rgba(255, 255, 255, 0.05)',
+                          cursor: 'pointer'
+                        }}
+                        title={`Plan trip with ${spot}`}
+                      >
                         {spot}
                       </span>
                     ))}
@@ -781,6 +812,276 @@ export const Dashboard: React.FC<DashboardProps> = ({
             </div>
           ))}
         </div>
+      </div>
+
+      {/* ================================================================= */}
+      {/* Explore India by State (All 36 States & UTs with Real Photo Collages) */}
+      {/* ================================================================= */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '10px' }}>
+        <div className="flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <Compass style={{ width: '22px', height: '22px', color: '#38bdf8' }} />
+              <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                Explore India by State
+              </h2>
+              <span className="badge badge-blue" style={{ fontSize: '0.72rem' }}>
+                All 36 States & UTs
+              </span>
+            </div>
+            <p style={{ fontSize: '0.82rem', color: '#94a3b8', margin: '4px 0 0 0' }}>
+              Real landmark photo collages for each state. Click any state or landmark to launch your destination in the Trip Planner.
+            </p>
+          </div>
+          <span className="badge badge-purple" style={{ fontSize: '0.75rem', padding: '4px 10px' }}>
+            {filteredStates.length} Displayed
+          </span>
+        </div>
+
+        {/* Filter & Search Toolbar */}
+        <div className="glass-panel" style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ position: 'relative', width: '100%' }}>
+            <Search style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', width: '16px', height: '16px', color: '#94a3b8', pointerEvents: 'none' }} />
+            <input
+              type="text"
+              value={stateSearchQuery}
+              onChange={e => setStateSearchQuery(e.target.value)}
+              placeholder="Search states, capitals, or famous landmarks (e.g. Tamil Nadu, Kerala, Rajasthan, Hampi, Kedarnath)..."
+              className="input-glass"
+              style={{ width: '100%', paddingLeft: '38px', paddingRight: stateSearchQuery ? '36px' : '12px', fontSize: '0.82rem', borderRadius: '10px' }}
+            />
+            {stateSearchQuery && (
+              <button
+                type="button"
+                onClick={() => setStateSearchQuery('')}
+                style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+              >
+                <X style={{ width: '14px', height: '14px' }} />
+              </button>
+            )}
+          </div>
+
+          {/* Region Tabs */}
+          <div className="flex items-center gap-1 flex-wrap">
+            {[
+              { id: 'All', label: 'All States & UTs (36)' },
+              { id: 'South', label: 'South (5)' },
+              { id: 'North', label: 'North (8)' },
+              { id: 'West', label: 'West (4)' },
+              { id: 'East & North-East', label: 'East & North-East (11)' },
+              { id: 'Central', label: 'Central (2)' },
+              { id: 'Union Territories', label: 'Union Territories (6)' }
+            ].map(tab => {
+              const isActive = selectedZone === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setSelectedZone(tab.id)}
+                  style={{
+                    padding: '5px 12px',
+                    borderRadius: '8px',
+                    fontSize: '0.74rem',
+                    fontWeight: 700,
+                    border: 'none',
+                    cursor: 'pointer',
+                    background: isActive ? '#38bdf8' : 'rgba(255,255,255,0.06)',
+                    color: isActive ? '#0f172a' : '#cbd5e1',
+                    transition: 'all 0.15s ease'
+                  }}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* States Cards Grid */}
+        {filteredStates.length > 0 ? (
+          <div className="states-grid">
+            {filteredStates.map(state => (
+              <div
+                key={state.id}
+                className="state-card"
+                onClick={() => onNavigateTab('planner', state.name)}
+              >
+                {/* 6-Photo Real Landmark Collage (3 cols x 2 rows) */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gridTemplateRows: 'repeat(2, 92px)',
+                  gap: '4px',
+                  background: 'rgba(10, 15, 29, 0.95)',
+                  padding: '4px',
+                  position: 'relative'
+                }}>
+                  {state.topPlaces.slice(0, 6).map((place, pIdx) => (
+                    <div
+                      key={pIdx}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onNavigateTab('planner', state.name, place.name);
+                      }}
+                      style={{
+                        position: 'relative',
+                        overflow: 'hidden',
+                        borderRadius: '8px',
+                        background: '#0a0f1d',
+                        cursor: 'pointer'
+                      }}
+                      title={`Click to set destination to ${place.name} (${place.category}) in ${place.city}, ${state.name}`}
+                    >
+                      <img
+                        src={place.image}
+                        alt={place.name}
+                        loading="lazy"
+                        className="state-collage-thumb"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                      <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'linear-gradient(to top, rgba(9, 14, 23, 0.92) 0%, rgba(9, 14, 23, 0.2) 65%, transparent 100%)'
+                      }} />
+                      <div style={{
+                        position: 'absolute',
+                        bottom: '4px',
+                        left: '5px',
+                        right: '5px',
+                        display: 'flex',
+                        flexDirection: 'column'
+                      }}>
+                        <span style={{
+                          fontSize: '0.62rem',
+                          fontWeight: 800,
+                          color: '#ffffff',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          textShadow: '0 1px 3px rgba(0,0,0,0.9)'
+                        }}>
+                          {place.name}
+                        </span>
+                        <span style={{ fontSize: '0.54rem', color: '#94a3b8' }}>
+                          {place.city}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* Badges on Collage */}
+                  <div style={{ position: 'absolute', top: '10px', left: '10px', zIndex: 2 }}>
+                    <span className="badge badge-purple" style={{ fontSize: '0.62rem', padding: '3px 8px', backdropFilter: 'blur(8px)' }}>
+                      {state.zone}
+                    </span>
+                  </div>
+                  <div style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 2 }}>
+                    <span className="badge badge-blue" style={{ fontSize: '0.62rem', padding: '3px 8px', backdropFilter: 'blur(8px)' }}>
+                      {state.spotCount}
+                    </span>
+                  </div>
+                </div>
+
+                {/* State Card Details */}
+                <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px', flex: 1, justifyContent: 'space-between' }}>
+                  <div>
+                    <div className="flex items-center justify-between" style={{ marginBottom: '4px' }}>
+                      <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '6px', margin: 0 }}>
+                        <MapPin style={{ width: '16px', height: '16px', color: '#38bdf8' }} />
+                        {state.name}
+                      </h3>
+                      <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>
+                        🏛️ {state.capital}
+                      </span>
+                    </div>
+
+                    <p style={{ fontSize: '0.75rem', color: '#cbd5e1', margin: '4px 0 10px 0', lineHeight: 1.4 }}>
+                      {state.tagline}
+                    </p>
+
+                    <div>
+                      <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block', marginBottom: '6px' }}>
+                        Top 6 Famous Landmarks (Click to Plan):
+                      </span>
+                      <div className="flex flex-wrap gap-1">
+                        {state.topPlaces.slice(0, 6).map((pl, idx) => (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onNavigateTab('planner', state.name, pl.name);
+                            }}
+                            style={{
+                              fontSize: '0.68rem',
+                              padding: '3px 8px',
+                              borderRadius: '6px',
+                              background: 'rgba(56, 189, 248, 0.08)',
+                              color: '#cbd5e1',
+                              border: '1px solid rgba(56, 189, 248, 0.2)',
+                              cursor: 'pointer',
+                              textAlign: 'left',
+                              transition: 'all 0.15s ease'
+                            }}
+                            title={`Set destination to ${pl.name}, ${state.name}`}
+                          >
+                            <span style={{ color: '#38bdf8', fontWeight: 700 }}>{idx + 1}.</span> {pl.name}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Plan Trip in State Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onNavigateTab('planner', state.name);
+                    }}
+                    style={{
+                      padding: '9px 14px',
+                      borderRadius: '10px',
+                      background: 'linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%)',
+                      border: '1px solid rgba(56, 189, 248, 0.3)',
+                      color: '#38bdf8',
+                      fontWeight: 700,
+                      fontSize: '0.78rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      cursor: 'pointer',
+                      marginTop: '8px',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    <span>Plan Trip in {state.name}</span>
+                    <ArrowRight style={{ width: '15px', height: '15px' }} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="glass-panel" style={{ padding: '36px', textAlign: 'center', color: '#94a3b8' }}>
+            <Globe style={{ width: '32px', height: '32px', color: '#64748b', margin: '0 auto 8px auto' }} />
+            <p style={{ fontSize: '0.9rem', color: '#ffffff', fontWeight: 700, margin: '0 0 4px 0' }}>
+              No state found matching "{stateSearchQuery}"
+            </p>
+            <p style={{ fontSize: '0.78rem', margin: '0 0 16px 0' }}>
+              Try searching another state name, capital, or famous landmark.
+            </p>
+            <button
+              type="button"
+              onClick={() => { setStateSearchQuery(''); setSelectedZone('All'); }}
+              className="btn-secondary"
+              style={{ padding: '6px 14px', fontSize: '0.78rem' }}
+            >
+              Reset Search & Filters
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
