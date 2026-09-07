@@ -236,6 +236,7 @@ async function bootstrapMySQL(pool) {
       username VARCHAR(64) UNIQUE,
       password VARCHAR(255),
       email VARCHAR(128) UNIQUE,
+      google_id VARCHAR(255),
       full_name VARCHAR(128) NOT NULL,
       avatar_url TEXT,
       dob DATE,
@@ -260,7 +261,8 @@ async function bootstrapMySQL(pool) {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
       INDEX idx_user_email (email),
-      INDEX idx_user_username (username)
+      INDEX idx_user_username (username),
+      INDEX idx_user_google_id (google_id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;`,
 
     `CREATE TABLE IF NOT EXISTS service_providers (
@@ -370,6 +372,15 @@ async function bootstrapMySQL(pool) {
     }
   }
 
+  // Migration: Add google_id column if missing (for existing databases)
+  try {
+    await pool.query(`ALTER TABLE users ADD COLUMN google_id VARCHAR(255) DEFAULT NULL`);
+    await pool.query(`CREATE INDEX idx_user_google_id ON users (google_id)`);
+    console.log('✅ MySQL Migration: Added google_id column to users table.');
+  } catch (err) {
+    // Column already exists — safe to ignore
+  }
+
   await syncSeedDataToDatabase(async (sql, params) => {
     const [rows] = await pool.query(sql, params);
     return rows;
@@ -423,6 +434,7 @@ async function bootstrapSqlite(db) {
       username TEXT UNIQUE,
       password TEXT,
       email TEXT UNIQUE,
+      google_id TEXT,
       full_name TEXT NOT NULL,
       avatar_url TEXT,
       dob TEXT,
@@ -555,6 +567,56 @@ async function bootstrapSqlite(db) {
   const statements = ddl.split(';').map(s => s.trim()).filter(Boolean);
   for (const stmt of statements) {
     await runSqliteQuery(db, stmt);
+  }
+
+  // Ensure all user profile and service provider columns exist even on pre-existing databases
+  try {
+    const userCols = await runSqliteQuery(db, 'PRAGMA table_info(users);');
+    const existingColNames = new Set((userCols || []).map(c => c.name.toLowerCase()));
+
+    const missingUserColumns = [
+      { name: 'google_id', type: 'TEXT' },
+      { name: 'username', type: 'TEXT' },
+      { name: 'password', type: 'TEXT' },
+      { name: 'dob', type: 'TEXT' },
+      { name: 'age', type: 'INTEGER DEFAULT 0' },
+      { name: 'gender', type: "TEXT DEFAULT 'Male'" },
+      { name: 'blood_group', type: "TEXT DEFAULT 'O+'" },
+      { name: 'allergies', type: 'TEXT' },
+      { name: 'medical_conditions', type: 'TEXT' },
+      { name: 'disability', type: 'TEXT' },
+      { name: 'address', type: 'TEXT' },
+      { name: 'govt_id_type', type: "TEXT DEFAULT 'Aadhaar Card'" },
+      { name: 'govt_id_number', type: 'TEXT' },
+      { name: 'govt_id_state', type: "TEXT DEFAULT 'Tamil Nadu (TN), India'" },
+      { name: 'languages_known', type: 'TEXT' },
+      { name: 'preferred_language', type: "TEXT DEFAULT 'English'" },
+      { name: 'native_currency', type: "TEXT DEFAULT 'INR'" },
+      { name: 'current_location', type: 'TEXT' },
+      { name: 'location_coordinates', type: 'TEXT' },
+      { name: 'trusted_contacts', type: 'TEXT' },
+      { name: 'interested_top_picks', type: 'TEXT' },
+      { name: 'is_registered', type: 'INTEGER DEFAULT 1' },
+      { name: 'role', type: "TEXT DEFAULT 'tourist'" }
+    ];
+
+    for (const col of missingUserColumns) {
+      if (!existingColNames.has(col.name.toLowerCase())) {
+        try {
+          await runSqliteQuery(db, `ALTER TABLE users ADD COLUMN ${col.name} ${col.type};`);
+        } catch (e) { /* ignore if already exists */ }
+      }
+    }
+
+    const spCols = await runSqliteQuery(db, 'PRAGMA table_info(service_providers);');
+    const spColNames = new Set((spCols || []).map(c => c.name.toLowerCase()));
+    if (!spColNames.has('google_id')) {
+      try {
+        await runSqliteQuery(db, 'ALTER TABLE service_providers ADD COLUMN google_id TEXT;');
+      } catch (e) { /* ignore */ }
+    }
+  } catch (err) {
+    console.error('Error verifying SQLite columns:', err.message);
   }
 
   await syncSeedDataToDatabase((sql, params) => runSqliteQuery(db, sql, params), 'sqlite', db);

@@ -1,0 +1,354 @@
+name,type,latitude,longitude,osm_id
+G1,police,11.4117251,76.7031563,way/24385984
+Police Quarters,police,11.4119909,76.6888919,way/32747326
+Women's Police Station,police,10.7809629,79.1339162,way/43316308
+Thanjavur District Police HQ,police,10.7801475,79.1335845,way/43316417
+Police training camp 4th battalion in coimbatore,police,10.9412581,76.9396392,way/130035512
+Commisioner Office,police,11.0007466,76.9681639,way/133585587
+B9 Saravanampatty Police Station,police,11.0747167,77.0027098,way/133739505
+Nilgiri armed reserve,police,11.4239411,76.7092904,way/151586128
+Pavoorchatram Police Station,police,8.9153414,77.3841992,way/178616405
+Mylapore E1 PS,police,13.0359873,80.2701421,way/208569725
+Periamet PS,police,13.0831121,80.2709138,way/211435479
+R1 Police Station,police,13.0347642,80.2294897,way/214356712
+Esplanade PS,police,13.0864715,80.2853702,way/217637688
+F4 Greams Road PS,police,13.0598386,80.2547972,way/217767201
+Peravallur Police Station,police,13.1113985,80.2263784,way/217920494
+D1 Triplicane Police Station,police,13.0672549,80.2736489,way/217960575
+K4 Police Station,police,13.0925447,80.21797,way/231052535
+R3 Ashok Nagar Police Station,police,13.0440809,80.2173045,way/240511203
+Abhiramapuram,police,13.0332562,80.2559671,way/241007895
+F2 Egmore Police Station,police,13.0750725,80.257014,way/241027985
+Thudiyalur Police Station,police,11.0820675,76.9412411,node/247177690
+Mambalam Police Station,police,13.0349573,80.22946,node/250363729
+Royapettah PS,police,13.0520106,80.2637348,node/259773441
+Sulur Police Station,police,11.0248612,77.1204842,way/295103984
+Selaiyur Police Station,police,12.9229459,80.1352359,way/297495780
+S-8 Adambakkam Police Station,police,12.9893957,80.2019683,node/300468066
+Teynampet E3 PS,police,13.048651,80.2494881,node/301949978
+Police Quarters,police,11.4741243,77.8673495,way/306980743
+Police Station,police,10.6571159,77.0083512,node/308446629
+Adyar J2,police,12.997814,80.2557176,node/312025133
+Central Station PS,police,13.0818276,80.2755071,node/320968223
+Chennai Central RPF,police,13.0830613,80.2732996,node/320968578
+RTO Check Post,police,8.3307076,77.1742787,node/334644593
+Tax Check Post,police,8.3242251,77.1817641,node/334644595
+B1 Saint Thomas Mount PS,police,12.9991212,80.200262,node/339282419
+Mohanur Police Station,police,11.0615398,78.1388491,way/342464013
+Police Station - J1 - Saidapet,police,13.0224076,80.226078,way/343141650
+Police Station,police,11.2185353,78.1695347,way/345483870
+Women Police Station,police,11.2183133,78.1692677,way/345483871
+Kalpakkam Police Station,police,12.5037687,80.1533696,node/353073504
+E5 Foreshore Estate Police Station,police,13.0245553,80.2748155,way/354469200
+Dharapuram Police Station,police,10.7312269,77.5240154,node/354836500
+Sadras Police Station,police,12.5251654,80.1626667,node/354890203
+D3 Guduvancheri Police Station,police,12.8439997,80.0603546,way/355104205
+Koyambedu Police Station,police,13.0696407,80.2004587,node/366075241
+E1 Police Station,police,11.412076,76.6884781,node/369183249
+"Office, Police Commissioner",police,13.0100865,80.1990931,node/370481197
+T15 SRMC PS,police,13.0341993,80.1602489,node/370969674
+KK Nagar PS,police,13.0415108,80.2054415,node/389948945
+N4 PS,police,13.1345408,80.2974596,node/390852677
+Police Station,police,11.746409,79.7454395,way/396363992
+Virugambakkam Police Station,police,13.0491123,80.1992562,node/411318042
+K G Chavadi Police,police,10.8755239,76.8950568,way/580408779
+Sipcot Police Station,police,12.9562113,79.3044053,way/683879393
+vadavalli police station,police,11.0452875,76.8949051,way/685342422
+Police Booth,police,13.0737484,80.1923421,node/687175330
+Police Booth,police,13.0656907,80.1935705,node/687177364
+Police Station,police,11.277733,77.5865812,node/725513774
+Velachery,police,12.9850126,80.2208713,node/747616884
+District Police Office,police,10.9990022,76.9677805,node/803272013
+Ambattur T1 Police Station,police,13.1073143,80.1525569,way/835251736
+District Police Office,police,12.2717178,79.0749271,way/844760299
+Rajapalayam South Police Station,police,9.4499892,77.5546694,way/914095632
+Rajapalayam North Police Station,police,9.4589091,77.5556291,way/914095633
+Police Booth,police,13.0447322,80.1862162,node/934859086
+E6,police,13.2718063,80.2625092,node/951833229
+Chintadripet,police,13.0749088,80.2725042,node/966556101
+S6 Shankar Nagar Police Station,police,12.9692797,80.1257959,node/983961147
+Vadapalani Police station,police,13.049673,80.2117315,node/984217571
+Ramapuram Police Station,police,13.0317737,80.1790069,node/1015569835
+B4 Taluk Police Station,police,11.9366797,79.5066409,way/1029921184
+Guindy J3 Police station,police,13.0093531,80.2106918,way/1038741390
+Ukkadam Police Station(B2),police,10.9890037,76.9615341,node/1051328308
+Womens Police Station,police,11.0155688,76.9683463,node/1051328344
+Kattor Police Station,police,11.0153033,76.968307,node/1051328360
+Madukkarai Police Station,police,10.911453,76.9490401,node/1051328368
+Coastal Police Station Pazhaverkadu,police,13.4201609,80.3175919,way/1065857124
+B1 North Beach Police Station,police,13.0899215,80.2904578,way/1076586613
+C3 Seven Wells Police Station,police,13.0988879,80.2816945,way/1089835073
+C5 Kothavalchavadi Police Station,police,13.0940347,80.2854602,way/1089863482
+C1 Flower Bazaar Police Station,police,13.0884077,80.2817032,way/1090653955
+C1 Flower Bazaar Police Booth,police,13.0883718,80.2823944,way/1090653956
+H1 Washermanpet Police Station,police,13.1086614,80.2809199,way/1090950056
+P2 Otteri Police Station,police,13.1003326,80.2515633,way/1091003580
+E3 Teynampet Police Assistance Booth,police,13.0313112,80.2398324,way/1095915240
+Office of the Director General of Police Civil Supplies CID Chennai,police,13.0300516,80.2432354,way/1095915254
+Perungudi Police Station,police,9.8294147,78.1009093,way/1105182350
+C2 Elephant Gate Police Station,police,13.0926307,80.2750124,way/1105971900
+"Office of the Deputy Commissioner of Police, Pudupet",police,13.0686386,80.2620582,way/1107911282
+N3 Muthialpet Police Station,police,13.0998376,80.2870248,way/1110191293
+D5 Marina Police Station,police,13.0391513,80.2793207,way/1112851437
+B1 North Beach Police Station,police,13.0966217,80.2915125,way/1116154383
+Armed Reserve Police,police,11.6678863,78.1607012,way/1120328241
+T.S.P. Camp,police,10.4642883,77.5175337,way/1120601888
+G7 Chetpet Police Station,police,13.0725347,80.2520681,way/1122926992
+D2 Anna Salai (Mount Road) Poice Station,police,13.061062,80.262232,way/1123051523
+VEERANAM POLICE STATION,police,11.6862223,78.2128812,way/1130577724
+Tamil Nadu Police Computer Communication Centre,police,13.0225066,80.271388,way/1131693908
+Tamil Nadu State Crime Records Bureau,police,13.022806,80.2716339,way/1131693910
+Elliots Beach Police Outpost,police,13.0007139,80.2712201,way/1132145713
+E1 Singanallur Police Station,police,11.0003996,77.0296891,way/1149353353
+C5 Kothavalchavadi Police Station,police,13.0953439,80.2807237,way/1176848837
+D1 Chengalpattu Police Station,police,12.6965498,79.9773389,way/1182101834
+All Women's Police Station,police,12.6741842,79.9784278,way/1184563415
+Office Of Assistant Superintendent Of Police,police,12.6743322,79.9782946,way/1184563416
+TIRUPPUR NORTH,police,11.107892,77.3450511,node/1186119073
+Palapatti Police Station,police,11.669908,78.1395206,way/1227711041
+Police Recruit School Thiruvallur,police,13.1468874,79.8387584,way/1231867886
+T13 Kundrathur Police Station,police,12.9974051,80.0918523,way/1236765220
+Gandhimanagar Police Station,police,11.0412789,77.0062037,way/1237329086
+"Office of Deputy Superintendent of Police, Thiruvarur",police,10.775372,79.6151789,way/1281445046
+C3 Appan Thiruppathi Police Station,police,10.0143867,78.1906544,way/1299705525
+Palladam Police Station,police,10.9966966,77.279193,way/1302295328
+Karumathampatti Police Station,police,11.1093464,77.1802095,way/1302295330
+Thiruvarur Town Police Station,police,10.7745754,79.6322485,way/1305366954
+Police booth,police,12.9651635,80.2060352,node/1315141190
+T-1 Police Station,police,13.1306625,80.1587027,way/1330398918
+BS-1 Vellore South Police Station,police,12.9164047,79.1328121,way/1337331154
+Ideal North Police Station,police,12.9233141,79.1315278,way/1337331156
+Chettipalayam Police Station,police,10.9174713,77.0377395,way/1348530473
+District Police Station,police,12.9468623,79.3182381,way/1349540967
+Railway Police Station,police,11.4045403,76.6960877,way/1381963782
+Karamadai Police Station,police,11.2395224,76.9595897,node/1423854834
+Pudumund Police Station,police,11.4311534,76.7027635,way/1425843725
+Porur Police Station,police,13.0343074,80.1601292,node/1451946829
+Podanur Police Station,police,10.9658795,76.9854655,way/1460005482
+TN Police Battallion,police,10.9414244,76.9391242,way/1468160426
+"C2- Race Course Police Station, Coimbatore",police,11.001692,76.9713177,node/1470432055
+C-3 Saibaba Colony Police Station,police,11.0266348,76.9515967,node/1471854713
+Saravanampatti Police Station,police,11.0747296,77.0027116,node/1474350853
+Ramanathapuram police station,police,10.9975827,76.997871,node/1474518443
+B1 POLICE STATION,police,10.9924847,76.9591307,node/1474803271
+Manavala Nagar Police Station,police,13.0839303,79.8991106,way/1486069895
+T-13 Chitlapakkam Police Station,police,12.9395399,80.1380005,way/1531132888
+Thiruverumbur Police Station,police,10.7813909,78.7810197,way/1535747119
+Police station,police,11.0982007,77.3547487,way/1551398607
+Town Crime Police Station,police,12.230218,79.0703162,way/1553492424
+Kollencode Police Station,police,8.2937626,77.114347,node/1623278302
+Police Station,police,11.3630177,77.7476505,node/1668204092
+Tisaiyanvillai Police Station,police,8.3366712,77.8541616,node/1685476656
+Shastri Nagar Police Station,police,13.0006116,80.2659307,node/1711627907
+Bagayam Police Station,police,12.8757507,79.1336955,node/1754861237
+Palani Town Police Station,police,10.4528743,77.5155698,node/1771171090
+Tiruppur North,police,11.1066254,77.3427939,node/1813686211
+Police Outpost,police,13.2156173,80.1694388,node/1865961947
+HVF,police,13.1291456,80.1073794,node/1896342668
+Railway police station,police,8.9645513,77.3063031,node/1909667210
+"Krishnagiri Taluk office, fire station, Police station",police,12.5254539,78.2171823,node/1911051522
+Police Stations,police,8.9724199,77.4192932,node/1918541999
+K11 CMBT Police Station,police,13.0687012,80.2046669,node/1948632616
+Komarapalayam Police station,police,11.4413141,77.6931115,node/1974104672
+Adirampattinam Police Station,police,10.3404104,79.3855317,node/1988390146
+Commissioner's office,police,11.755369,79.7688583,node/1998095213
+J2 Police Station Kedar Jurisdiction,police,12.0091224,79.4029681,node/2039963456
+J9 Police Station,police,12.947613,80.2416251,node/2061123092
+Madipakkam Police Station,police,12.9559858,80.1853072,node/2086712180
+All Women Police Station,police,8.0824428,77.5495196,node/2152043251
+Police Station,police,8.0821735,77.5495411,node/2152043264
+Police Srirangam,police,10.8571762,78.6896428,node/2152463911
+Taluk Police Station Kumbakonam,police,10.9555027,79.3655029,node/2153276888
+Traffic Police Station,police,12.6212684,80.1955516,node/2154131305
+"Police Station, Vettavalam",police,12.1098807,79.2447246,node/2156885345
+Police Booth,police,12.8975662,80.1823209,node/2210021510
+police station,police,10.7035066,78.5504006,node/2214183884
+Police Assistance Booth Mugalivakam,police,13.0207162,80.1663239,node/2221603034
+B2 Police Station,police,10.8228204,78.6827289,node/2296700944
+Trafic Police Station,police,12.7279317,77.8270513,node/2344385363
+Hosur Town Police Station,police,12.7267546,77.827283,node/2344410073
+Police,police,12.6214889,80.1942737,node/2375997491
+Jaihindpuram Police Station,police,9.9066088,78.1119041,node/2442814216
+City Police HQ,police,9.5565491,77.9453096,node/2445795300
+Koothanallur Police Station,police,10.7161884,79.5172308,node/2535205986
+Women's Police Station,police,12.2523481,79.4163223,node/2578986487
+Police Station,police,12.2517837,79.4181292,node/2578986788
+J6 Police Station,police,12.9874599,80.2559315,node/2587520257
+Mailam Police Station,police,12.1281858,79.6195761,node/2678764369
+S-10 Police Station (Pallikaranai),police,12.9173825,80.1950805,node/3097014588
+Perumalpuram C3 Police station,police,8.7040942,77.7319902,node/3154720635
+Chetpet,police,13.0706907,80.2421194,node/3195423909
+Rathinapuri Police Station,police,11.0250344,76.9715748,node/3571694093
+Thirukovilur Police Station,police,11.9664139,79.2020996,node/3591907532
+Boiler Plant Police Station,police,10.7710082,78.795665,node/3686857438
+Police Station,police,11.9401952,79.4865046,node/3983676959
+Police Station,police,11.9440945,79.4958028,node/3983763747
+Salem Town Police Station,police,11.6539405,78.1604851,node/4299434191
+Alagapuram Police station,police,11.6769953,78.1422615,node/4305413795
+R6 KUMARAN NAGAR POLICE STATION ,police,13.0283677,80.2163105,node/4308319495
+Denkanikottai Police Station,police,12.5208971,77.7903372,node/4322649892
+Airport Police Station,police,10.7588027,78.7077417,node/4436123523
+G4 Vandavasi north police station,police,12.5068712,79.6045373,node/4444954749
+superitendent of police,police,12.8224828,79.6973133,node/4445174109
+Walajabad police station,police,12.7937471,79.8162163,node/4445183306
+c3 police station Manimangalam,police,12.9163861,80.0398418,node/4445204054
+Cheyur Police station,police,12.3517152,79.9975084,node/4445288963
+sup,police,12.822712,79.6949704,node/4445321696
+anna nagar police superitendent station,police,12.8237772,79.6974277,node/4445321697
+Chengalpatu AwPolice Station,police,12.6971397,79.9771626,node/4445352945
+Guduvancherry Police Station,police,12.8439226,80.0615864,node/4445363957
+Baluchetty Chatram Police station,police,12.8768075,79.6160108,node/4445386757
+Melmaruvathur Police Station,police,12.4316923,79.831919,node/4445409369
+Mathur Police Station,police,12.3828409,78.4125514,node/4445425089
+Otteri Police Station,police,13.0874523,80.2458786,node/4445488162
+Palur Police station,police,12.7676644,79.9034914,node/4445825097
+Ammapet B 6  Police Station,police,11.6530298,78.1617852,node/4446290798
+Ammapet B 6  Police Station,police,11.6590023,78.1816097,node/4446318185
+Annadanapatti B 4 Police Station,police,11.6424031,78.1404779,node/4446321544
+Attayampati C 1 Police Station,police,11.5313534,78.050867,node/4446325349
+Hastampatti B 7 Police Station,police,11.6778088,78.1645798,node/4446333993
+Kannankurichi B 8 Police Station,police,11.6967465,78.1769759,node/4446337753
+Karipatti Police Station,police,9.6771157,78.1034294,node/4446339678
+Kitchipalayam B 5 Police Station,police,11.6472529,78.1702578,node/4446341974
+Mallur Police Station,police,11.5452987,78.1428828,node/4446350980
+Palapatti B 10 Police Station,police,11.6699556,78.1394849,node/4446359348
+Panamarathupatti Police Station,police,11.5614945,78.1639663,node/4446368920
+Police Control Room Police Station,police,11.6425701,78.1459515,node/4446378287
+Suramangalam Police Station,police,11.6708007,78.1168863,node/4446385831
+Shevapet B 2 Police Station,police,11.6514754,78.1522608,node/4446388122
+Veeranam Police Station,police,11.6862224,78.2128652,node/4446398757
+Women Ammapet W 2 Police Station,police,11.6590617,78.1818592,node/4446403140
+Women Salem Town W 1 Police Station,police,11.654013,78.1601008,node/4446409862
+police station s11,police,12.9254171,80.1128984,node/4446984572
+Somangalam police station,police,12.9459306,80.0355638,node/4446987278
+thiroporur police station,police,12.7236799,80.1887292,node/4446991785
+Uthiranerur police station,police,12.6162879,79.7537657,node/4446993625
+Acirapakkam Police Station,police,12.403834,79.8174314,node/4446999050
+Sriperumbudur Police Station,police,12.9637993,79.9491741,node/4446999051
+Cheyyar Police Station,police,12.6667419,79.540611,node/4449926670
+J.J Nagar Police Booth (V3),police,13.0876952,80.1878894,node/4449967759
+Anna Nagar Police Station,police,9.9354414,78.1442838,node/4449972552
+D6 Police Station,police,12.7890654,80.0309867,node/4449998376
+Orathi Police Station,police,12.3806752,79.6928343,node/4450005607
+Thalambur Police Station,police,12.8469006,80.2271771,node/4450010503
+Temple police station,police,9.2893241,79.3185256,node/4471710291
+West Police Station,police,9.5924531,77.9534737,node/4546946582
+Viruthampattu police station,police,12.9534269,79.1414205,node/4693434975
+Gandhi Market Police Station,police,10.8161795,78.6944015,node/4701650874
+Unnamed police station,police,11.7189488,79.7696453,node/4707055100
+Arakkonam Town Police Station,police,13.0838611,79.6699654,node/4748988045
+Kadampuliyur Police Station,police,11.7025877,79.5509081,node/4881957124
+H1 - Kulithalai Police Station,police,10.9407757,78.4198168,node/4951080243
+District Commissioner Office,police,10.780682,78.7015497,node/5079396769
+Police Assistance Booth,police,13.0699263,80.2714181,node/5079397364
+Mandiyur Police Station,police,10.6596787,78.7408896,node/5079397452
+District Police Office,police,10.7849428,78.699011,node/5079397456
+Police Quarters,police,11.7516072,79.7602431,node/5225890331
+Cuddalore New Town Police Station,police,11.7513011,79.7610182,node/5225891829
+Police Booth,police,13.1037724,80.0585425,node/5226071789
+T9 Police Station Pattabiram,police,13.1222511,80.0624155,node/5226197960
+J-10 Semmenchery Police Station,police,12.9008558,80.2280156,node/5226262920
+Police Station,police,10.7743667,79.1328753,node/5232302356
+Tamil nadu special police battalion,police,10.7901246,78.6825796,node/5234779869
+Ayyampettai Police Station,police,10.8905055,79.1890064,node/5235144279
+Karunya nagar police station,police,10.941951,76.7536848,node/5338402894
+Police Booth,police,13.0149758,80.1816427,node/5367536437
+Prohibition Check Post,police,11.9827095,79.8450868,node/5601012628
+B6 Kandamangalam Police Station,police,11.9189716,79.6785747,node/5692259731
+G3,police,10.3406203,79.3854808,node/5893838815
+Police Station - Annamalai Nagar,police,11.3869698,79.7111529,node/6029686231
+Paramathi velur police station,police,11.1098949,78.0096057,node/6169678221
+Jedarpalayam Police station,police,11.1496887,77.8921407,node/6176739305
+Kangeyam Police Station,police,11.0011411,77.562688,node/6209719671
+Unnamed police station,police,10.3828047,78.8189833,node/6236032560
+T-11 Tiruninravur Police Station,police,13.1251137,80.0286037,node/6354550885
+Pattamadai Police Station,police,8.6671909,77.5840969,node/6765543397
+Railway Police,police,13.0341367,80.2664405,node/6780251054
+Alagappapuram Police Station,police,10.0807228,78.7936167,node/6859575314
+North Police Station,police,10.0754828,78.7791774,node/6859609827
+Ketti Village Police Station,police,11.3816825,76.7358475,node/7067369294
+Police Station Rasipuram,police,11.4617825,78.1847411,node/7161554515
+"Diatrict Police Station, Kallakurichi",police,11.7030001,78.9430882,node/7169322645
+Temple Police Station,police,9.2870953,79.3098772,node/7199661754
+West Police Station,police,10.958471,79.3748958,node/7216689413
+Police Checkpost,police,10.2648663,77.5394683,node/7279582468
+Anjugramam Police Station,police,8.1487731,77.5704974,node/7476292498
+pachal police station,police,12.270105,78.9416793,node/7880331736
+Police station,police,8.9387509,77.4491522,node/7880514352
+Arakandanallur Police station,police,11.9741088,79.2255456,node/7881407653
+Police station,police,10.7526081,78.8228808,node/7973358298
+R10 MGR Nagar Police Station,police,13.0310886,80.2017034,node/8096280337
+R6 Police Booth,police,13.026501,80.2116238,node/8108600154
+Kunnathur Police Station,police,11.2730826,77.4111808,node/8151962606
+Police Help Line,police,10.0732901,78.7813961,node/8477523432
+"Narikudi, Virudhunagar",police,9.5890379,78.3162074,node/8541101418
+Ponnamaravathy,police,10.2764499,78.5388542,node/8541104017
+Railway Protection Force,police,10.0680319,78.7918841,node/8616517717
+Velachery Police Station,police,12.9809435,80.2209233,node/8645780209
+Wellington Police Station,police,11.3547876,76.7846127,node/8766962805
+DSP office,police,11.3430657,76.7908448,node/8770991976
+SP Bungalow,police,10.3609025,77.9868464,node/9104697728
+S.P. Police Station,police,10.3609973,77.986485,node/9104697729
+"Police Station, Kattumannarkoil",police,11.2748874,79.5467232,node/9135062024
+Pettai Police Station,police,8.7233887,77.6634014,node/9194950899
+E5 Mattuthavani Station,police,9.9435961,78.1551729,node/9569071027
+Women Police Station,police,10.0754931,78.7793942,node/9776942617
+Police station,police,11.3844885,78.1622883,node/10199917192
+Puduchathiram Police station,police,11.3845086,78.1624257,node/10200933102
+HUDCO Police Station,police,12.7258052,77.8579715,node/10688149980
+mangadu police station,police,13.0352881,80.114521,node/10741550765
+Ranipet Police Station,police,12.9275387,79.3304569,node/10926155837
+F2 Auroville Police Station,police,11.9910312,79.7840118,node/10949254831
+Government Railway Police Station,police,11.6712204,78.1130289,node/10968036587
+Police station,police,11.4417624,76.9515084,node/11105068155
+J1 Sethiathoppu Police Station,police,11.4526281,79.5462513,node/11174459038
+Maavatta Kaaval Aluvalagam - Tiruppur,police,11.0811826,77.3409296,node/11282919361
+L3 Kullanchavadi Police Station,police,11.6280544,79.6690515,node/11799299456
+T-2 Reddichavady Police Station,police,11.8364604,79.7858521,node/11799300848
+Thiruvarur Taluk Police Station,police,10.7807779,79.6076069,node/11810827238
+Police Station,police,10.1460152,77.6419915,node/11816646131
+Police station,police,10.310788,77.6430616,node/11816661282
+Police station,police,10.1224472,77.545984,node/11816672233
+DYSP Police station,police,10.2368898,77.4943466,node/11816672814
+Munneerpallam Police Station,police,8.6818307,77.6986627,node/11868319265
+Thottiyam Police station,police,10.9874415,78.3363001,node/11905568731
+Thiruvarur Armed Reserve,police,10.7695222,79.6054543,node/12006228469
+Tirupattur Town Police Station,police,12.4950217,78.5674799,node/12038551386
+Malli Police Station,police,9.4944923,77.6937848,node/12044030499
+kanjanur police station,police,12.0661599,79.4651755,node/12077887621
+X1 Veppur Police Station,police,11.5295953,79.1223868,node/12078439759
+Annur Police Station,police,11.2315485,77.1014321,node/12122699748
+Control Room,police,13.0848694,80.2182466,node/12169790434
+"E4 Police Station, Thuraiyur",police,11.1448718,78.593571,node/12287751638
+Southgate Police Station,police,9.9107439,78.1197237,node/12289141065
+W.2. Oomangalam Police Station,police,11.5380527,79.4326298,node/12310097751
+Mallasamudram Police Station,police,11.4998427,78.0303028,node/12347266609
+M5 Ennore Police Booth,police,13.1864179,80.3076057,node/12459049285
+Peelamedu E2 Police Station,police,11.0253639,77.0101634,node/12473835683
+Podanur Police Station,police,10.9677575,76.9781012,node/12473896167
+Ramanathapuram Police Station,police,11.0028259,76.9916717,node/12473897891
+C1 Katoor Police Station,police,11.0145917,76.968262,node/12473901192
+Out Post Police Station - Singanallur,police,11.0025957,77.0288423,node/12473949936
+Rathinapuri B-15 Police Station,police,11.0252974,76.9689359,node/12473970775
+Thudiyalur Police Station,police,11.0819434,76.9412392,node/12473983454
+C-1 Bargur Police Station,police,12.5432967,78.354871,node/12564674797
+"All Women Police Station, Vedaranyam",police,10.3771265,79.8515803,node/12650886972
+Muthupet Police Station,police,10.3995959,79.4969815,node/12705216101
+DSP Police station,police,10.2388773,77.4947667,node/12909709888
+B-2 R.S.Puram police station,police,11.0053262,76.9500311,node/13001849060
+Srinagar colony police booth,police,13.0125062,80.2272456,node/13127975757
+Yercaud Police Station,police,11.7743308,78.2077213,node/13337897439
+Madurai Traffic Police Station,police,9.9245991,78.1488578,node/13609197706
+Thondamuthur Police Station,police,10.9912998,76.8424602,node/13673527215
+"All Women Police Station, Kulithalai",police,10.9406349,78.420054,node/13851193949
+B3 South Police Station,police,8.8005023,78.1368421,node/13910328978
+Thoothukudi All Women Police Station,police,8.80064,78.1369217,node/13910328979
+Andimadam Police Station,police,11.3359445,79.3770445,node/13938799960
+Selaiyur Beat Post,police,12.9339134,80.1295679,node/14057634446
+Kilpennathur Police Station,police,12.2469441,79.2249296,node/14057710532
+"K2 Police Station, Ayanavaram",police,13.093795,80.2409682,node/14066727702
+R-5 Virugambakkam Police Station,police,13.0571823,80.1995238,node/14067751968
+GH Police station,police,10.8124638,78.6784929,node/14088746402
+Kilambakkam Bus Terminus Police Booth,police,12.8744391,80.0781668,node/14100068902
+E-3 Teynampet Police Help Station,police,13.0412543,80.2503552,node/14121893948
+Hosur Town Police Station,police,12.7290664,77.8323693,node/14133768896

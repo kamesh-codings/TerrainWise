@@ -11,6 +11,12 @@ const router = express.Router();
 const crypto = require('crypto');
 const db = require('../config/db');
 const { extractApiKey, getValidKeys } = require('../middleware/auth');
+const { OAuth2Client } = require('google-auth-library');
+
+// Google OAuth 2.0 Client
+const googleClient = new OAuth2Client(
+  process.env.GOOGLE_CLIENT_ID || '41671720068-7smhesmvqm4m446hj5nv1k6l6e8meims.apps.googleusercontent.com'
+);
 
 // In-memory OTP cache for password resets (email -> { code, expiresAt })
 const otpStore = new Map();
@@ -505,6 +511,99 @@ router.post('/reset-password', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// =============================================================================
+// 5. GOOGLE OAUTH 2.0 SIGN-IN
+// =============================================================================
+// POST /api/auth/google
+router.post('/google', async (req, res) => {
+  try {
+    const { credential } = req.body;
+    if (!credential) {
+      return res.status(400).json({ success: false, error: 'Google credential token is required' });
+    }
+
+    // Verify the Google ID token
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID || '41671720068-7smhesmvqm4m446hj5nv1k6l6e8meims.apps.googleusercontent.com'
+    });
+
+    const payload = ticket.getPayload();
+    const googleId = payload.sub;
+    const email = (payload.email || '').trim().toLowerCase();
+    const name = payload.name || '';
+    const picture = payload.picture || '';
+
+    if (!email) {
+      return res.status(400).json({ success: false, error: 'Google account does not have an email address' });
+    }
+
+    // 1. Check Tourist Users table by email
+    const userRows = await db.query(
+      'SELECT * FROM users WHERE LOWER(TRIM(email)) = ?',
+      [email]
+    );
+
+    if (userRows && userRows.length > 0) {
+      const user = userRows[0];
+
+      // Update google_id if not set yet
+      if (!user.google_id) {
+        try {
+          await db.query('UPDATE users SET google_id = ? WHERE id = ?', [googleId, user.id]);
+        } catch (e) { /* ignore */ }
+      }
+
+      const formattedProfile = formatTouristProfile(user);
+      return res.json({
+        success: true,
+        isNewUser: false,
+        type: 'tourist',
+        profile: formattedProfile,
+        message: `Google Sign-In successful. Welcome back, ${formattedProfile.name}!`
+      });
+    }
+
+    // 2. Check Service Providers table by email
+    const providerRows = await db.query(
+      'SELECT * FROM service_providers WHERE LOWER(TRIM(email)) = ?',
+      [email]
+    );
+
+    if (providerRows && providerRows.length > 0) {
+      const provider = providerRows[0];
+      const formattedProfile = formatProviderProfile(provider);
+      return res.json({
+        success: true,
+        isNewUser: false,
+        type: 'provider',
+        profile: formattedProfile,
+        message: `Google Sign-In successful. Welcome back, ${formattedProfile.businessName}!`
+      });
+    }
+
+    // 3. User not found — return Google profile for registration
+    return res.json({
+      success: true,
+      isNewUser: true,
+      googleProfile: {
+        googleId,
+        name,
+        email,
+        picture
+      },
+      message: 'No account found with this Google email. Please complete your profile to create a new account.'
+    });
+
+  } catch (err) {
+    console.error('Google OAuth error:', err);
+    if (err.message && err.message.includes('Token used too late')) {
+      return res.status(401).json({ success: false, error: 'Google token has expired. Please try signing in again.' });
+    }
+    res.status(500).json({ success: false, error: 'Failed to verify Google credentials: ' + err.message });
   }
 });
 

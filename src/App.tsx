@@ -15,6 +15,7 @@ import { NovaAIBot } from './components/NovaAIBot';
 import { WelcomeGateway } from './components/WelcomeGateway';
 import { SpotsExplorer } from './components/SpotsExplorer';
 import { SOSBroadcastModal } from './components/SOSBroadcastModal';
+import { ProfileCompletionForm } from './components/ProfileCompletionForm';
 import { UserProfile, TripPlan, ServiceProviderProfile, UserLocation } from './types';
 import { DEFAULT_USER_PROFILE } from './data/mockData';
 import { 
@@ -78,6 +79,8 @@ export const App: React.FC = () => {
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
   const [isSOSModalOpen, setIsSOSModalOpen] = useState<boolean>(false);
   const [isChatbotOpen, setIsChatbotOpen] = useState<boolean>(false);
+  const [isProfileCompletionOpen, setIsProfileCompletionOpen] = useState<boolean>(false);
+  const [googleProfileData, setGoogleProfileData] = useState<{ googleId: string; name: string; email: string; picture: string } | null>(null);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -399,6 +402,10 @@ export const App: React.FC = () => {
           setIsLoginOpen(false);
           setIsProviderRegisterOpen(true);
         }}
+        onGoogleNewUser={(googleProfile) => {
+          setGoogleProfileData(googleProfile);
+          setIsProfileCompletionOpen(true);
+        }}
       />
 
       {/* 3. Consumer / Tourist Registration Modal */}
@@ -435,6 +442,23 @@ export const App: React.FC = () => {
 
       {/* 7. Mobile Bottom Navigation */}
       <MobileNav activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      {/* 8. Google OAuth Profile Completion Modal */}
+      {googleProfileData && (
+        <ProfileCompletionForm
+          isOpen={isProfileCompletionOpen}
+          onClose={() => {
+            setIsProfileCompletionOpen(false);
+            setGoogleProfileData(null);
+          }}
+          googleProfile={googleProfileData}
+          onComplete={(result) => {
+            setIsProfileCompletionOpen(false);
+            setGoogleProfileData(null);
+            handleLoginSuccess(result);
+          }}
+        />
+      )}
     </div>
   );
 };
